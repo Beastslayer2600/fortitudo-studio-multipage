@@ -44,7 +44,7 @@ export default function Home() {
             Get the sample pages and be first to know about new releases.
           </p>
           <form className="mt-6 mx-auto max-w-md flex gap-3" action="#" method="post">
-            <input className="flex-1 rounded-2xl px-4 py-3 border border-[var(--gold)]" type="email" placeholder="you@email.com" />
+            <input className="flex-1 rounded-2xl px-4 py-3 border border-(--gold)]" type="email" placeholder="you@email.com" />
             <button className="btn btn-primary" type="submit">Notify me</button>
           </form>
         </div>
