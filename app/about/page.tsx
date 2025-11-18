@@ -5,7 +5,7 @@ export default function About(){
         <h1 className="font-serif text-3xl" style={{color:"var(--green)"}}>About Fortitudo Studios</h1>
         <p className="mt-4 text-neutral-800">
           Fortitudo means strength. We design quiet, durable tools for a good life—where discipline meets grace.
-          Our flagship is the Fortitudo Journal: a 30-day field manual for order, stewardship, and faith.
+          Our flagship is the Fortitudo Journal: a 60-day field manual for order, stewardship, and faith.
         </p>
       </div>
     </main>

@@ -5,7 +5,7 @@ export default function Journal(){
         <article className="lg:col-span-7">
           <h1 className="font-serif text-3xl" style={{color:"var(--green)"}}>Fortitudo Journal (PDF)</h1>
           <p className="mt-3">
-            A 30-day practice with morning and evening prompts, weekly themes, habit tracker, and scripture selections.
+            A 60-day practice with morning and evening prompts, weekly themes, habit tracker, and scripture selections.
           </p>
           <ul className="mt-4 list-disc pl-5 text-sm">
             <li>Printable A4 & GoodNotes-ready (hyperlinked)</li>
@@ -24,7 +24,7 @@ export default function Journal(){
           <ol className="mt-4 list-decimal pl-5 text-sm space-y-1">
             <li>Quiet cover and ownership page</li>
             <li>How to use + weekly scripture anchors</li>
-            <li>30 days of AM/PM pages</li>
+            <li>60 days of AM/PM pages</li>
             <li>Habit tracker and review spread</li>
             <li>Closing blessing in hand-script style</li>
           </ol>
