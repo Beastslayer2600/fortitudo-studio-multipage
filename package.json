@@ -11,7 +11,8 @@
   "dependencies": {
     "framer-motion": "^11.0.0",
     "lucide-react": "^0.441.0",
-    "next": "^14.2.33",
+    "next": "^16.2.0-canary.48",
+    "nodemailer": "^8.0.1",
     "react": "18.2.0",
     "react-dom": "18.2.0"
   },

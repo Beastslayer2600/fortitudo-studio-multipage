@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://fortitudostudios.site/</loc></url>
-  <url><loc>https://fortitudostudios.site/journal</loc></url>
   <url><loc>https://fortitudostudios.site/about</loc></url>
+  <url><loc>https://fortitudostudios.site/services</loc></url>
   <url><loc>https://fortitudostudios.site/contact</loc></url>
+  <url><loc>https://fortitudostudios.site/disclaimer</loc></url>
+  <url><loc>https://fortitudostudios.site/privacy</loc></url>
 </urlset>
