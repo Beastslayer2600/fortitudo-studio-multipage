@@ -53,7 +53,7 @@ export default function RootLayout({
             </div>
           </div>
         </footer>
-      </body>
+      </body>gi
     </html>
   );
 }
