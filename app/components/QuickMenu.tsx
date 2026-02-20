@@ -93,6 +93,9 @@ export default function QuickMenu() {
           >
             Process
           </Link>
+          <span className="text-sm md:text-base text-[var(--cream)]/70">
+            Coming soon
+          </span>
           <Link
             href="/insights"
             className="hover:text-[var(--gold)] transition-colors"
@@ -101,14 +104,9 @@ export default function QuickMenu() {
           >
             Insights
           </Link>
-          <Link
-            href="/fee-transparency"
-            className="hover:text-[var(--gold)] transition-colors"
-            role="menuitem"
-            onClick={() => setOpen(false)}
-          >
-            Fees
-          </Link>
+          <span className="text-sm md:text-base text-[var(--cream)]/70">
+            Work in progress
+          </span>
           <Link
             href="/contact"
             className="mt-6 px-10 py-4 bg-[var(--gold)] text-[var(--greenDark)] rounded-xl text-xl font-medium hover:bg-[var(--gold)]/90 transition"
