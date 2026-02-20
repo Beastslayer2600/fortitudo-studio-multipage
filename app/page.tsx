@@ -1,28 +1,33 @@
-import Link from "next/link";
 import { Brain, Compass, ShieldCheck } from "lucide-react";
 
 export default function Home() {
   return (
     <main>
-      <section className="relative min-h-[80vh] flex items-center justify-center bg-gradient-to-br from-[var(--greenDark)] via-[var(--green)] to-[var(--greenDark)] text-[var(--cream)] overflow-hidden">
+      <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-[var(--greenDark)] to-[var(--green)] text-[var(--cream)]">
         <div className="absolute inset-0 opacity-10 bg-[url('/subtle-pattern.png')] bg-repeat" />
-        <div className="relative z-10 text-center container px-6 max-w-5xl">
-          <h1 className="text-5xl md:text-7xl font-serif font-bold mb-6 tracking-tight">
-            You work hard for your money. Let's make sure it works just as hard for you.
+        <div className="text-center container px-6 max-w-5xl">
+          <h1 className="text-5xl md:text-7xl font-serif font-bold mb-6">
+            You work hard for your money. Let's structure it to endure.
           </h1>
-          <p className="text-xl md:text-3xl mb-10 font-light max-w-3xl mx-auto text-[var(--cream)]/90">
-            Structured financial planning that replaces worry with clarity - Pretoria
+          <p className="text-xl md:text-3xl mb-10">
+            Financial strategy for high-income professionals who value clarity, discipline, and long-term growth - Pretoria
           </p>
-          <p className="text-lg md:text-xl mb-12 opacity-90">
-            Gert Fourie - Financial Advisor - Liberty Group (FSP 2409)
+          <p className="text-lg mb-12 opacity-90">
+            Gert Fourie | Financial Advisor | Liberty Group (FSP 2409)
           </p>
-          <div className="flex justify-center">
-            <Link
+          <div className="flex flex-col sm:flex-row gap-6 justify-center">
+            <a
               href="/contact"
-              className="inline-block bg-[var(--gold)] text-[var(--green)] px-10 py-5 rounded-xl text-lg font-medium hover:bg-[var(--gold)]/90 transition shadow-lg"
+              className="bg-[var(--gold)] text-[var(--greenDark)] px-10 py-5 rounded-xl text-lg font-medium hover:bg-[var(--gold)]/90 transition shadow-lg"
             >
-              Book a Discovery Call
-            </Link>
+              Schedule a Strategy Session
+            </a>
+            <a
+              href="/about"
+              className="border-2 border-[var(--gold)] text-[var(--gold)] px-10 py-5 rounded-xl text-lg font-medium hover:bg-[var(--gold)]/10 transition"
+            >
+              Learn About My Approach
+            </a>
           </div>
         </div>
       </section>
