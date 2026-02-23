@@ -3,31 +3,44 @@ import { Brain, Compass, ShieldCheck } from "lucide-react";
 export default function Home() {
   return (
     <main>
-      <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-[var(--greenDark)] to-[var(--green)] text-[var(--cream)]">
-        <div className="absolute inset-0 opacity-10 bg-[url('/subtle-pattern.png')] bg-repeat" />
-        <div className="text-center container px-6 max-w-5xl">
-          <h1 className="text-5xl md:text-7xl font-serif font-bold mb-6">
-            You work hard for your money. Let's structure it to endure.
+      <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-[var(--greenDark)] via-[var(--greenDark)] to-[var(--green)] text-[var(--cream)] overflow-hidden">
+        <div className="absolute inset-0 bg-black/20" />
+
+        <div className="relative z-10 text-center container px-6 max-w-5xl">
+          <p className="text-lg md:text-xl mb-4 opacity-90 font-medium tracking-wide">
+            Gert Fourie | Financial Advisor | Liberty Group (FSP 2409) | Pretoria
+          </p>
+
+          <h1 className="text-5xl md:text-7xl font-serif font-bold mb-6 leading-tight">
+            You work hard for your money.<br className="hidden md:block" /> Let's structure it to
+            endure.
           </h1>
-          <p className="text-xl md:text-3xl mb-10">
-            Financial strategy for high-income professionals who value clarity, discipline, and long-term growth - Pretoria
+
+          <p className="text-xl md:text-3xl mb-12 font-light max-w-4xl mx-auto">
+            Financial strategy for high-income professionals who value clarity, discipline, and long-term
+            growth.
           </p>
-          <p className="text-lg mb-12 opacity-90">
-            Gert Fourie | Financial Advisor | Liberty Group (FSP 2409)
-          </p>
+
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
             <a
               href="/contact"
-              className="bg-[var(--gold)] text-[var(--greenDark)] px-10 py-5 rounded-xl text-lg font-medium hover:bg-[var(--gold)]/90 transition shadow-lg"
+              className="inline-block bg-[var(--gold)] text-[var(--greenDark)] px-10 py-5 rounded-xl text-lg font-medium hover:bg-[var(--gold)]/90 transition shadow-lg"
             >
               Schedule a Strategy Session
             </a>
             <a
               href="/about"
-              className="border-2 border-[var(--gold)] text-[var(--gold)] px-10 py-5 rounded-xl text-lg font-medium hover:bg-[var(--gold)]/10 transition"
+              className="inline-block border-2 border-[var(--gold)] text-[var(--gold)] px-10 py-5 rounded-xl text-lg font-medium hover:bg-[var(--gold)]/10 transition"
             >
-              Learn About My Approach
+              Learn My Approach
             </a>
+          </div>
+
+          <div className="mt-16 flex flex-wrap justify-center gap-8 text-sm md:text-base opacity-80">
+            <div>Liberty Group FSP 2409</div>
+            <div>Pretoria Based</div>
+            <div>Discipline Over Emotion</div>
+            <div>Structure Over Speculation</div>
           </div>
         </div>
       </section>
