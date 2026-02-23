@@ -7,7 +7,7 @@ export default function SiteLayout({
   children: React.ReactNode;
 }) {
   return (
-    <>
+    <div className="min-h-screen flex flex-col">
       <header className="border-b border-[var(--gold)]/30 bg-[var(--cream)]">
         <div className="container flex items-center justify-between py-4">
           <Link href="/" className="font-serif text-xl" style={{ color: "var(--green)" }}>
@@ -16,8 +16,8 @@ export default function SiteLayout({
           <QuickMenu />
         </div>
       </header>
-      {children}
-      <footer className="mt-auto py-10 bg-[var(--greenDark)] text-[var(--cream)] text-center text-sm border-t border-[var(--gold)]/30">
+      <div className="flex-1">{children}</div>
+      <footer className="py-10 bg-[var(--greenDark)] text-[var(--cream)] text-center text-sm border-t border-[var(--gold)]/30">
         <div className="container mx-auto px-6 max-w-5xl">
           <p className="mb-3 font-medium">
             &copy; {new Date().getFullYear()} Gert Fourie | Financial Advisor &ndash; Liberty
@@ -47,6 +47,6 @@ export default function SiteLayout({
           </div>
         </div>
       </footer>
-    </>
+    </div>
   );
 }
