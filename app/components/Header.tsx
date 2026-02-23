@@ -18,22 +18,24 @@ export default function Header() {
 
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 z-50 bg-gray-950/85 backdrop-blur-lg border-b border-gray-800/50 shadow-xl">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-[var(--cream)]/85 backdrop-blur-lg border-b border-[var(--gold)]/30 shadow-lg">
+        <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-[var(--gold)]/70 to-transparent" />
+        <div className="pointer-events-none absolute -top-16 right-6 h-28 w-28 rounded-full bg-[var(--gold)]/20 blur-2xl" />
+        <div className="mx-auto max-w-7xl px-6 lg:px-8 relative">
           <div className="flex h-16 md:h-20 items-center justify-between">
             <div className="flex items-center gap-4">
-              <div className="flex h-10 w-10 md:h-12 md:w-12 items-center justify-center rounded-full bg-[#A02633] text-white font-bold text-xl md:text-2xl shadow-lg ring-2 ring-[#A02633]/30">
+              <div className="flex h-10 w-10 md:h-12 md:w-12 items-center justify-center rounded-full bg-gradient-to-br from-[var(--greenDark)] to-[var(--green)] text-[var(--cream)] font-bold text-xl md:text-2xl shadow-lg ring-2 ring-[var(--gold)]/40">
                 GF
               </div>
 
               <div className="flex flex-col">
                 <Link
                   href="/"
-                  className="text-xl md:text-2xl font-semibold text-white tracking-tight hover:text-[#A02633] transition-colors duration-300"
+                  className="text-xl md:text-2xl font-semibold text-[var(--greenDark)] tracking-tight hover:text-[var(--gold)] transition-colors duration-300"
                 >
                   Gert Fourie
                 </Link>
-                <span className="text-xs md:text-sm text-gray-400 font-medium tracking-wide">
+                <span className="text-xs md:text-sm text-[var(--ink)]/70 font-medium tracking-wide">
                   Financial Advisor | Liberty Group (FSP 2409) | Pretoria
                 </span>
               </div>
@@ -44,22 +46,26 @@ export default function Header() {
                 <Link
                   key={item.href}
                   href={item.href}
-                  className="group relative text-gray-300 hover:text-white font-medium transition-colors duration-200"
+                  className="group relative text-[var(--ink)]/80 hover:text-[var(--greenDark)] font-medium transition-colors duration-200"
                   onClick={closeMenu}
                 >
                   {item.label}
-                  <span className="absolute bottom-[-6px] left-0 h-0.5 w-0 bg-[#A02633] transition-all duration-300 group-hover:w-full" />
+                  <span className="absolute bottom-[-6px] left-0 h-0.5 w-0 bg-[var(--gold)] transition-all duration-300 group-hover:w-full" />
                 </Link>
               ))}
             </nav>
 
             <button
-              className="md:hidden text-white focus:outline-none focus:ring-2 focus:ring-[#A02633]/50 rounded-md p-1"
+              className="md:hidden text-[var(--greenDark)] focus:outline-none focus:ring-2 focus:ring-[var(--gold)]/50 rounded-md p-1"
               onClick={toggleMenu}
               aria-label="Toggle mobile menu"
               type="button"
             >
-              {isOpen ? <X size={28} strokeWidth={2.5} /> : <Menu size={28} strokeWidth={2.5} />}
+              {isOpen ? (
+                <X size={28} strokeWidth={2.5} />
+              ) : (
+                <Menu size={28} strokeWidth={2.5} />
+              )}
             </button>
           </div>
         </div>
@@ -71,27 +77,27 @@ export default function Header() {
         }`}
       >
         <div
-          className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+          className="absolute inset-0 bg-black/40 backdrop-blur-sm"
           onClick={closeMenu}
           aria-hidden="true"
         />
 
         <div
-          className={`absolute top-0 bottom-0 left-0 w-72 bg-gray-950 border-r border-gray-800 transform transition-transform duration-300 ease-in-out ${
+          className={`absolute top-0 bottom-0 left-0 w-72 bg-[var(--cream)] border-r border-[var(--gold)]/30 transform transition-transform duration-300 ease-in-out ${
             isOpen ? "translate-x-0" : "-translate-x-full"
           }`}
         >
           <div className="flex flex-col h-full">
-            <div className="flex items-center justify-between p-6 border-b border-gray-800">
+            <div className="flex items-center justify-between p-6 border-b border-[var(--gold)]/30">
               <div className="flex items-center gap-3">
-                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#A02633] text-white font-bold text-xl">
+                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-[var(--greenDark)] to-[var(--green)] text-[var(--cream)] font-bold text-xl">
                   GF
                 </div>
-                <span className="text-lg font-semibold text-white">Gert Fourie</span>
+                <span className="text-lg font-semibold text-[var(--greenDark)]">Gert Fourie</span>
               </div>
               <button
                 onClick={closeMenu}
-                className="text-gray-400 hover:text-white focus:outline-none"
+                className="text-[var(--ink)]/60 hover:text-[var(--greenDark)] focus:outline-none"
                 aria-label="Close menu"
                 type="button"
               >
@@ -104,7 +110,7 @@ export default function Header() {
                 <Link
                   key={item.href}
                   href={item.href}
-                  className="block text-lg font-medium text-gray-300 hover:text-[#A02633] transition-colors"
+                  className="block text-lg font-medium text-[var(--ink)]/80 hover:text-[var(--greenDark)] transition-colors"
                   onClick={closeMenu}
                 >
                   {item.label}
@@ -112,7 +118,7 @@ export default function Header() {
               ))}
             </nav>
 
-            <div className="p-6 border-t border-gray-800 text-sm text-gray-500">
+            <div className="p-6 border-t border-[var(--gold)]/30 text-sm text-[var(--ink)]/70">
               Liberty Group (FSP 2409) | Pretoria Based
             </div>
           </div>
