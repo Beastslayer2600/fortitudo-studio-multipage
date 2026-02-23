@@ -2,7 +2,7 @@ import { Brain, Compass, ShieldCheck } from "lucide-react";
 
 export default function Home() {
   return (
-    <main>
+    <main className="bg-gray-950 text-white pt-20 md:pt-24 min-h-screen">
       <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-[var(--greenDark)] via-[var(--greenDark)] to-[var(--green)] text-[var(--cream)] overflow-hidden">
         <div className="absolute inset-0 bg-black/20" />
 
@@ -45,7 +45,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="py-16 sm:py-24">
+      <section className="bg-[var(--cream)] text-[var(--ink)] py-16 sm:py-24">
         <div className="container max-w-5xl">
           <div className="grid gap-10 lg:grid-cols-12 items-start">
             <div className="lg:col-span-5">

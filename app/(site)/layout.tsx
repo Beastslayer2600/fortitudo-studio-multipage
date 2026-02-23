@@ -1,5 +1,4 @@
-import Link from "next/link";
-import QuickMenu from "../components/QuickMenu";
+import Header from "../components/Header";
 
 export default function SiteLayout({
   children,
@@ -8,14 +7,7 @@ export default function SiteLayout({
 }) {
   return (
     <div className="min-h-screen flex flex-col">
-      <header className="border-b border-[var(--gold)]/30 bg-[var(--cream)]">
-        <div className="container flex items-center justify-between py-4">
-          <Link href="/" className="font-serif text-xl" style={{ color: "var(--green)" }}>
-            Gert Fourie
-          </Link>
-          <QuickMenu />
-        </div>
-      </header>
+      <Header />
       <div className="flex-1">{children}</div>
       <footer className="py-10 bg-[var(--greenDark)] text-[var(--cream)] text-center text-sm border-t border-[var(--gold)]/30">
         <div className="container mx-auto px-6 max-w-5xl">
