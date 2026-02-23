@@ -28,54 +28,55 @@ export default function ProcessPage() {
           <div className="relative pl-8 lg:pl-0 lg:grid lg:grid-cols-12 lg:gap-8">
             <div className="lg:col-span-4">
               <div className="flex items-center lg:justify-end lg:pr-8">
-                <div className="flex h-14 w-14 items-center justify-center rounded-full bg-indigo-600 text-white text-xl font-bold shadow-md">
+                <div className="flex h-14 w-14 items-center justify-center rounded-full bg-blue-700 text-white text-xl font-bold shadow-md">
                   1
                 </div>
               </div>
             </div>
             <div className="mt-6 lg:col-span-8 lg:mt-0">
-              <h2 className="text-2xl font-bold text-gray-900">Strategic Discovery</h2>
-              <p className="mt-4 text-lg text-gray-600">
+              <h2 className="text-2xl font-bold text-blue-800">Strategic Discovery</h2>
+              <p className="mt-4 text-lg text-gray-700">
                 We begin with a comprehensive assessment of your financial position. Assets,
                 liabilities, income streams, tax exposure, existing structures, risk cover, and
                 long-term objectives are mapped in detail.
               </p>
-              <p className="mt-4 font-semibold text-indigo-700">Clarity precedes strategy.</p>
+              <p className="mt-4 font-semibold text-blue-700">Clarity precedes strategy.</p>
             </div>
           </div>
 
           <div className="relative pl-8 lg:pl-0 lg:grid lg:grid-cols-12 lg:gap-8">
             <div className="lg:col-span-4">
               <div className="flex items-center lg:justify-end lg:pr-8">
-                <div className="flex h-14 w-14 items-center justify-center rounded-full bg-indigo-600 text-white text-xl font-bold shadow-md">
+                <div className="flex h-14 w-14 items-center justify-center rounded-full bg-blue-700 text-white text-xl font-bold shadow-md">
                   2
                 </div>
               </div>
             </div>
             <div className="mt-6 lg:col-span-8 lg:mt-0">
-              <h2 className="text-2xl font-bold text-gray-900">Strategy Design</h2>
-              <p className="mt-4 text-lg text-gray-600">Data without direction has no value.</p>
-              <p className="mt-3 text-lg text-gray-600">
+              <h2 className="text-2xl font-bold text-blue-800">Strategy Design</h2>
+              <p className="mt-4 text-lg text-gray-700">Data without direction has no value.</p>
+              <p className="mt-3 text-lg text-gray-700">
                 Based on your objectives, I design a structured financial strategy focused on:
               </p>
-              <ul className="mt-4 space-y-3 text-gray-600">
+              <ul className="mt-4 space-y-3 text-gray-700">
                 <li className="flex items-start">
-                  <span className="mr-3 text-indigo-600">•</span> Capital preservation
+                  <span className="mr-3 text-blue-700 font-bold">•</span> Capital preservation
                 </li>
                 <li className="flex items-start">
-                  <span className="mr-3 text-indigo-600">•</span> Sustainable long-term growth
+                  <span className="mr-3 text-blue-700 font-bold">•</span> Sustainable long-term
+                  growth
                 </li>
                 <li className="flex items-start">
-                  <span className="mr-3 text-indigo-600">•</span> Tax efficiency
+                  <span className="mr-3 text-blue-700 font-bold">•</span> Tax efficiency
                 </li>
                 <li className="flex items-start">
-                  <span className="mr-3 text-indigo-600">•</span> Risk mitigation
+                  <span className="mr-3 text-blue-700 font-bold">•</span> Risk mitigation
                 </li>
                 <li className="flex items-start">
-                  <span className="mr-3 text-indigo-600">•</span> Liquidity planning
+                  <span className="mr-3 text-blue-700 font-bold">•</span> Liquidity planning
                 </li>
               </ul>
-              <p className="mt-6 text-gray-600">
+              <p className="mt-6 text-gray-700">
                 Asset allocation decisions are made intentionally, not emotionally. Strategy
                 determines product selection — never the other way around.
               </p>
@@ -85,22 +86,22 @@ export default function ProcessPage() {
           <div className="relative pl-8 lg:pl-0 lg:grid lg:grid-cols-12 lg:gap-8">
             <div className="lg:col-span-4">
               <div className="flex items-center lg:justify-end lg:pr-8">
-                <div className="flex h-14 w-14 items-center justify-center rounded-full bg-indigo-600 text-white text-xl font-bold shadow-md">
+                <div className="flex h-14 w-14 items-center justify-center rounded-full bg-blue-700 text-white text-xl font-bold shadow-md">
                   3
                 </div>
               </div>
             </div>
             <div className="mt-6 lg:col-span-8 lg:mt-0">
-              <h2 className="text-2xl font-bold text-gray-900">Implementation</h2>
-              <p className="mt-4 text-lg text-gray-600">
+              <h2 className="text-2xl font-bold text-blue-800">Implementation</h2>
+              <p className="mt-4 text-lg text-gray-700">
                 Once strategy is defined, structures are executed precisely.
               </p>
-              <p className="mt-3 text-lg text-gray-600">
+              <p className="mt-3 text-lg text-gray-700">
                 This may include investment vehicles, retirement planning structures, offshore
                 exposure, risk cover alignment, estate planning considerations, or business-related
                 financial structuring.
               </p>
-              <p className="mt-4 font-semibold text-indigo-700">
+              <p className="mt-4 font-semibold text-blue-700">
                 Every decision must serve the strategy.
               </p>
             </div>
@@ -109,44 +110,43 @@ export default function ProcessPage() {
           <div className="relative pl-8 lg:pl-0 lg:grid lg:grid-cols-12 lg:gap-8">
             <div className="lg:col-span-4">
               <div className="flex items-center lg:justify-end lg:pr-8">
-                <div className="flex h-14 w-14 items-center justify-center rounded-full bg-indigo-600 text-white text-xl font-bold shadow-md">
+                <div className="flex h-14 w-14 items-center justify-center rounded-full bg-blue-700 text-white text-xl font-bold shadow-md">
                   4
                 </div>
               </div>
             </div>
             <div className="mt-6 lg:col-span-8 lg:mt-0">
-              <h2 className="text-2xl font-bold text-gray-900">Ongoing Oversight</h2>
-              <p className="mt-4 text-lg text-gray-600">
+              <h2 className="text-2xl font-bold text-blue-800">Ongoing Oversight</h2>
+              <p className="mt-4 text-lg text-gray-700">
                 Markets change. Legislation evolves. Life shifts.
               </p>
-              <p className="mt-3 text-lg text-gray-600">
+              <p className="mt-3 text-lg text-gray-700">
                 Your financial strategy is reviewed regularly to ensure alignment with your
                 objectives. Portfolios are rebalanced when necessary. Adjustments are made with
                 discipline — not reaction.
               </p>
-              <p className="mt-4 font-semibold text-indigo-700">Consistency compounds.</p>
+              <p className="mt-4 font-semibold text-blue-700">Consistency compounds.</p>
             </div>
           </div>
 
           <div className="relative pl-8 lg:pl-0 lg:grid lg:grid-cols-12 lg:gap-8">
             <div className="lg:col-span-4">
               <div className="flex items-center lg:justify-end lg:pr-8">
-                <div className="flex h-14 w-14 items-center justify-center rounded-full bg-indigo-600 text-white text-xl font-bold shadow-md">
+                <div className="flex h-14 w-14 items-center justify-center rounded-full bg-blue-700 text-white text-xl font-bold shadow-md">
                   5
                 </div>
               </div>
             </div>
             <div className="mt-6 lg:col-span-8 lg:mt-0">
-              <h2 className="text-2xl font-bold text-gray-900">Protection & Continuity</h2>
-              <p className="mt-4 text-lg text-gray-600">
-                Wealth planning is incomplete without liquidity at death and structural
-                efficiency.
+              <h2 className="text-2xl font-bold text-blue-800">Protection &amp; Continuity</h2>
+              <p className="mt-4 text-lg text-gray-700">
+                Wealth planning is incomplete without liquidity at death and structural efficiency.
               </p>
-              <p className="mt-3 text-lg text-gray-600">
+              <p className="mt-3 text-lg text-gray-700">
                 Estate alignment, beneficiary structuring, and risk protection ensure your capital
                 transfers with clarity and control.
               </p>
-              <p className="mt-4 font-semibold text-indigo-700">
+              <p className="mt-4 font-semibold text-blue-700">
                 Structure protects what emotion cannot.
               </p>
             </div>
@@ -159,7 +159,7 @@ export default function ProcessPage() {
           </p>
           <a
             href="/contact"
-            className="mt-6 inline-block rounded-lg bg-indigo-600 px-8 py-4 text-lg font-semibold text-white shadow-md hover:bg-indigo-700 transition"
+            className="mt-6 inline-block rounded-lg bg-blue-700 px-8 py-4 text-lg font-semibold text-white shadow-md hover:bg-blue-800 transition"
           >
             Get Started
           </a>
