@@ -20,7 +20,30 @@ export default function Header() {
     <>
       <header className="fixed top-0 left-0 right-0 z-50 bg-[var(--cream)]/85 backdrop-blur-lg border-b border-[var(--gold)]/30 shadow-lg">
         <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-[var(--gold)]/70 to-transparent" />
-        <div className="pointer-events-none absolute -top-16 right-6 h-28 w-28 rounded-full bg-[var(--gold)]/20 blur-2xl" />
+        <div className="pointer-events-none absolute inset-0 overflow-hidden">
+          <div
+            className="absolute -top-24 -left-16 h-48 w-48 rounded-full blur-3xl opacity-70"
+            style={{
+              background:
+                "radial-gradient(circle, rgba(188,164,114,0.35) 0%, rgba(188,164,114,0.0) 70%)",
+            }}
+          />
+          <div
+            className="absolute -bottom-24 right-0 h-56 w-56 rounded-full blur-3xl opacity-60"
+            style={{
+              background:
+                "radial-gradient(circle, rgba(13,42,31,0.25) 0%, rgba(13,42,31,0.0) 70%)",
+            }}
+          />
+          <div
+            className="absolute inset-0 opacity-30"
+            style={{
+              backgroundImage:
+                "linear-gradient(90deg, rgba(13,42,31,0.06) 1px, transparent 1px), linear-gradient(0deg, rgba(13,42,31,0.06) 1px, transparent 1px)",
+              backgroundSize: "28px 28px",
+            }}
+          />
+        </div>
         <div className="mx-auto max-w-7xl px-6 lg:px-8 relative">
           <div className="flex h-16 md:h-20 items-center justify-between">
             <div className="flex items-center gap-4">
