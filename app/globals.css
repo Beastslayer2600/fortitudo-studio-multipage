@@ -11,27 +11,27 @@
 
 html,body{height:100%}
 body{
-  background:var(--cream);
-  color:var(--ink);
+  background:#0B0D10;
+  color:var(--cream);
   font-feature-settings:"liga","kern";
 }
 
 /* Typography */
 h1,h2,h3,h4{font-family: Georgia, "Times New Roman", Times, serif}
-.lead{ @apply text-lg sm:text-xl; color: #3a3a3a; }
+.lead{ @apply text-lg sm:text-xl; color: rgba(248,244,234,0.75); }
 
 /* Layout helpers */
 .container{ @apply mx-auto max-w-6xl px-4 sm:px-6 lg:px-8; }
 
 /* Card & surface */
-.surface{ background: #fffdfa; border:1px solid var(--gold); @apply rounded-2xl; }
+.surface{ background: rgba(15,18,22,0.9); border:1px solid color-mix(in srgb, var(--gold) 30%, transparent); @apply rounded-2xl; }
 
 /* Buttons */
 .btn{ @apply inline-flex items-center justify-center rounded-2xl px-5 py-3 text-sm font-medium transition-transform;
   border:1px solid transparent;
 }
 .btn:hover{ transform:translateY(-2px) }
-.btn-primary{ background:var(--gold); color:var(--ink) }
+.btn-primary{ background:var(--gold); color:#0B0D10 }
 .btn-ghost{ background:transparent; border-color:var(--gold); color:var(--gold) }
 
 /* Luxe details */

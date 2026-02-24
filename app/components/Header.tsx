@@ -30,8 +30,8 @@ export default function Header() {
   return (
     <>
       <motion.header
-        className={`fixed top-0 left-0 right-0 z-50 border-b border-white/5 ${
-          isScrolled ? "backdrop-blur-md" : ""
+        className={`fixed top-0 left-0 right-0 z-50 ${
+          isScrolled ? "border-b border-white/10 backdrop-blur-md" : "border-b border-transparent"
         }`}
         initial={false}
         animate={{
@@ -40,7 +40,12 @@ export default function Header() {
         }}
         transition={{ duration: 0.4, ease: "easeOut" }}
       >
-        <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-[var(--gold)]/40 to-transparent" />
+        <motion.div
+          className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-[var(--gold)]/50 to-transparent"
+          initial={false}
+          animate={{ opacity: isScrolled ? 1 : 0 }}
+          transition={{ duration: 0.4, ease: "easeOut" }}
+        />
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="flex h-16 md:h-20 items-center justify-between">
             <Link

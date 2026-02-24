@@ -1,50 +1,92 @@
 "use client";
 
-import { Brain, Compass, ShieldCheck } from "lucide-react";
 import { motion } from "framer-motion";
+
+const reveal = {
+  initial: { opacity: 0, y: 24 },
+  whileInView: { opacity: 1, y: 0 },
+  transition: { duration: 0.8, ease: "easeOut" },
+  viewport: { once: true, amount: 0.2 },
+};
+
+const sections = [
+  {
+    title: "Who This Is Designed For",
+    eyebrow: "Ideal Client Profile",
+    body:
+      "High-income professionals and business owners who want calm, structured financial decisions that hold up across cycles.",
+    bullets: [
+      "Professionals who want a disciplined, long-term framework.",
+      "Families seeking retirement clarity and income certainty.",
+      "Business owners who value structure over speculation.",
+    ],
+  },
+  {
+    title: "My Philosophy",
+    eyebrow: "Structure Before Reaction",
+    body:
+      "Wealth is protected by process, not prediction. Every recommendation serves a defined strategy, built to endure volatility and preserve optionality.",
+    bullets: [
+      "Clarity over complexity.",
+      "Discipline over emotion.",
+      "Structure over speculation.",
+    ],
+  },
+  {
+    title: "How We Work Together",
+    eyebrow: "Deliberate, Repeatable Process",
+    body:
+      "We begin with discovery, design a tailored strategy, implement precisely, and review consistently. Decisions are measured, not rushed.",
+    bullets: [
+      "Strategic discovery and full needs analysis.",
+      "Structured plan aligned with goals and risk.",
+      "Ongoing oversight and disciplined adjustments.",
+    ],
+  },
+  {
+    title: "Stewardship & Principle",
+    eyebrow: "Capital Protected by Design",
+    body:
+      "Stewardship means protecting what you have built and ensuring continuity. Risk is managed deliberately so capital can compound with confidence.",
+    bullets: [
+      "Risk mitigation and protection alignment.",
+      "Estate continuity and beneficiary structure.",
+      "Long-term accountability and transparency.",
+    ],
+  },
+];
 
 export default function Home() {
   return (
-    <main className="bg-[#0B0D10] text-white pt-20 md:pt-24 min-h-screen">
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 bg-[#0B0D10]" />
-        <motion.div
-          className="absolute inset-0"
-          style={{
-            background:
-              "linear-gradient(120deg, rgba(11,13,16,0.95), rgba(18,21,26,0.9), rgba(11,13,16,0.95))",
-            backgroundSize: "200% 200%",
-          }}
-          animate={{ backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] }}
-          transition={{ duration: 28, repeat: Infinity, ease: "linear" }}
-        />
+    <main className="bg-[#0B0D10] text-[var(--cream)] pt-20 md:pt-24">
+      <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 pointer-events-none">
-          {[12, 28, 44, 60, 76, 90].map((top, index) => (
+          {[18, 36, 54, 72].map((top, index) => (
             <motion.div
-              key={`h-${top}`}
-              className="absolute left-[-5%] right-[-5%] h-px bg-white/5"
+              key={`hero-h-${top}`}
+              className="absolute left-[-8%] right-[-8%] h-px bg-white/5"
               style={{ top: `${top}%` }}
               animate={{ opacity: [0.03, 0.08, 0.03], x: [0, 30, 0] }}
               transition={{
-                duration: 26,
+                duration: 30,
                 repeat: Infinity,
                 ease: "easeInOut",
-                delay: index * 1.5,
+                delay: index * 1.6,
               }}
             />
           ))}
-          {[-10, 15, 40, 65, 90].map((top, index) => (
+          {[-5, 20, 45, 70].map((top, index) => (
             <motion.div
-              key={`d-${top}`}
-              className="absolute left-[-40%] w-[180%] h-px bg-white/5"
+              key={`hero-d-${top}`}
+              className="absolute left-[-45%] w-[190%] h-px bg-white/5"
               style={{ top: `${top}%` }}
               animate={{
                 opacity: [0.02, 0.07, 0.02],
                 x: [0, -40, 0],
-                rotate: [-14, -8, -14],
+                rotate: [-14, -9, -14],
               }}
               transition={{
-                duration: 32,
+                duration: 34,
                 repeat: Infinity,
                 ease: "easeInOut",
                 delay: index * 2,
@@ -53,88 +95,67 @@ export default function Home() {
           ))}
         </div>
 
-        <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
-          <h1 className="text-4xl sm:text-5xl md:text-7xl font-serif font-semibold tracking-tight leading-tight">
+        <div className="relative z-10 text-center px-6 max-w-4xl">
+          <motion.h1
+            className="text-4xl sm:text-5xl md:text-7xl font-serif font-semibold leading-tight"
+            {...reveal}
+          >
             You work hard for your money. Let's structure it to endure.
-          </h1>
-          <p className="mt-6 text-base sm:text-lg md:text-2xl text-white/80 font-sans">
-            Financial strategy for high-income professionals who value clarity, discipline, and long-term
-            growth - Pretoria
-          </p>
-          <div className="mx-auto mt-8 h-px w-24 bg-[var(--gold)]/80" />
-          <p className="mt-6 text-sm md:text-base text-white/60 tracking-[0.08em]">
+          </motion.h1>
+          <motion.p
+            className="mt-6 text-base sm:text-lg md:text-2xl text-white/80"
+            {...reveal}
+          >
+            Financial strategy for high-income professionals who value clarity, discipline, and
+            long-term growth - Pretoria
+          </motion.p>
+          <div className="mx-auto mt-8 h-px w-28 bg-[var(--gold)]/80" />
+          <motion.p className="mt-6 text-sm md:text-base text-white/60" {...reveal}>
             Gert Fourie | Financial Advisor | Liberty Group (FSP 2409)
-          </p>
-          <div className="mt-10">
-            <a
+          </motion.p>
+          <motion.div className="mt-10" {...reveal}>
+            <motion.a
               href="/contact"
-              className="inline-flex items-center justify-center border border-[var(--gold)] text-[var(--gold)] px-8 py-4 text-sm md:text-base tracking-[0.08em] hover:bg-[var(--gold)] hover:text-[#0B0D10] transition-colors duration-300"
+              className="inline-flex items-center justify-center border border-[var(--gold)] text-[var(--gold)] px-8 py-4 text-sm md:text-base tracking-[0.08em] uppercase hover:bg-[var(--gold)] hover:text-[#0B0D10] transition-colors duration-300"
+              whileHover={{ y: -2, boxShadow: "0 14px 34px rgba(188,164,114,0.25)" }}
+              whileTap={{ y: 0 }}
             >
               Schedule a Strategy Session
-            </a>
-          </div>
+            </motion.a>
+          </motion.div>
         </div>
       </section>
 
-      <section className="bg-[var(--cream)] text-[var(--ink)] py-16 sm:py-24">
-        <div className="container max-w-5xl">
-          <div className="grid gap-10 lg:grid-cols-12 items-start">
-            <div className="lg:col-span-5">
-              <p className="text-xs uppercase tracking-[0.2em]" style={{ color: "var(--gold)" }}>
-                Who this is for
-              </p>
-              <h2 className="mt-2 font-serif text-3xl" style={{ color: "var(--green)" }}>
-                For people who want calm, not complexity
-              </h2>
-              <p className="mt-4 text-neutral-700 leading-relaxed">
-                You are not looking for more noise. You are looking for a plan you can trust.
-              </p>
-            </div>
-            <div className="lg:col-span-7 grid gap-4 sm:grid-cols-2">
-              {[
-                "Professionals earning well but unsure if their strategy is optimal.",
-                "Families wanting retirement certainty and fewer surprises.",
-                "Business owners who want structure, not guesswork.",
-              ].map((item) => (
-                <div key={item} className="surface p-6">
-                  <p className="text-sm text-neutral-700">{item}</p>
+      <section className="relative py-20 md:py-28 border-t border-white/5">
+        <div className="mx-auto max-w-5xl px-6">
+          <div className="grid gap-16 md:gap-20">
+            {sections.map((section) => (
+              <motion.div
+                key={section.title}
+                className="grid gap-8 md:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]"
+                {...reveal}
+              >
+                <div>
+                  <p className="text-xs uppercase tracking-[0.3em] text-[var(--gold)]/70">
+                    {section.eyebrow}
+                  </p>
+                  <h2 className="mt-4 text-2xl md:text-3xl font-serif">
+                    {section.title}
+                  </h2>
+                  <div className="mt-4 h-px w-16 bg-[var(--gold)]/60" />
                 </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="mt-10 flex flex-wrap gap-4 text-sm text-neutral-600">
-            <span className="px-3 py-2 rounded-full border border-[var(--gold)]">Liberty FSP 2409</span>
-            <span className="px-3 py-2 rounded-full border border-[var(--gold)]">Pretoria based</span>
-            <span className="px-3 py-2 rounded-full border border-[var(--gold)]">Fiduciary focus</span>
-            <span className="px-3 py-2 rounded-full border border-[var(--gold)]">Personalised</span>
-          </div>
-
-          <div className="mt-12 grid gap-6 sm:grid-cols-3">
-            {[
-              {
-                title: "Clarity",
-                text: "A plan you can understand and explain to your family.",
-                icon: Compass,
-              },
-              {
-                title: "Discipline",
-                text: "A structure that reduces emotion and protects progress.",
-                icon: ShieldCheck,
-              },
-              {
-                title: "Confidence",
-                text: "The quiet assurance that you are on the right path.",
-                icon: Brain,
-              },
-            ].map(({ title, text, icon: Icon }) => (
-              <div key={title} className="surface p-6">
-                <Icon className="h-6 w-6" style={{ color: "var(--gold)" }} />
-                <h3 className="mt-4 font-serif text-xl" style={{ color: "var(--green)" }}>
-                  {title}
-                </h3>
-                <p className="mt-2 text-sm text-neutral-700">{text}</p>
-              </div>
+                <div className="space-y-5 text-white/75">
+                  <p className="text-base md:text-lg leading-relaxed">{section.body}</p>
+                  <ul className="space-y-3 text-sm md:text-base">
+                    {section.bullets.map((item) => (
+                      <li key={item} className="flex items-start gap-3">
+                        <span className="mt-2 h-1.5 w-1.5 rounded-full bg-[var(--gold)]" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </motion.div>
             ))}
           </div>
         </div>
