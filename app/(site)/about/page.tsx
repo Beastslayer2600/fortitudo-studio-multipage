@@ -14,10 +14,9 @@ export default function About() {
           </p>
 
           <p className="mb-8 leading-relaxed text-lg">
-            I advise high-income professionals, business owners, and families who understand that
-            earning well is only the beginning. The real advantage comes from strategy - aligning
-            income, assets, risk, and legacy into a system that works quietly and consistently over
-            time.
+            I advise professionals, business owners, and families who understand that earning well
+            is only the beginning. The real advantage comes from strategy - aligning income,
+            assets, risk, and legacy into a system that works quietly and consistently over time.
           </p>
 
           <p className="mb-8 leading-relaxed text-lg">
