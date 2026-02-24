@@ -1,46 +1,77 @@
+"use client";
+
 import { Brain, Compass, ShieldCheck } from "lucide-react";
+import { motion } from "framer-motion";
 
 export default function Home() {
   return (
-    <main className="bg-gray-950 text-white pt-20 md:pt-24 min-h-screen">
-      <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-[var(--greenDark)] via-[var(--greenDark)] to-[var(--green)] text-[var(--cream)] overflow-hidden">
-        <div className="absolute inset-0 bg-black/20" />
+    <main className="bg-[#0B0D10] text-white pt-20 md:pt-24 min-h-screen">
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+        <div className="absolute inset-0 bg-[#0B0D10]" />
+        <motion.div
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(120deg, rgba(11,13,16,0.95), rgba(18,21,26,0.9), rgba(11,13,16,0.95))",
+            backgroundSize: "200% 200%",
+          }}
+          animate={{ backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] }}
+          transition={{ duration: 28, repeat: Infinity, ease: "linear" }}
+        />
+        <div className="absolute inset-0 pointer-events-none">
+          {[12, 28, 44, 60, 76, 90].map((top, index) => (
+            <motion.div
+              key={`h-${top}`}
+              className="absolute left-[-5%] right-[-5%] h-px bg-white/5"
+              style={{ top: `${top}%` }}
+              animate={{ opacity: [0.03, 0.08, 0.03], x: [0, 30, 0] }}
+              transition={{
+                duration: 26,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: index * 1.5,
+              }}
+            />
+          ))}
+          {[-10, 15, 40, 65, 90].map((top, index) => (
+            <motion.div
+              key={`d-${top}`}
+              className="absolute left-[-40%] w-[180%] h-px bg-white/5"
+              style={{ top: `${top}%` }}
+              animate={{
+                opacity: [0.02, 0.07, 0.02],
+                x: [0, -40, 0],
+                rotate: [-14, -8, -14],
+              }}
+              transition={{
+                duration: 32,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: index * 2,
+              }}
+            />
+          ))}
+        </div>
 
-        <div className="relative z-10 text-center container px-6 max-w-5xl">
-          <p className="text-lg md:text-xl mb-4 opacity-90 font-medium tracking-wide">
-            Gert Fourie | Financial Advisor | Liberty Group (FSP 2409) | Pretoria
-          </p>
-
-          <h1 className="text-5xl md:text-7xl font-serif font-bold mb-6 leading-tight">
-            You work hard for your money.<br className="hidden md:block" /> Let's structure it to
-            endure.
+        <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
+          <h1 className="text-4xl sm:text-5xl md:text-7xl font-serif font-semibold tracking-tight leading-tight">
+            You work hard for your money. Let's structure it to endure.
           </h1>
-
-          <p className="text-xl md:text-3xl mb-12 font-light max-w-4xl mx-auto">
+          <p className="mt-6 text-base sm:text-lg md:text-2xl text-white/80 font-sans">
             Financial strategy for high-income professionals who value clarity, discipline, and long-term
-            growth.
+            growth - Pretoria
           </p>
-
-          <div className="flex flex-col sm:flex-row gap-6 justify-center">
+          <div className="mx-auto mt-8 h-px w-24 bg-[var(--gold)]/80" />
+          <p className="mt-6 text-sm md:text-base text-white/60 tracking-[0.08em]">
+            Gert Fourie | Financial Advisor | Liberty Group (FSP 2409)
+          </p>
+          <div className="mt-10">
             <a
               href="/contact"
-              className="inline-block bg-[var(--gold)] text-[var(--greenDark)] px-10 py-5 rounded-xl text-lg font-medium hover:bg-[var(--gold)]/90 transition shadow-lg"
+              className="inline-flex items-center justify-center border border-[var(--gold)] text-[var(--gold)] px-8 py-4 text-sm md:text-base tracking-[0.08em] hover:bg-[var(--gold)] hover:text-[#0B0D10] transition-colors duration-300"
             >
               Schedule a Strategy Session
             </a>
-            <a
-              href="/about"
-              className="inline-block border-2 border-[var(--gold)] text-[var(--gold)] px-10 py-5 rounded-xl text-lg font-medium hover:bg-[var(--gold)]/10 transition"
-            >
-              Learn My Approach
-            </a>
-          </div>
-
-          <div className="mt-16 flex flex-wrap justify-center gap-8 text-sm md:text-base opacity-80">
-            <div>Liberty Group FSP 2409</div>
-            <div>Pretoria Based</div>
-            <div>Discipline Over Emotion</div>
-            <div>Structure Over Speculation</div>
           </div>
         </div>
       </section>
