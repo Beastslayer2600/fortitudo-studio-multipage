@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { Menu, X } from "lucide-react";
+import { Home, Menu, X } from "lucide-react";
 import { motion } from "framer-motion";
 import { usePathname } from "next/navigation";
 
@@ -62,6 +62,13 @@ export default function Header() {
             </Link>
 
             <nav className="hidden md:flex items-center gap-8">
+              <Link
+                href="/"
+                aria-label="Home"
+                className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/10 text-white/80 hover:text-[var(--gold)] hover:border-[var(--gold)]/60 transition-colors"
+              >
+                <Home size={16} strokeWidth={2} />
+              </Link>
               {navItems.map((item) => (
                 <Link
                   key={item.href}
@@ -105,6 +112,14 @@ export default function Header() {
             </button>
           </div>
           <nav className="flex flex-col gap-6 px-6 py-8">
+            <Link
+              href="/"
+              className="flex items-center gap-3 text-white/80 text-sm tracking-[0.12em] hover:text-[var(--gold)] transition-colors"
+              onClick={closeMenu}
+            >
+              <Home size={16} strokeWidth={2} />
+              Home
+            </Link>
             {navItems.map((item) => (
               <Link
                 key={item.href}
