@@ -4,8 +4,10 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { motion } from "framer-motion";
+import { usePathname } from "next/navigation";
 
 export default function Header() {
+  const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -26,6 +28,10 @@ export default function Header() {
     { href: "/insights", label: "Insights" },
     { href: "/contact", label: "Contact" },
   ];
+
+  if (pathname === "/") {
+    return null;
+  }
 
   return (
     <>
