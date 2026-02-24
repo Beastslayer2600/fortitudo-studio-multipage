@@ -6,7 +6,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Gert Fourie | Financial Advisor | Liberty Group FSP 2409 | Pretoria",
   description:
-    "Calm, structured financial planning that replaces worry with clarity - Pretoria & Gauteng",
+    "Structured financial planning for professionals and families in Pretoria - clarity, discipline, long-term growth.",
 };
 
 export default function RootLayout({
@@ -16,7 +16,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="min-h-screen bg-[#0B0D10] text-[var(--cream)]">
+      <body className="bg-[#0B0D10] text-[var(--cream)] min-h-screen relative overflow-x-hidden">
         <StructuralLines />
         <div className="relative z-10 min-h-screen flex flex-col">
           <Header />
