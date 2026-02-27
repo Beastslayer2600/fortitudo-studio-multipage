@@ -6,7 +6,7 @@ export const metadata: Metadata = {
 
 export default function PrivacyPolicy() {
   return (
-    <div className="bg-[#0B0D10] text-[var(--cream)]">
+    <div className="relative z-10 bg-[#0B0D10]/70 backdrop-blur-[2px] min-h-screen text-[var(--cream)]">
       <div className="container mx-auto px-6 pt-24 pb-16 max-w-4xl">
         <h1 className="text-4xl font-serif mb-8">Privacy Policy (POPIA)</h1>
         <p className="mb-6 text-white/70">

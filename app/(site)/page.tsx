@@ -5,8 +5,8 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <>
-      <section className="relative min-h-screen pt-20 md:pt-24 flex items-center justify-center bg-[#0B0D10] text-[var(--cream)]">
+    <div className="relative z-10 bg-[#0B0D10]/70 backdrop-blur-[2px] min-h-screen">
+      <section className="relative min-h-screen pt-20 md:pt-24 flex items-center justify-center bg-[#0B0D10]/70 text-[var(--cream)]">
 
         <div className="relative z-10 text-center container px-6 max-w-5xl">
           <p className="text-[var(--gold)] tracking-widest text-sm mb-4 uppercase">
@@ -159,6 +159,6 @@ export default function Home() {
         </div>
       </section>
 
-    </>
+    </div>
   );
 }

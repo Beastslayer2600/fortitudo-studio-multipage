@@ -1,6 +1,6 @@
 export default function About() {
   return (
-    <div className="min-h-screen bg-[#0B0D10] text-[var(--cream)]">
+    <div className="relative z-10 bg-[#0B0D10]/70 backdrop-blur-[2px] min-h-screen text-[var(--cream)]">
       <div className="container mx-auto px-6 py-24 max-w-4xl">
         <h1 className="text-5xl md:text-6xl font-serif font-bold mb-16 text-center tracking-tight">
           Gert Fourie
