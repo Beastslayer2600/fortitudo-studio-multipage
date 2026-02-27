@@ -10,6 +10,10 @@
 }
 
 html,body{height:100%}
+html, body{
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
 body{
   background:#0B0D10;
   color:var(--cream);

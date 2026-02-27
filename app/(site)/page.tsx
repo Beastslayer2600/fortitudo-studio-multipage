@@ -29,7 +29,7 @@ export default function Home() {
         </div>
       </nav>
 
-      <section className="relative min-h-screen flex items-center justify-center bg-[#0B0D10] text-[var(--cream)] overflow-hidden">
+      <section className="relative min-h-screen pt-20 md:pt-24 flex items-center justify-center bg-[#0B0D10] text-[var(--cream)]">
         <motion.div
           className="absolute inset-0 opacity-5 pointer-events-none"
           animate={{ backgroundPosition: ["0% 0%", "100% 100%"] }}
@@ -90,6 +90,11 @@ export default function Home() {
           <span className="md:hidden">Swipe up to explore</span>
         </motion.div>
       </section>
+
+      {/* Temporary test content to force scroll */}
+      <div className="h-[100vh] bg-[#0a231a] text-white flex items-center justify-center text-4xl">
+        Scroll works! This is the content below the hero.
+      </div>
     </>
   );
 }

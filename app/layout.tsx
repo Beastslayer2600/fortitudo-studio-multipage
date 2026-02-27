@@ -16,7 +16,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="bg-[#0B0D10] text-[var(--cream)] min-h-screen relative overflow-x-hidden">
+      <body className="bg-[#0B0D10] text-[var(--cream)] min-h-screen relative">
         <AnimatedLines />
         <div className="relative z-10 bg-[#0B0D10]/80 backdrop-blur-[1px] min-h-screen flex flex-col">
           <Navbar />
