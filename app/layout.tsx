@@ -1,13 +1,8 @@
-import type { Metadata } from "next";
-import AnimatedLines from "./components/AnimatedLines";
+"use client";
+
+import { motion } from "framer-motion";
 import Navbar from "./components/Navbar";
 import "./globals.css";
-
-export const metadata: Metadata = {
-  title: "Gert Fourie | Liberty Accredited Financial Adviser | Pretoria",
-  description:
-    "Structured financial planning for professionals and families in Pretoria - clarity, discipline, long-term growth.",
-};
 
 export default function RootLayout({
   children,
@@ -17,10 +12,34 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="bg-[#0B0D10] text-[var(--cream)] min-h-screen relative overflow-x-hidden">
-        <AnimatedLines />
-        <div className="relative z-10 bg-[#0B0D10]/70 backdrop-blur-[2px] min-h-screen flex flex-col">
+        {/* Layer 1: Green structural grid – visible and moving */}
+        <motion.div
+          className="absolute inset-0 opacity-[0.12] pointer-events-none z-0"
+          animate={{ backgroundPosition: ["0% 0%", "150% 150%"] }}
+          transition={{ duration: 35, repeat: Infinity, ease: "linear" }}
+          style={{
+            backgroundImage:
+              "linear-gradient(45deg, #0a231a 25%, transparent 25%, transparent 75%, #0a231a 75%)",
+            backgroundSize: "160px 160px",
+          }}
+        />
+
+        {/* Layer 2: Gold cross-layer – opposite direction, more visible */}
+        <motion.div
+          className="absolute inset-0 opacity-[0.08] pointer-events-none z-0"
+          animate={{ backgroundPosition: ["150% 150%", "0% 0%"] }}
+          transition={{ duration: 50, repeat: Infinity, ease: "linear" }}
+          style={{
+            backgroundImage:
+              "linear-gradient(135deg, transparent 45%, #bca472 45%, #bca472 55%, transparent 55%)",
+            backgroundSize: "200px 200px",
+          }}
+        />
+
+        {/* Main content – transparent enough for lines to show through */}
+        <div className="relative z-10 bg-[#0B0D10]/70 backdrop-blur-[2px] min-h-screen">
           <Navbar />
-          <div className="flex-1">{children}</div>
+          {children}
           <footer className="border-t border-white/10">
             <div className="mx-auto max-w-5xl px-6 py-12 text-center text-sm text-white/60">
               <div className="mx-auto mb-6 h-px w-24 bg-[var(--gold)]/60" />
