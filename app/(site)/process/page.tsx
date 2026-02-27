@@ -1,4 +1,4 @@
-export default function Process() {
+﻿export default function Process() {
   const steps = [
     {
       number: "01",
@@ -27,7 +27,7 @@ export default function Process() {
   ];
 
   return (
-    <div className="relative z-10 bg-[#0B0D10]/70 backdrop-blur-[2px] min-h-screen text-[var(--cream)]">
+    <div className="relative z-10 bg-[#0B0D10]/60 backdrop-blur-[2px] min-h-screen text-[var(--cream)]">
       <div className="container mx-auto px-6 py-24 max-w-5xl">
         <div className="text-center mb-20">
           <h1 className="text-5xl md:text-6xl font-serif font-bold mb-6">
@@ -73,3 +73,4 @@ export default function Process() {
     </div>
   );
 }
+

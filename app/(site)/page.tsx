@@ -1,16 +1,16 @@
-"use client";
+﻿"use client";
 
 import { motion } from "framer-motion";
 import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="relative z-10 bg-[#0B0D10]/70 backdrop-blur-[2px] min-h-screen">
-      <section className="relative min-h-screen pt-20 md:pt-24 flex items-center justify-center bg-[#0B0D10]/70 text-[var(--cream)]">
+    <div className="relative z-10 bg-[#0B0D10]/60 backdrop-blur-[2px] min-h-screen">
+      <section className="relative min-h-screen pt-20 md:pt-24 flex items-center justify-center bg-[#0B0D10]/60 text-[var(--cream)]">
 
         <div className="relative z-10 text-center container px-6 max-w-5xl">
           <p className="text-[var(--gold)] tracking-widest text-sm mb-4 uppercase">
-            Liberty Group (FSP 2409) • Pretoria
+            Liberty Group (FSP 2409) â€¢ Pretoria
           </p>
 
           <h1 className="text-5xl md:text-7xl font-serif font-bold mb-6 leading-tight">
@@ -51,7 +51,7 @@ export default function Home() {
             transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
             className="text-3xl"
           >
-            ↓
+            â†“
           </motion.div>
           <span className="hidden md:block">SCROLL TO EXPLORE</span>
           <span className="md:hidden">Swipe up to explore</span>
@@ -59,7 +59,7 @@ export default function Home() {
       </section>
 
       {/* Quick "Who This Is Designed For" */}
-      <section className="py-20 px-6 bg-[#0B0D10]/95">
+      <section className="py-20 px-6 bg-[#0B0D10]/75">
         <div className="container mx-auto max-w-5xl">
           <h2 className="text-4xl md:text-5xl font-serif text-center mb-16 text-[var(--gold)]">
             Who This Is Designed For
@@ -100,7 +100,7 @@ export default function Home() {
           </h2>
           <p className="text-xl leading-relaxed opacity-90 mb-12">
             Markets fluctuate. Noise increases. Trends tempt. I believe wealth is built through
-            structured planning, disciplined execution, and long-term thinking — not reactionary
+            structured planning, disciplined execution, and long-term thinking â€” not reactionary
             decisions. Performance matters, but only within a framework that protects your future.
           </p>
           <p className="text-2xl font-serif text-[var(--gold)] italic">
@@ -110,7 +110,7 @@ export default function Home() {
       </section>
 
       {/* How We Work Together (Teaser) */}
-      <section className="py-20 px-6 bg-[#0B0D10]/95">
+      <section className="py-20 px-6 bg-[#0B0D10]/75">
         <div className="container mx-auto max-w-5xl">
           <h2 className="text-4xl md:text-5xl font-serif text-center mb-16 text-[var(--gold)]">
             How We Work Together
@@ -147,7 +147,7 @@ export default function Home() {
             Wealth Is Responsibility
           </h2>
           <p className="text-xl leading-relaxed opacity-90 mb-12">
-            Financial success carries responsibility — to your future, your family, and the legacy
+            Financial success carries responsibility â€” to your future, your family, and the legacy
             you build. Strategy should reflect discipline, integrity, and long-term stewardship.
           </p>
           <Link
@@ -162,3 +162,4 @@ export default function Home() {
     </div>
   );
 }
+

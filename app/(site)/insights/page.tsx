@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Insights | Gert Fourie Financial Adviser",
@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 
 export default function InsightsPage() {
   return (
-    <main className="relative z-10 bg-[#0B0D10]/70 backdrop-blur-[2px] min-h-screen text-[var(--cream)] pt-24 pb-16 md:pt-28 md:pb-24">
+    <main className="relative z-10 bg-[#0B0D10]/60 backdrop-blur-[2px] min-h-screen text-[var(--cream)] pt-24 pb-16 md:pt-28 md:pb-24">
       <div className="mx-auto max-w-4xl px-6 lg:px-8">
         <div className="mx-auto max-w-3xl text-center">
           <h1 className="text-4xl font-bold tracking-tight sm:text-5xl font-serif">Insights</h1>
@@ -79,3 +79,4 @@ export default function InsightsPage() {
     </main>
   );
 }
+

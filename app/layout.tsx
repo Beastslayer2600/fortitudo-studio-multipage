@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { motion } from "framer-motion";
 import Navbar from "./components/Navbar";
@@ -12,32 +12,61 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="bg-[#0B0D10] text-[var(--cream)] min-h-screen relative overflow-x-hidden">
-        {/* Layer 1: Green structural grid – visible and moving */}
+        {/* Layer 1: Green structural grid */}
         <motion.div
-          className="absolute inset-0 opacity-[0.12] pointer-events-none z-0"
-          animate={{ backgroundPosition: ["0% 0%", "150% 150%"] }}
-          transition={{ duration: 35, repeat: Infinity, ease: "linear" }}
+          className="absolute inset-0 opacity-[0.18] pointer-events-none z-0"
+          animate={{
+            backgroundPosition: ["0% 0%", "180% 180%"],
+            opacity: [0.14, 0.2, 0.14],
+          }}
+          transition={{
+            backgroundPosition: { duration: 55, repeat: Infinity, ease: "linear" },
+            opacity: { duration: 14, repeat: Infinity, ease: "easeInOut" },
+          }}
           style={{
             backgroundImage:
               "linear-gradient(45deg, #0a231a 25%, transparent 25%, transparent 75%, #0a231a 75%)",
-            backgroundSize: "160px 160px",
+            backgroundSize: "150px 150px",
           }}
         />
 
-        {/* Layer 2: Gold cross-layer – opposite direction, more visible */}
+        {/* Layer 2: Gold cross-layer */}
         <motion.div
-          className="absolute inset-0 opacity-[0.08] pointer-events-none z-0"
-          animate={{ backgroundPosition: ["150% 150%", "0% 0%"] }}
-          transition={{ duration: 50, repeat: Infinity, ease: "linear" }}
+          className="absolute inset-0 opacity-[0.12] pointer-events-none z-0"
+          animate={{
+            backgroundPosition: ["180% 180%", "0% 0%"],
+            opacity: [0.09, 0.14, 0.09],
+          }}
+          transition={{
+            backgroundPosition: { duration: 70, repeat: Infinity, ease: "linear" },
+            opacity: { duration: 18, repeat: Infinity, ease: "easeInOut" },
+          }}
           style={{
             backgroundImage:
               "linear-gradient(135deg, transparent 45%, #bca472 45%, #bca472 55%, transparent 55%)",
-            backgroundSize: "200px 200px",
+            backgroundSize: "210px 210px",
           }}
         />
 
-        {/* Main content – transparent enough for lines to show through */}
-        <div className="relative z-10 bg-[#0B0D10]/70 backdrop-blur-[2px] min-h-screen">
+        {/* Layer 3: Soft moving glow */}
+        <motion.div
+          className="absolute -inset-[15%] pointer-events-none z-0 blur-3xl"
+          animate={{
+            x: ["-6%", "8%", "-4%"],
+            y: ["-4%", "10%", "-3%"],
+            rotate: [0, 5, -4, 0],
+            scale: [1, 1.06, 1],
+            opacity: [0.18, 0.28, 0.18],
+          }}
+          transition={{ duration: 90, repeat: Infinity, ease: "easeInOut" }}
+          style={{
+            backgroundImage:
+              "radial-gradient(circle at 20% 25%, rgba(188, 164, 114, 0.35), transparent 48%), radial-gradient(circle at 78% 68%, rgba(10, 35, 26, 0.55), transparent 52%)",
+          }}
+        />
+
+        {/* Main content wrapper */}
+        <div className="relative z-10 bg-[#0B0D10]/55 backdrop-blur-[1px] min-h-screen">
           <Navbar />
           {children}
           <footer className="border-t border-white/10">
@@ -60,11 +89,11 @@ export default function RootLayout({
                 <a href="/disclaimer" className="hover:text-[var(--gold)] transition-colors">
                   Disclaimer
                 </a>
-                <span aria-hidden="true">•</span>
+                <span aria-hidden="true">|</span>
                 <a href="/privacy" className="hover:text-[var(--gold)] transition-colors">
                   Privacy Policy (POPIA)
                 </a>
-                <span aria-hidden="true">•</span>
+                <span aria-hidden="true">|</span>
                 <a href="/contact" className="hover:text-[var(--gold)] transition-colors">
                   Contact
                 </a>
