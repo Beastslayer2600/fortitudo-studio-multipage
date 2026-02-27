@@ -91,10 +91,6 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* Temporary test content to force scroll */}
-      <div className="h-[100vh] bg-[#0a231a] text-white flex items-center justify-center text-4xl">
-        Scroll works! This is the content below the hero.
-      </div>
     </>
   );
 }
