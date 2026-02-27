@@ -1,6 +1,7 @@
 ﻿"use client";
 
 import { motion } from "framer-motion";
+import { ArrowDown } from "lucide-react";
 import Link from "next/link";
 
 export default function Home() {
@@ -10,7 +11,7 @@ export default function Home() {
 
         <div className="relative z-10 text-center container px-6 max-w-5xl">
           <p className="text-[var(--gold)] tracking-widest text-sm mb-4 uppercase">
-            Liberty Group (FSP 2409) â€¢ Pretoria
+            Liberty Group (FSP 2409) | Pretoria
           </p>
 
           <h1 className="text-5xl md:text-7xl font-serif font-bold mb-6 leading-tight">
@@ -51,7 +52,7 @@ export default function Home() {
             transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
             className="text-3xl"
           >
-            â†“
+            <ArrowDown className="h-8 w-8" aria-hidden="true" />
           </motion.div>
           <span className="hidden md:block">SCROLL TO EXPLORE</span>
           <span className="md:hidden">Swipe up to explore</span>
@@ -100,7 +101,7 @@ export default function Home() {
           </h2>
           <p className="text-xl leading-relaxed opacity-90 mb-12">
             Markets fluctuate. Noise increases. Trends tempt. I believe wealth is built through
-            structured planning, disciplined execution, and long-term thinking â€” not reactionary
+            structured planning, disciplined execution, and long-term thinking - not reactionary
             decisions. Performance matters, but only within a framework that protects your future.
           </p>
           <p className="text-2xl font-serif text-[var(--gold)] italic">
@@ -147,7 +148,7 @@ export default function Home() {
             Wealth Is Responsibility
           </h2>
           <p className="text-xl leading-relaxed opacity-90 mb-12">
-            Financial success carries responsibility â€” to your future, your family, and the legacy
+            Financial success carries responsibility - to your future, your family, and the legacy
             you build. Strategy should reflect discipline, integrity, and long-term stewardship.
           </p>
           <Link
