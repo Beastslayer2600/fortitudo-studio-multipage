@@ -101,7 +101,7 @@ export default function Header() {
       >
         <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" onClick={closeMenu} />
         <div
-          className={`absolute top-0 bottom-0 right-0 w-72 bg-[#0B0D10] border-l border-white/10 transform transition-transform duration-300 ease-in-out ${
+          className={`absolute top-0 bottom-0 right-0 w-72 bg-[#0B0D10]/90 backdrop-blur-md border-l border-white/10 transform transition-transform duration-300 ease-in-out ${
             isOpen ? "translate-x-0" : "translate-x-full"
           }`}
         >

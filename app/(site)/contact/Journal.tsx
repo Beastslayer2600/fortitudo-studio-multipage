@@ -1,7 +1,7 @@
 
 export default function Contact(){
   return (
-    <main className="bg-[#0B0D10] text-[var(--cream)] pt-24 pb-16 sm:pt-28 sm:pb-24">
+    <main className="relative z-10 bg-[#0B0D10]/70 backdrop-blur-[2px] min-h-screen text-[var(--cream)] pt-24 pb-16 sm:pt-28 sm:pb-24">
       <div className="container max-w-xl">
         <h1 className="font-serif text-3xl text-[var(--cream)]">Contact</h1>
         <p className="mt-2 text-sm text-white/70">Questions or collaborations? Send a note.</p>
