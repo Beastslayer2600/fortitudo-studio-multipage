@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 export default function StructuralLines() {
   return (
     <>
+      {/* Main structural lines layer */}
       <motion.div
         className="absolute inset-0 opacity-5 pointer-events-none z-0"
         animate={{
@@ -16,12 +17,15 @@ export default function StructuralLines() {
           ease: "linear",
         }}
         style={{
-          backgroundImage:
-            "linear-gradient(45deg, #0a231a 25%, transparent 25%, transparent 75%, #0a231a 75%), linear-gradient(-45deg, #bca472 25%, transparent 25%, transparent 75%, #bca472 75%)",
+          backgroundImage: `
+            linear-gradient(45deg, #0a231a 25%, transparent 25%, transparent 75%, #0a231a 75%),
+            linear-gradient(-45deg, #bca472 25%, transparent 25%, transparent 75%, #bca472 75%)
+          `,
           backgroundSize: "120px 120px",
         }}
       />
 
+      {/* Secondary faint gold layer for depth */}
       <motion.div
         className="absolute inset-0 opacity-3 pointer-events-none z-0"
         animate={{

@@ -10,8 +10,8 @@ export default function Disclaimer() {
       <div className="container mx-auto px-6 pt-24 pb-16 max-w-4xl">
         <h1 className="text-4xl font-serif mb-8">Disclaimer</h1>
         <p className="mb-6 text-white/70">
-        Liberty Group Limited is an Authorised Financial Services Provider (FSP 2409) in terms of the Financial Advisory and
-        Intermediary Services Act 37 of 2002. Gert Fourie is a representative of Liberty Group Limited.
+        Liberty Group Limited is an authorised financial service provider (No. 2409) and part of the Standard Bank Group. Gert
+        Fourie is a representative of Liberty Group Limited.
         </p>
         <p className="mb-6 text-white/70">
         All content on this website is general information only and does not constitute financial advice, a recommendation or

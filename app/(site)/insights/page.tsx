@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Insights | Gert Fourie Financial Advisor",
+  title: "Insights | Gert Fourie Financial Adviser",
   description:
     "Structured perspectives on economic cycles, portfolio construction, tax developments, risk management, and behavioural finance in South Africa.",
 };

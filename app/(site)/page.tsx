@@ -74,10 +74,12 @@ export default function Home() {
         </div>
 
         <motion.div
-          className="absolute bottom-10 left-1/2 -translate-x-1/2 text-[var(--cream)]/50 text-xs tracking-widest"
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 2.5, repeat: Infinity }}
+          className="absolute bottom-10 left-1/2 -translate-x-1/2 text-[var(--cream)]/50 text-xs tracking-widest flex flex-col items-center gap-2"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1.5, duration: 1 }}
         >
+          <span className="animate-bounce">↓</span>
           SCROLL TO EXPLORE
         </motion.div>
       </section>

@@ -117,6 +117,13 @@ h1,h2,h3,h4{font-family: Georgia, "Times New Roman", Times, serif}
   60%{ transform:translateY(2px) scale(1.01); opacity:1; filter:blur(0); }
   100%{ transform:translateY(0) scale(1); }
 }
+.animate-bounce{
+  animation:bounce 2s infinite;
+}
+@keyframes bounce{
+  0%, 100%{ transform:translateY(0); }
+  50%{ transform:translateY(8px); }
+}
 .menu-list{
   display:flex;
   flex-direction:column;

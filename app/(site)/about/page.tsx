@@ -8,9 +8,9 @@ export default function About() {
 
         <div className="prose prose-lg prose-invert max-w-none">
           <p className="mb-8 leading-relaxed text-lg">
-            I am a financial advisor with Liberty Group (FSP 2409), based in Pretoria. My work is
-            grounded in one principle: wealth is not built by reacting - it is built by structure,
-            discipline, and long-term clarity.
+            I am a Liberty accredited financial adviser based in Pretoria. My work is grounded in
+            one principle: wealth is not built by reacting - it is built by structure, discipline,
+            and long-term clarity.
           </p>
 
           <p className="mb-8 leading-relaxed text-lg">

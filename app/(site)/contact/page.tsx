@@ -23,7 +23,7 @@ export default function Contact() {
               </p>
               <div className="mt-4 space-y-2 text-white/70">
                 <p className="text-base font-medium text-[var(--cream)]">Mr. Gert Fourie</p>
-                <p>Financial Advisor - Liberty Group Limited (FSP 2409)</p>
+                <p>Liberty accredited financial adviser</p>
               </div>
             </div>
             <div className="space-y-2 text-white/70">
