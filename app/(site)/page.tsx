@@ -6,40 +6,7 @@ import Link from "next/link";
 export default function Home() {
   return (
     <>
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-[#0B0D10]/80 backdrop-blur-md border-b border-white/10">
-        <div className="container mx-auto px-6 py-5 flex justify-between items-center">
-          <div className="font-serif text-2xl text-[var(--cream)] tracking-tight">GERT FOURIE</div>
-          <div className="hidden md:flex gap-8 text-sm uppercase tracking-widest text-[var(--cream)]/80">
-            <Link href="/about" className="hover:text-[var(--gold)] transition">
-              About
-            </Link>
-            <Link href="/services" className="hover:text-[var(--gold)] transition">
-              Services
-            </Link>
-            <Link href="/process" className="hover:text-[var(--gold)] transition">
-              Process
-            </Link>
-            <Link href="/insights" className="hover:text-[var(--gold)] transition">
-              Insights
-            </Link>
-            <Link href="/contact" className="hover:text-[var(--gold)] transition">
-              Contact
-            </Link>
-          </div>
-        </div>
-      </nav>
-
       <section className="relative min-h-screen pt-20 md:pt-24 flex items-center justify-center bg-[#0B0D10] text-[var(--cream)]">
-        <motion.div
-          className="absolute inset-0 opacity-5 pointer-events-none"
-          animate={{ backgroundPosition: ["0% 0%", "100% 100%"] }}
-          transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
-          style={{
-            backgroundImage:
-              "linear-gradient(45deg, #0a231a 25%, transparent 25%, transparent 75%, #0a231a 75%)",
-            backgroundSize: "100px 100px",
-          }}
-        />
 
         <div className="relative z-10 text-center container px-6 max-w-5xl">
           <p className="text-[var(--gold)] tracking-widest text-sm mb-4 uppercase">
