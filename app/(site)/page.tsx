@@ -74,19 +74,20 @@ export default function Home() {
         </div>
 
         <motion.div
-          className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 text-[var(--cream)]/60 text-sm tracking-widest"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          className="absolute bottom-16 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 text-[var(--cream)]/70 text-sm tracking-widest md:bottom-12"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
           transition={{ delay: 2, duration: 1.2 }}
         >
-          <motion.span
+          <motion.div
             animate={{ y: [0, 12, 0] }}
-            transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-            className="text-2xl"
+            transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
+            className="text-3xl"
           >
             ↓
-          </motion.span>
-          SCROLL TO EXPLORE
+          </motion.div>
+          <span className="hidden md:block">SCROLL TO EXPLORE</span>
+          <span className="md:hidden">Swipe up to explore</span>
         </motion.div>
       </section>
     </>
