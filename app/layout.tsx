@@ -18,7 +18,7 @@ export default function RootLayout({
     <html lang="en">
       <body className="bg-[#0B0D10] text-[var(--cream)] min-h-screen relative overflow-x-hidden">
         <AnimatedLines />
-        <div className="relative z-10 bg-[#0B0D10]/85 backdrop-blur-[1px] min-h-screen flex flex-col">
+        <div className="relative z-10 bg-[#0B0D10]/70 backdrop-blur-[2px] min-h-screen flex flex-col">
           <Navbar />
           <div className="flex-1">{children}</div>
           <footer className="border-t border-white/10">
