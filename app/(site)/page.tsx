@@ -74,12 +74,18 @@ export default function Home() {
         </div>
 
         <motion.div
-          className="absolute bottom-10 left-1/2 -translate-x-1/2 text-[var(--cream)]/50 text-xs tracking-widest flex flex-col items-center gap-2"
+          className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 text-[var(--cream)]/60 text-sm tracking-widest"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.5, duration: 1 }}
+          transition={{ delay: 2, duration: 1.2 }}
         >
-          <span className="animate-bounce">↓</span>
+          <motion.span
+            animate={{ y: [0, 12, 0] }}
+            transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+            className="text-2xl"
+          >
+            ↓
+          </motion.span>
           SCROLL TO EXPLORE
         </motion.div>
       </section>

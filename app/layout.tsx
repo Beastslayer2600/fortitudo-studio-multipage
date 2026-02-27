@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
+import AnimatedLines from "./components/AnimatedLines";
 import Navbar from "./components/Navbar";
-import StructuralLines from "@/components/StructuralLines";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -17,8 +17,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="bg-[#0B0D10] text-[var(--cream)] min-h-screen relative overflow-x-hidden">
-        <StructuralLines />
-        <div className="relative z-10 bg-[#0B0D10]/70 backdrop-blur-sm min-h-screen flex flex-col">
+        <AnimatedLines />
+        <div className="relative z-10 bg-[#0B0D10]/75 backdrop-blur-[2px] min-h-screen flex flex-col">
           <Navbar />
           <div className="flex-1">{children}</div>
           <footer className="border-t border-white/10">
