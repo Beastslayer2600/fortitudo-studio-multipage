@@ -11,10 +11,7 @@
 
 html,body{height:100%}
 body{
-  background:
-    radial-gradient(circle at 8% -12%, rgb(188 164 114 / 20%), transparent 40%),
-    radial-gradient(circle at 92% 116%, rgb(13 42 31 / 56%), transparent 45%),
-    linear-gradient(180deg, #07110d 0%, #0b1410 100%);
+  background: linear-gradient(180deg, #050a08 0%, #0a120e 55%, #08100c 100%);
   color:var(--cream);
   font-feature-settings:"liga","kern";
 }

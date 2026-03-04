@@ -4,23 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="02c9b464-ad10-4ab0-bbd2-c9e16c6b4552" name="Changes" comment="j">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/(site)/about/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/(site)/about/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/(site)/contact/Journal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/(site)/contact/Journal.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/(site)/contact/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/(site)/contact/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/(site)/disclaimer/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/(site)/disclaimer/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/(site)/guides/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/(site)/guides/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/(site)/insights/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/(site)/insights/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/(site)/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/(site)/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/(site)/privacy/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/(site)/privacy/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/(site)/process/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/(site)/process/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/(site)/services/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/(site)/services/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/(site)/thank-you/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/(site)/thank-you/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/QuickMenu.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/QuickMenu.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/globals.css" beforeDir="false" afterPath="$PROJECT_DIR$/app/globals.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/layout.tsx" afterDir="false" />
-    </list>
+    <list default="true" id="02c9b464-ad10-4ab0-bbd2-c9e16c6b4552" name="Changes" comment="j" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -127,7 +111,15 @@
       <option name="project" value="LOCAL" />
       <updated>1772615803015</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="j">
+      <option name="closed" value="true" />
+      <created>1772616523879</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1772616523879</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
