@@ -62,19 +62,19 @@ export default function Home() {
           </h2>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <div className="p-8 border border-[var(--gold)]/20 rounded-xl bg-black/15 backdrop-blur-[1px] hover:border-[var(--gold)] hover:shadow-[0_0_20px_rgba(188,164,114,0.2)] transition-all duration-300">
+            <div className="p-8 border border-[var(--gold)]/20 rounded-xl hover:border-[var(--gold)] hover:shadow-[0_0_20px_rgba(188,164,114,0.2)] transition-all duration-300">
               <h3 className="text-2xl font-serif mb-4 text-[var(--gold)]">High-income professionals</h3>
               <p className="text-lg opacity-90">Seeking clarity and structure in a complex financial world.</p>
             </div>
-            <div className="p-8 border border-[var(--gold)]/20 rounded-xl bg-black/15 backdrop-blur-[1px] hover:border-[var(--gold)] hover:shadow-[0_0_20px_rgba(188,164,114,0.2)] transition-all duration-300">
+            <div className="p-8 border border-[var(--gold)]/20 rounded-xl hover:border-[var(--gold)] hover:shadow-[0_0_20px_rgba(188,164,114,0.2)] transition-all duration-300">
               <h3 className="text-2xl font-serif mb-4 text-[var(--gold)]">Business owners</h3>
               <p className="text-lg opacity-90">Building sustainable wealth without speculation.</p>
             </div>
-            <div className="p-8 border border-[var(--gold)]/20 rounded-xl bg-black/15 backdrop-blur-[1px] hover:border-[var(--gold)] hover:shadow-[0_0_20px_rgba(188,164,114,0.2)] transition-all duration-300">
+            <div className="p-8 border border-[var(--gold)]/20 rounded-xl hover:border-[var(--gold)] hover:shadow-[0_0_20px_rgba(188,164,114,0.2)] transition-all duration-300">
               <h3 className="text-2xl font-serif mb-4 text-[var(--gold)]">Families</h3>
               <p className="text-lg opacity-90">Planning multi-decade security and legacy.</p>
             </div>
-            <div className="p-8 border border-[var(--gold)]/20 rounded-xl bg-black/15 backdrop-blur-[1px] hover:border-[var(--gold)] hover:shadow-[0_0_20px_rgba(188,164,114,0.2)] transition-all duration-300">
+            <div className="p-8 border border-[var(--gold)]/20 rounded-xl hover:border-[var(--gold)] hover:shadow-[0_0_20px_rgba(188,164,114,0.2)] transition-all duration-300">
               <h3 className="text-2xl font-serif mb-4 text-[var(--gold)]">Disciplined thinkers</h3>
               <p className="text-lg opacity-90">Who value long-term stewardship over short-term hype.</p>
             </div>
