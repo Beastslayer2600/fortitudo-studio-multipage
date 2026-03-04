@@ -1,8 +1,8 @@
-﻿import Link from "next/link";
+import Link from "next/link";
 
 export default function ThankYou() {
   return (
-    <div className="relative z-10 bg-[#0B0D10]/60 backdrop-blur-[2px] min-h-screen flex items-center justify-center text-[var(--cream)]">
+    <div className="relative z-10 min-h-screen flex items-center justify-center text-[var(--cream)]">
       <div className="text-center px-6">
         <h1 className="text-5xl font-serif mb-6">Thank You</h1>
         <p className="text-xl mb-10 max-w-2xl mx-auto">
@@ -18,4 +18,5 @@ export default function ThankYou() {
     </div>
   );
 }
+
 

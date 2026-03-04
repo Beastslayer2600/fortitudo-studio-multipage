@@ -1,4 +1,4 @@
-﻿const services = [
+const services = [
   {
     title: "Retirement Clarity",
     description:
@@ -33,7 +33,7 @@
 
 export default function Services() {
   return (
-    <main className="relative z-10 bg-[#0B0D10]/60 backdrop-blur-[2px] min-h-screen text-[var(--cream)] pt-24 pb-16 sm:pt-28 sm:pb-24">
+    <main className="relative z-10 min-h-screen text-[var(--cream)] pt-24 pb-16 sm:pt-28 sm:pb-24">
       <div className="container max-w-5xl">
         <h1 className="font-serif text-3xl text-[var(--cream)]">
           How I Help
@@ -58,4 +58,5 @@ export default function Services() {
     </main>
   );
 }
+
 
