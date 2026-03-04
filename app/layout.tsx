@@ -23,7 +23,7 @@ export default function RootLayout({
       <body className="relative min-h-screen overflow-x-hidden">
         <div aria-hidden="true" className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
           <AnimatedLines />
-          <div className="absolute inset-0 bg-black/8" />
+          <div className="absolute inset-0 bg-black/2" />
         </div>
 
         <div className="relative z-10 flex min-h-screen flex-col">
