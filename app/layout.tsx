@@ -23,8 +23,8 @@ export default function RootLayout({
       <body className="relative min-h-screen overflow-x-hidden">
         <div aria-hidden="true" className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
           <AnimatedLines />
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_16%_-8%,rgba(188,164,114,0.14),transparent_36%),radial-gradient(circle_at_84%_110%,rgba(13,42,31,0.45),transparent_46%)]" />
-          <div className="absolute inset-0 bg-[#070d0a]/38" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_15%_-10%,rgba(188,164,114,0.18),transparent_38%),radial-gradient(circle_at_85%_112%,rgba(13,42,31,0.48),transparent_50%),linear-gradient(180deg,rgba(5,10,8,0.22),rgba(5,10,8,0.36))]" />
+          <div className="absolute inset-0 bg-[#070d0a]/22" />
         </div>
 
         <div className="relative z-10 flex min-h-screen flex-col">
