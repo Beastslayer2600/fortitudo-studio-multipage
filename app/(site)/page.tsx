@@ -8,7 +8,7 @@ export default function Home() {
     <main className="relative text-[var(--cream)]">
       {/* Hero Section */}
       <section className="relative min-h-screen overflow-hidden pt-20 md:pt-24">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(188,164,114,0.12),transparent_42%),linear-gradient(180deg,rgba(5,10,8,0.58),rgba(6,11,9,0.32)_58%,transparent)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(188,164,114,0.14),transparent_42%),linear-gradient(180deg,rgba(5,10,8,0.32),rgba(6,11,9,0.16)_58%,transparent)]" />
         <div className="relative z-10 flex min-h-screen items-center justify-center">
         {/* Subtle animated lines - already global from layout */}
           <div className="relative z-10 text-center container px-6 max-w-5xl">
@@ -53,12 +53,12 @@ export default function Home() {
           <span className="hidden md:block">SCROLL TO EXPLORE</span>
           <span className="md:hidden">Swipe up to explore</span>
         </motion.div>
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent via-[#070d0a]/55 to-[#070d0a]/85" />
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent via-[#070d0a]/18 to-[#070d0a]/42" />
       </section>
 
       {/* Who This Is Designed For */}
       <section className="relative isolate py-32 px-6">
-        <div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-b from-[#070d0a]/80 via-[#0a120e]/50 to-transparent" />
+        <div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-b from-[#070d0a]/34 via-[#0a120e]/16 to-transparent" />
         <div className="container mx-auto max-w-5xl">
           <h2 className="text-4xl md:text-5xl font-serif text-center mb-16 text-[var(--gold)]">
             Who This Is Designed For
@@ -87,7 +87,7 @@ export default function Home() {
 
       {/* Discipline Over Emotion */}
       <section className="relative isolate py-32 px-6">
-        <div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-b from-transparent via-[#09110d]/40 to-transparent" />
+        <div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-b from-transparent via-[#09110d]/18 to-transparent" />
         <div className="container mx-auto max-w-4xl text-center">
           <h2 className="text-4xl md:text-5xl font-serif mb-10 text-[var(--gold)]">
             Discipline Over Emotion. Structure Over Speculation.
@@ -103,7 +103,7 @@ export default function Home() {
 
       {/* CTA */}
       <section className="relative isolate py-32 px-6 text-center">
-        <div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-b from-transparent via-[#070d0a]/72 to-[#050a08]/92" />
+        <div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-b from-transparent via-[#070d0a]/28 to-[#050a08]/56" />
         <div className="container mx-auto max-w-4xl">
           <h2 className="text-4xl md:text-5xl font-serif mb-8 text-[var(--gold)]">
             Ready to Structure Your Future?

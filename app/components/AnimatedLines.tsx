@@ -6,51 +6,59 @@ export default function AnimatedLines() {
   return (
     <>
       <motion.div
-        className="pointer-events-none absolute -inset-[20%] z-0 blur-[42px]"
+        className="pointer-events-none absolute -inset-[8%] z-0"
         animate={{
-          backgroundPosition: ["0% 0%", "100% 100%"],
-          scale: [1, 1.08, 1],
+          backgroundPosition: ["0% 0%", "120% 120%"],
         }}
         transition={{
-          duration: 38,
+          duration: 34,
           repeat: Infinity,
-          ease: "easeInOut",
+          ease: "linear",
         }}
         style={{
           backgroundImage: `
-            radial-gradient(circle at 18% 24%, rgba(188, 164, 114, 0.34), transparent 42%),
-            radial-gradient(circle at 76% 72%, rgba(13, 42, 31, 0.42), transparent 48%),
-            radial-gradient(circle at 52% 8%, rgba(188, 164, 114, 0.18), transparent 40%)
+            repeating-linear-gradient(
+              45deg,
+              rgba(188, 164, 114, 0.2) 0px,
+              rgba(188, 164, 114, 0.2) 1.2px,
+              transparent 1.2px,
+              transparent 90px
+            ),
+            repeating-linear-gradient(
+              -45deg,
+              rgba(13, 42, 31, 0.22) 0px,
+              rgba(13, 42, 31, 0.22) 1.2px,
+              transparent 1.2px,
+              transparent 90px
+            )
           `,
-          backgroundSize: "140% 140%",
-          opacity: 0.52,
+          backgroundSize: "220px 220px",
+          opacity: 0.17,
         }}
       />
 
       <motion.div
         className="absolute inset-0 pointer-events-none z-0"
         animate={{
-          backgroundPosition: ["0% 0%", "120% 120%"],
+          backgroundPosition: ["120% 0%", "0% 120%"],
         }}
         transition={{
-          duration: 48,
+          duration: 52,
           repeat: Infinity,
           ease: "linear",
         }}
         style={{
           backgroundImage:
-            "linear-gradient(45deg, rgba(13, 42, 31, 0.26) 1px, transparent 1px), linear-gradient(-45deg, rgba(188, 164, 114, 0.22) 1px, transparent 1px)",
-          backgroundSize: "150px 150px",
-          opacity: 0.036,
-          mixBlendMode: "screen",
-          filter: "blur(0.45px)",
+            "repeating-linear-gradient(135deg, rgba(188, 164, 114, 0.16) 0px, rgba(188, 164, 114, 0.16) 1px, transparent 1px, transparent 120px)",
+          backgroundSize: "280px 280px",
+          opacity: 0.12,
         }}
       />
 
       <motion.div
         className="absolute inset-0 pointer-events-none z-0"
         animate={{
-          opacity: [0.03, 0.06, 0.03],
+          opacity: [0.09, 0.16, 0.09],
           backgroundPosition: ["120% 20%", "0% 80%", "120% 20%"],
         }}
         transition={{
@@ -62,7 +70,7 @@ export default function AnimatedLines() {
           backgroundImage:
             "linear-gradient(120deg, transparent 38%, rgba(188, 164, 114, 0.28) 50%, transparent 62%)",
           backgroundSize: "180% 180%",
-          filter: "blur(2px)",
+          filter: "blur(1px)",
         }}
       />
     </>
