@@ -6,13 +6,16 @@ export default function AnimatedLines() {
   return (
     <>
       <motion.div
-        className="pointer-events-none absolute -inset-[12%] z-0"
+        className="pointer-events-none absolute -inset-[16%] z-0"
         animate={{
-          x: [0, 120],
-          y: [0, 120],
+          backgroundPosition: [
+            "0px 0px, 0px 0px",
+            "680px 680px, -680px 680px",
+          ],
+          rotate: [0, 1.2, 0, -1.2, 0],
         }}
         transition={{
-          duration: 28,
+          duration: 26,
           repeat: Infinity,
           ease: "linear",
         }}
@@ -33,7 +36,7 @@ export default function AnimatedLines() {
               transparent 88px
             )
           `,
-          backgroundSize: "240px 240px",
+          backgroundSize: "220px 220px, 220px 220px",
           opacity: 0.36,
         }}
       />
@@ -41,11 +44,10 @@ export default function AnimatedLines() {
       <motion.div
         className="absolute inset-0 pointer-events-none z-0"
         animate={{
-          x: [160, 0],
-          y: [0, 160],
+          backgroundPosition: ["0px 0px", "-820px 820px"],
         }}
         transition={{
-          duration: 36,
+          duration: 32,
           repeat: Infinity,
           ease: "linear",
         }}
@@ -62,10 +64,10 @@ export default function AnimatedLines() {
         className="absolute inset-0 pointer-events-none z-0"
         animate={{
           opacity: [0.06, 0.16, 0.06],
-          backgroundPosition: ["120% 20%", "0% 80%", "120% 20%"],
+          backgroundPosition: ["140% 10%", "-40% 90%", "140% 10%"],
         }}
         transition={{
-          duration: 26,
+          duration: 18,
           repeat: Infinity,
           ease: "easeInOut",
         }}
