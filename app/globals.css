@@ -11,7 +11,7 @@
 
 html,body{height:100%}
 body{
-  background: linear-gradient(180deg, #050a08 0%, #0a120e 55%, #08100c 100%);
+  background:#0B0D10;
   color:var(--cream);
   font-feature-settings:"liga","kern";
 }
