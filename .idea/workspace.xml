@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="02c9b464-ad10-4ab0-bbd2-c9e16c6b4552" name="Changes" comment="j">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="02c9b464-ad10-4ab0-bbd2-c9e16c6b4552" name="Changes" comment="Add files via upload&#10;# Conflicts:&#10;#&#9;app/about/page.tsx&#10;#&#9;app/api/contact/route.ts&#10;#&#9;app/components/QuickMenu.tsx&#10;#&#9;app/contact/page.tsx&#10;#&#9;app/globals.css&#10;#&#9;app/layout.tsx&#10;#&#9;app/page.tsx&#10;#&#9;app/sitemap.xml&#10;#&#9;env.example&#10;#&#9;next-env.d.ts&#10;#&#9;tsconfig.json" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
