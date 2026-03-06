@@ -50,6 +50,7 @@ export async function POST(request: Request) {
   const port = readEnv("CONTACT_SMTP_PORT", "SMTP_PORT", "MAIL_PORT", "EMAIL_PORT");
   const user = readEnv(
     "CONTACT_SMTP_USER",
+    "CONTACT_SMTP_USERNAME",
     "SMTP_USER",
     "SMTP_USERNAME",
     "MAIL_USER",
@@ -58,6 +59,7 @@ export async function POST(request: Request) {
   );
   const pass = readEnv(
     "CONTACT_SMTP_PASS",
+    "CONTACT_SMTP_PASSWORD",
     "SMTP_PASS",
     "SMTP_PASSWORD",
     "MAIL_PASS",
