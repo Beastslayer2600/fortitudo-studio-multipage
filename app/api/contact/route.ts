@@ -8,6 +8,17 @@ function isEmail(value: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
 }
 
+function readEnv(...keys: string[]) {
+  for (const key of keys) {
+    const value = process.env[key];
+    if (value && value.trim()) {
+      return value.trim();
+    }
+  }
+
+  return undefined;
+}
+
 export async function POST(request: Request) {
   const body = await request.json().catch(() => null);
   if (!body) {
@@ -27,13 +38,13 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Please provide a valid email address." }, { status: 400 });
   }
 
-  const host = process.env.CONTACT_SMTP_HOST;
-  const port = process.env.CONTACT_SMTP_PORT;
-  const user = process.env.CONTACT_SMTP_USER;
-  const pass = process.env.CONTACT_SMTP_PASS;
-  const secure = process.env.CONTACT_SMTP_SECURE === "true";
-  const from = process.env.CONTACT_FROM || user;
-  const to = process.env.CONTACT_TO || "fortitudostudios@protonmail.com";
+  const host = readEnv("CONTACT_SMTP_HOST", "SMTP_HOST");
+  const port = readEnv("CONTACT_SMTP_PORT", "SMTP_PORT");
+  const user = readEnv("CONTACT_SMTP_USER", "SMTP_USER");
+  const pass = readEnv("CONTACT_SMTP_PASS", "SMTP_PASS");
+  const secure = (readEnv("CONTACT_SMTP_SECURE", "SMTP_SECURE") || "").toLowerCase() === "true";
+  const from = readEnv("CONTACT_FROM", "SMTP_FROM", "MAIL_FROM") || user;
+  const to = readEnv("CONTACT_TO", "SMTP_TO", "MAIL_TO") || "fortitudostudios@protonmail.com";
 
   if (!host || !port || !user || !pass || !from) {
     return NextResponse.json(
@@ -42,9 +53,17 @@ export async function POST(request: Request) {
     );
   }
 
+  const smtpPort = Number(port);
+  if (!Number.isInteger(smtpPort) || smtpPort <= 0) {
+    return NextResponse.json(
+      { error: "Email service is not configured. SMTP port is invalid." },
+      { status: 500 }
+    );
+  }
+
   const transporter = nodemailer.createTransport({
     host,
-    port: Number(port),
+    port: smtpPort,
     secure,
     auth: {
       user,
