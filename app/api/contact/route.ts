@@ -19,6 +19,14 @@ function readEnv(...keys: string[]) {
   return undefined;
 }
 
+function parseBoolean(value: string | undefined) {
+  if (!value) {
+    return undefined;
+  }
+
+  return /^(true|1|yes)$/i.test(value);
+}
+
 export async function POST(request: Request) {
   const body = await request.json().catch(() => null);
   if (!body) {
@@ -38,17 +46,46 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Please provide a valid email address." }, { status: 400 });
   }
 
-  const host = readEnv("CONTACT_SMTP_HOST", "SMTP_HOST");
-  const port = readEnv("CONTACT_SMTP_PORT", "SMTP_PORT");
-  const user = readEnv("CONTACT_SMTP_USER", "SMTP_USER");
-  const pass = readEnv("CONTACT_SMTP_PASS", "SMTP_PASS");
-  const secure = (readEnv("CONTACT_SMTP_SECURE", "SMTP_SECURE") || "").toLowerCase() === "true";
-  const from = readEnv("CONTACT_FROM", "SMTP_FROM", "MAIL_FROM") || user;
-  const to = readEnv("CONTACT_TO", "SMTP_TO", "MAIL_TO") || "fortitudostudios@protonmail.com";
+  const host = readEnv("CONTACT_SMTP_HOST", "SMTP_HOST", "MAIL_HOST", "EMAIL_HOST");
+  const port = readEnv("CONTACT_SMTP_PORT", "SMTP_PORT", "MAIL_PORT", "EMAIL_PORT");
+  const user = readEnv(
+    "CONTACT_SMTP_USER",
+    "SMTP_USER",
+    "SMTP_USERNAME",
+    "MAIL_USER",
+    "MAIL_USERNAME",
+    "EMAIL_USER"
+  );
+  const pass = readEnv(
+    "CONTACT_SMTP_PASS",
+    "SMTP_PASS",
+    "SMTP_PASSWORD",
+    "MAIL_PASS",
+    "MAIL_PASSWORD",
+    "EMAIL_PASS"
+  );
+  const secureValue = readEnv(
+    "CONTACT_SMTP_SECURE",
+    "SMTP_SECURE",
+    "MAIL_SECURE",
+    "EMAIL_SECURE"
+  );
+  const from = readEnv("CONTACT_FROM", "SMTP_FROM", "MAIL_FROM", "EMAIL_FROM") || user;
+  const to = readEnv("CONTACT_TO", "SMTP_TO", "MAIL_TO", "EMAIL_TO") || "fortitudostudios@protonmail.com";
 
-  if (!host || !port || !user || !pass || !from) {
+  const missingFields = [
+    !host ? "host" : "",
+    !port ? "port" : "",
+    !user ? "user" : "",
+    !pass ? "pass" : "",
+    !from ? "from" : "",
+  ].filter(Boolean);
+
+  if (missingFields.length > 0) {
     return NextResponse.json(
-      { error: "Email service is not configured. Please set SMTP environment variables." },
+      {
+        error: `Email service is not configured. Missing SMTP fields: ${missingFields.join(", ")}.`,
+      },
       { status: 500 }
     );
   }
@@ -60,6 +97,9 @@ export async function POST(request: Request) {
       { status: 500 }
     );
   }
+
+  const parsedSecure = parseBoolean(secureValue);
+  const secure = parsedSecure ?? smtpPort === 465;
 
   const transporter = nodemailer.createTransport({
     host,
