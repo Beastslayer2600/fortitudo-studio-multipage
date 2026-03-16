@@ -145,18 +145,37 @@ export async function POST(request: Request) {
   `;
 
   try {
-    await transporter.sendMail({
-      from: process.env.CONTACT_FROM,
-      to: process.env.CONTACT_TO,
-      replyTo: "fortitudostudios@protonmail.com",
+    console.log("Sending email with these details:", {
+      from: from,
+      to: to,
+      replyTo: email,
+      subject: subject,
+    });
+
+    const info = await transporter.sendMail({
+      from,
+      to,
+      replyTo: email,
       subject,
       text,
       html,
     });
 
+    console.log("Email successfully sent! Brevo response:", info);
+
     return NextResponse.json({ ok: true });
   } catch (error) {
-    return NextResponse.json({ error: "Failed to send message." }, { status: 500 });
+    console.error("Failed to send email via Nodemailer:", {
+      message: (error as Error).message,
+      code: (error as { code?: unknown }).code,
+      response: (error as { response?: unknown }).response,
+      stack: (error as Error).stack,
+    });
+
+    return NextResponse.json(
+      { error: "Failed to send message. Please try again later." },
+      { status: 500 }
+    );
   }
 }
 
