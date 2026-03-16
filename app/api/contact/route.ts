@@ -146,9 +146,9 @@ export async function POST(request: Request) {
 
   try {
     await transporter.sendMail({
-      from,
-      to,
-      replyTo: email,
+      from: process.env.CONTACT_FROM,
+      to: process.env.CONTACT_TO,
+      replyTo: "fortitudostudios@protonmail.com",
       subject,
       text,
       html,
