@@ -64,7 +64,8 @@ export async function POST(request: Request) {
     "SMTP_PASSWORD",
     "MAIL_PASS",
     "MAIL_PASSWORD",
-    "EMAIL_PASS"
+    "EMAIL_PASS",
+    "EMAIL_PASSWORD"
   );
   const secureValue = readEnv(
     "CONTACT_SMTP_SECURE",
@@ -84,9 +85,22 @@ export async function POST(request: Request) {
   ].filter(Boolean);
 
   if (missingFields.length > 0) {
+    const expectedEnv = {
+      host: "CONTACT_SMTP_HOST | SMTP_HOST | MAIL_HOST | EMAIL_HOST",
+      port: "CONTACT_SMTP_PORT | SMTP_PORT | MAIL_PORT | EMAIL_PORT",
+      user:
+        "CONTACT_SMTP_USER | CONTACT_SMTP_USERNAME | SMTP_USER | SMTP_USERNAME | MAIL_USER | MAIL_USERNAME | EMAIL_USER",
+      pass:
+        "CONTACT_SMTP_PASS | CONTACT_SMTP_PASSWORD | SMTP_PASS | SMTP_PASSWORD | MAIL_PASS | MAIL_PASSWORD | EMAIL_PASS | EMAIL_PASSWORD",
+      from: "CONTACT_FROM | SMTP_FROM | MAIL_FROM | EMAIL_FROM",
+    };
+
     return NextResponse.json(
       {
         error: `Email service is not configured. Missing SMTP fields: ${missingFields.join(", ")}.`,
+        expectedEnv: Object.fromEntries(
+          missingFields.map((field) => [field, expectedEnv[field as keyof typeof expectedEnv]])
+        ),
       },
       { status: 500 }
     );
