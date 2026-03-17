@@ -145,13 +145,17 @@ export async function POST(request: Request) {
   `;
 
   try {
+    console.log("Verifying SMTP connection...");
     await transporter.verify();
-    console.log("SMTP connection verified successfully! Brevo auth good.");
-  } catch (verifyError) {
-    console.error("SMTP connection verify FAILED:", {
-      message: (verifyError as Error).message,
-      code: (verifyError as { code?: unknown }).code,
-      response: (verifyError as { response?: unknown }).response,
+    console.log("SMTP connection VERIFIED! Brevo auth & host are correct.");
+  } catch (verifyErr) {
+    console.error("SMTP VERIFY FAILED — this is why nothing reaches Brevo:", {
+      message: (verifyErr as Error).message,
+      code: (verifyErr as { code?: unknown }).code,
+      command: (verifyErr as { command?: unknown }).command,
+      response: (verifyErr as { response?: unknown }).response,
+      responseCode: (verifyErr as { responseCode?: unknown }).responseCode,
+      stack: (verifyErr as Error).stack,
     });
     return NextResponse.json(
       { error: "SMTP connection failed. Check server logs." },
@@ -161,10 +165,12 @@ export async function POST(request: Request) {
 
   try {
     console.log("Sending email attempt:", {
-      from,
-      to,
+      from: from,
+      to: to,
       replyTo: email,
-      subject,
+      subject: subject,
+      textLength: text.length,
+      htmlLength: html.length,
     });
 
     const info = await transporter.sendMail({
@@ -176,20 +182,27 @@ export async function POST(request: Request) {
       html,
     });
 
-    console.log("SendMail SUCCESS! Brevo response:", info);
+    console.log("SEND SUCCESS — Brevo accepted it:", {
+      messageId: (info as { messageId?: unknown }).messageId,
+      response: (info as { response?: unknown }).response,
+      accepted: (info as { accepted?: unknown }).accepted,
+      rejected: (info as { rejected?: unknown }).rejected,
+      pending: (info as { pending?: unknown }).pending,
+    });
 
     return NextResponse.json({ ok: true });
-  } catch (sendError) {
-    console.error("SendMail FAILED:", {
-      message: (sendError as Error).message,
-      code: (sendError as { code?: unknown }).code,
-      response: (sendError as { response?: unknown }).response,
-      responseCode: (sendError as { responseCode?: unknown }).responseCode,
-      stack: (sendError as Error).stack,
+  } catch (sendErr) {
+    console.error("SEND FAILED — Brevo rejected or connection dropped:", {
+      message: (sendErr as Error).message,
+      code: (sendErr as { code?: unknown }).code,
+      command: (sendErr as { command?: unknown }).command,
+      response: (sendErr as { response?: unknown }).response,
+      responseCode: (sendErr as { responseCode?: unknown }).responseCode,
+      stack: (sendErr as Error).stack,
     });
 
     return NextResponse.json(
-      { error: "Failed to send message. Check server logs for details." },
+      { error: "Failed to send message. Check server logs." },
       { status: 500 }
     );
   }
