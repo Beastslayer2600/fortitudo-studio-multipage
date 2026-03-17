@@ -143,6 +143,7 @@ export async function POST(request: Request) {
     <p><strong>Message:</strong></p>
     <p>${message.replace(/\n/g, "<br />")}</p>
   `;
+  const replyTo = "fortitudostudios@protonmail.com";
 
   try {
     console.log("Verifying SMTP connection...");
@@ -167,16 +168,16 @@ export async function POST(request: Request) {
     console.log("Sending email attempt:", {
       from: from,
       to: to,
-      replyTo: email,
+      replyTo: replyTo,
       subject: subject,
       textLength: text.length,
       htmlLength: html.length,
     });
 
     const info = await transporter.sendMail({
-      from,
-      to,
-      replyTo: email,
+      from: process.env.CONTACT_FROM,
+      to: process.env.CONTACT_TO,
+      replyTo: replyTo,
       subject,
       text,
       html,
