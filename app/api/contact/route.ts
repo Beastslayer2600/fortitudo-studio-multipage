@@ -145,11 +145,26 @@ export async function POST(request: Request) {
   `;
 
   try {
-    console.log("Sending email with these details:", {
-      from: from,
-      to: to,
+    await transporter.verify();
+    console.log("SMTP connection verified successfully! Brevo auth good.");
+  } catch (verifyError) {
+    console.error("SMTP connection verify FAILED:", {
+      message: (verifyError as Error).message,
+      code: (verifyError as { code?: unknown }).code,
+      response: (verifyError as { response?: unknown }).response,
+    });
+    return NextResponse.json(
+      { error: "SMTP connection failed. Check server logs." },
+      { status: 500 }
+    );
+  }
+
+  try {
+    console.log("Sending email attempt:", {
+      from,
+      to,
       replyTo: email,
-      subject: subject,
+      subject,
     });
 
     const info = await transporter.sendMail({
@@ -161,19 +176,20 @@ export async function POST(request: Request) {
       html,
     });
 
-    console.log("Email successfully sent! Brevo response:", info);
+    console.log("SendMail SUCCESS! Brevo response:", info);
 
     return NextResponse.json({ ok: true });
-  } catch (error) {
-    console.error("Failed to send email via Nodemailer:", {
-      message: (error as Error).message,
-      code: (error as { code?: unknown }).code,
-      response: (error as { response?: unknown }).response,
-      stack: (error as Error).stack,
+  } catch (sendError) {
+    console.error("SendMail FAILED:", {
+      message: (sendError as Error).message,
+      code: (sendError as { code?: unknown }).code,
+      response: (sendError as { response?: unknown }).response,
+      responseCode: (sendError as { responseCode?: unknown }).responseCode,
+      stack: (sendError as Error).stack,
     });
 
     return NextResponse.json(
-      { error: "Failed to send message. Please try again later." },
+      { error: "Failed to send message. Check server logs for details." },
       { status: 500 }
     );
   }
