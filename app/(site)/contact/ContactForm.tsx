@@ -26,17 +26,16 @@ export default function ContactForm() {
     }
 
     try {
-      const result = await emailjs.sendForm(serviceId, templateId, form, {
-        publicKey,
-      });
+      const result = await emailjs.sendForm(serviceId, templateId, form, publicKey);
       console.log(result.text);
 
       setStatus("success");
       form.reset();
     } catch (error) {
-      console.error(error);
+      const errorText = (error as { text?: string })?.text;
+      console.error(errorText ?? error);
       setStatus("error");
-      setErrorMessage("Failed to send message.");
+      setErrorMessage(errorText || "Failed to send message.");
     }
   }
 
