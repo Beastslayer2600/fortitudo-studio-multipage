@@ -1,5 +1,6 @@
 ﻿"use client";
 
+import emailjs from "@emailjs/browser";
 import { useState } from "react";
 
 type Status = "idle" | "sending" | "success" | "error";
@@ -14,36 +15,28 @@ export default function ContactForm() {
     setErrorMessage("");
 
     const form = event.currentTarget;
-    const formData = new FormData(form);
+    const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
+    const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
+    const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
 
-    const payload = {
-      name: String(formData.get("name") || "").trim(),
-      email: String(formData.get("email") || "").trim(),
-      phone: String(formData.get("phone") || "").trim(),
-      message: String(formData.get("message") || "").trim(),
-    };
+    if (!serviceId || !templateId || !publicKey) {
+      setStatus("error");
+      setErrorMessage("Email service is not configured. Please try again later.");
+      return;
+    }
 
     try {
-      const response = await fetch("/api/contact", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
+      const result = await emailjs.sendForm(serviceId, templateId, form, {
+        publicKey,
       });
-
-      if (!response.ok) {
-        const data = await response.json().catch(() => null);
-        setStatus("error");
-        setErrorMessage(data?.error || "Something went wrong. Please try again.");
-        return;
-      }
+      console.log(result.text);
 
       setStatus("success");
       form.reset();
     } catch (error) {
+      console.error(error);
       setStatus("error");
-      setErrorMessage("Something went wrong. Please try again.");
+      setErrorMessage("Failed to send message.");
     }
   }
 
