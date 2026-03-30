@@ -19,7 +19,7 @@ export default function AnimatedLines() {
         }}
         style={{
           backgroundImage:
-            "linear-gradient(45deg, rgba(10,35,26,0.9) 24%, transparent 24%, transparent 76%, rgba(10,35,26,0.9) 76%), linear-gradient(-45deg, rgba(12,46,34,0.46) 24%, transparent 24%, transparent 76%, rgba(12,46,34,0.46) 76%)",
+            "linear-gradient(45deg, rgba(8,10,12,0.96) 24%, transparent 24%, transparent 76%, rgba(8,10,12,0.96) 76%), linear-gradient(-45deg, rgba(20,22,26,0.58) 24%, transparent 24%, transparent 76%, rgba(20,22,26,0.58) 76%)",
           backgroundSize: "180px 180px",
         }}
       />
@@ -40,11 +40,11 @@ export default function AnimatedLines() {
           backgroundImage:
             "repeating-linear-gradient(135deg, transparent 0px, transparent 86px, rgba(188,164,114,0.88) 86px, rgba(188,164,114,0.88) 90px, transparent 90px, transparent 176px)",
           backgroundSize: "220px 220px",
-          filter: "drop-shadow(0 0 16px rgba(188,164,114,0.18))",
+          filter: "drop-shadow(0 0 18px rgba(188,164,114,0.22))",
         }}
       />
 
-      {/* Soft moving atmospheric glow */}
+      {/* Soft gold atmospheric glow */}
       <motion.div
         className="pointer-events-none absolute inset-0 z-0"
         animate={{
@@ -58,7 +58,7 @@ export default function AnimatedLines() {
         }}
         style={{
           backgroundImage:
-            "radial-gradient(circle at 18% 24%, rgba(188,164,114,0.2), transparent 34%), radial-gradient(circle at 78% 72%, rgba(28,86,61,0.22), transparent 40%), radial-gradient(circle at 55% 42%, rgba(248,244,234,0.06), transparent 26%)",
+            "radial-gradient(circle at 18% 24%, rgba(188,164,114,0.22), transparent 34%), radial-gradient(circle at 78% 72%, rgba(188,164,114,0.12), transparent 40%), radial-gradient(circle at 55% 42%, rgba(24,18,10,0.34), transparent 30%)",
           backgroundSize: "140% 140%",
         }}
       />
