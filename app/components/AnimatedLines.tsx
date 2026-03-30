@@ -1,3 +1,4 @@
+// app/components/AnimatedLines.tsx
 "use client";
 
 import { motion } from "framer-motion";
@@ -5,74 +6,39 @@ import { motion } from "framer-motion";
 export default function AnimatedLines() {
   return (
     <>
+      {/* Layer 1: Deep green structural grid */}
       <motion.div
-        className="pointer-events-none absolute -inset-[30%] z-0"
+        className="absolute inset-0 opacity-[0.12] pointer-events-none z-0"
         animate={{
-          backgroundPosition: ["0px 0px", "960px 640px"],
+          backgroundPosition: ["0% 0%", "150% 150%"],
         }}
         transition={{
-          duration: 14,
+          duration: 45,           // safe positive duration
+          repeat: Infinity,       // safe infinite repeat
+          ease: "linear",
+        }}
+        style={{
+          backgroundImage:
+            "linear-gradient(45deg, #0a231a 25%, transparent 25%, transparent 75%, #0a231a 75%)",
+          backgroundSize: "160px 160px",
+        }}
+      />
+
+      {/* Layer 2: Muted gold cross lines - opposite direction */}
+      <motion.div
+        className="absolute inset-0 opacity-[0.07] pointer-events-none z-0"
+        animate={{
+          backgroundPosition: ["150% 150%", "0% 0%"],
+        }}
+        transition={{
+          duration: 65,           // safe positive duration
           repeat: Infinity,
           ease: "linear",
         }}
         style={{
           backgroundImage:
-            "repeating-linear-gradient(120deg, rgba(188,164,114,0) 0px, rgba(188,164,114,0) 78px, rgba(188,164,114,0.62) 78px, rgba(188,164,114,0.62) 81px, rgba(188,164,114,0) 81px, rgba(188,164,114,0) 168px)",
-          backgroundSize: "320px 320px",
-          opacity: 0.62,
-        }}
-      />
-
-      <motion.div
-        className="pointer-events-none absolute -inset-[30%] z-0"
-        animate={{
-          backgroundPosition: ["0px 0px", "-880px 620px"],
-        }}
-        transition={{
-          duration: 18,
-          repeat: Infinity,
-          ease: "linear",
-        }}
-        style={{
-          backgroundImage:
-            "repeating-linear-gradient(60deg, rgba(248,244,234,0) 0px, rgba(248,244,234,0) 112px, rgba(248,244,234,0.24) 112px, rgba(248,244,234,0.24) 114px, rgba(248,244,234,0) 114px, rgba(248,244,234,0) 220px)",
-          backgroundSize: "360px 360px",
-          opacity: 0.4,
-        }}
-      />
-
-      <motion.div
-        className="pointer-events-none absolute inset-0 z-0 mix-blend-screen"
-        animate={{
-          opacity: [0.16, 0.3, 0.16],
-          backgroundPosition: ["140% 10%", "-30% 90%", "140% 10%"],
-        }}
-        transition={{
-          duration: 9,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-        style={{
-          backgroundImage:
-            "linear-gradient(118deg, transparent 42%, rgba(188,164,114,0.75) 50%, transparent 58%)",
-          backgroundSize: "220% 220%",
-        }}
-      />
-
-      <motion.div
-        className="pointer-events-none absolute inset-0 z-0"
-        animate={{
-          opacity: [0.18, 0.32, 0.18],
-          backgroundPosition: ["0% 0%", "120% 120%", "0% 0%"],
-        }}
-        transition={{
-          duration: 22,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-        style={{
-          backgroundImage:
-            "radial-gradient(circle at 18% 22%, rgba(188,164,114,0.28), transparent 42%), radial-gradient(circle at 82% 76%, rgba(13,42,31,0.34), transparent 48%)",
+            "linear-gradient(135deg, transparent 45%, #bca472 45%, #bca472 55%, transparent 55%)",
+          backgroundSize: "200px 200px",
         }}
       />
     </>
