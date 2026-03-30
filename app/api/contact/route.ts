@@ -1,30 +1,11 @@
-﻿const nodemailer = require("nodemailer");
 import { NextResponse } from "next/server";
+import { Resend } from "resend";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 function isEmail(value: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
-}
-
-function readEnv(...keys: string[]) {
-  for (const key of keys) {
-    const value = process.env[key];
-    if (value && value.trim()) {
-      return value.trim();
-    }
-  }
-
-  return undefined;
-}
-
-function parseBoolean(value: string | undefined) {
-  if (!value) {
-    return undefined;
-  }
-
-  return /^(true|1|yes)$/i.test(value);
 }
 
 export async function POST(request: Request) {
@@ -39,173 +20,50 @@ export async function POST(request: Request) {
   const message = String(body.message || "").trim();
 
   if (!name || !email || !message) {
-    return NextResponse.json({ error: "Name, email, and message are required." }, { status: 400 });
+    return NextResponse.json(
+      { error: "Name, email, and message are required." },
+      { status: 400 }
+    );
   }
 
   if (!isEmail(email)) {
-    return NextResponse.json({ error: "Please provide a valid email address." }, { status: 400 });
+    return NextResponse.json(
+      { error: "Please provide a valid email address." },
+      { status: 400 }
+    );
   }
 
-  const host = readEnv("CONTACT_SMTP_HOST", "SMTP_HOST", "MAIL_HOST", "EMAIL_HOST");
-  const port = readEnv("CONTACT_SMTP_PORT", "SMTP_PORT", "MAIL_PORT", "EMAIL_PORT");
-  const user = readEnv(
-    "CONTACT_SMTP_USER",
-    "CONTACT_SMTP_USERNAME",
-    "SMTP_USER",
-    "SMTP_USERNAME",
-    "MAIL_USER",
-    "MAIL_USERNAME",
-    "EMAIL_USER"
-  );
-  const pass = readEnv(
-    "CONTACT_SMTP_PASS",
-    "CONTACT_SMTP_PASSWORD",
-    "SMTP_PASS",
-    "SMTP_PASSWORD",
-    "MAIL_PASS",
-    "MAIL_PASSWORD",
-    "EMAIL_PASS",
-    "EMAIL_PASSWORD"
-  );
-  const secureValue = readEnv(
-    "CONTACT_SMTP_SECURE",
-    "SMTP_SECURE",
-    "MAIL_SECURE",
-    "EMAIL_SECURE"
-  );
-  const from = readEnv("CONTACT_FROM", "SMTP_FROM", "MAIL_FROM", "EMAIL_FROM") || user;
-  const to = readEnv("CONTACT_TO", "SMTP_TO", "MAIL_TO", "EMAIL_TO") || "fortitudostudios@protonmail.com";
-
-  const missingFields = [
-    !host ? "host" : "",
-    !port ? "port" : "",
-    !user ? "user" : "",
-    !pass ? "pass" : "",
-    !from ? "from" : "",
-  ].filter(Boolean);
-
-  if (missingFields.length > 0) {
-    const expectedEnv = {
-      host: "CONTACT_SMTP_HOST | SMTP_HOST | MAIL_HOST | EMAIL_HOST",
-      port: "CONTACT_SMTP_PORT | SMTP_PORT | MAIL_PORT | EMAIL_PORT",
-      user:
-        "CONTACT_SMTP_USER | CONTACT_SMTP_USERNAME | SMTP_USER | SMTP_USERNAME | MAIL_USER | MAIL_USERNAME | EMAIL_USER",
-      pass:
-        "CONTACT_SMTP_PASS | CONTACT_SMTP_PASSWORD | SMTP_PASS | SMTP_PASSWORD | MAIL_PASS | MAIL_PASSWORD | EMAIL_PASS | EMAIL_PASSWORD",
-      from: "CONTACT_FROM | SMTP_FROM | MAIL_FROM | EMAIL_FROM",
-    };
-
+  const apiKey = process.env.RESEND_API_KEY;
+  if (!apiKey) {
     return NextResponse.json(
-      {
-        error: `Email service is not configured. Missing SMTP fields: ${missingFields.join(", ")}.`,
-        expectedEnv: Object.fromEntries(
-          missingFields.map((field) => [field, expectedEnv[field as keyof typeof expectedEnv]])
-        ),
-      },
+      { error: "Email service is not configured." },
       { status: 500 }
     );
   }
 
-  const smtpPort = Number(port);
-  if (!Number.isInteger(smtpPort) || smtpPort <= 0) {
-    return NextResponse.json(
-      { error: "Email service is not configured. SMTP port is invalid." },
-      { status: 500 }
-    );
-  }
-
-  const parsedSecure = parseBoolean(secureValue);
-  const secure = parsedSecure ?? smtpPort === 465;
-
-  const transporter = nodemailer.createTransport({
-    host,
-    port: smtpPort,
-    secure,
-    auth: {
-      user,
-      pass,
-    },
-  });
-
-  const subject = `New website enquiry from ${name}`;
-  const text = [
-    `Name: ${name}`,
-    `Email: ${email}`,
-    phone ? `Phone: ${phone}` : "Phone: (not provided)",
-    "",
-    message,
-  ].join("\n");
-
-  const html = `
-    <p><strong>Name:</strong> ${name}</p>
-    <p><strong>Email:</strong> ${email}</p>
-    <p><strong>Phone:</strong> ${phone || "(not provided)"}</p>
-    <p><strong>Message:</strong></p>
-    <p>${message.replace(/\n/g, "<br />")}</p>
-  `;
-  const replyTo = "fortitudostudios@protonmail.com";
+  const resend = new Resend(apiKey);
 
   try {
-    console.log("Verifying SMTP connection...");
-    await transporter.verify();
-    console.log("SMTP connection VERIFIED! Brevo auth & host are correct.");
-  } catch (verifyErr) {
-    console.error("SMTP VERIFY FAILED — this is why nothing reaches Brevo:", {
-      message: (verifyErr as Error).message,
-      code: (verifyErr as { code?: unknown }).code,
-      command: (verifyErr as { command?: unknown }).command,
-      response: (verifyErr as { response?: unknown }).response,
-      responseCode: (verifyErr as { responseCode?: unknown }).responseCode,
-      stack: (verifyErr as Error).stack,
-    });
-    return NextResponse.json(
-      { error: "SMTP connection failed. Check server logs." },
-      { status: 500 }
-    );
-  }
-
-  try {
-    console.log("Sending email attempt:", {
-      from: from,
-      to: to,
-      replyTo: replyTo,
-      subject: subject,
-      textLength: text.length,
-      htmlLength: html.length,
-    });
-
-    const info = await transporter.sendMail({
-      from: process.env.CONTACT_FROM,
-      to: process.env.CONTACT_TO,
-      replyTo: replyTo,
-      subject,
-      text,
-      html,
-    });
-
-    console.log("SEND SUCCESS — Brevo accepted it:", {
-      messageId: (info as { messageId?: unknown }).messageId,
-      response: (info as { response?: unknown }).response,
-      accepted: (info as { accepted?: unknown }).accepted,
-      rejected: (info as { rejected?: unknown }).rejected,
-      pending: (info as { pending?: unknown }).pending,
+    await resend.emails.send({
+      from: "Fortitudo Studio <no-reply@fortitudostudios.site>",
+      to: "fortitudostudios@protonmail.com",
+      replyTo: email,
+      subject: `New enquiry from ${name}`,
+      html: `
+        <p><strong>Name:</strong> ${name}</p>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Phone:</strong> ${phone || "(not provided)"}</p>
+        <p><strong>Message:</strong></p>
+        <p>${message.replace(/\n/g, "<br />")}</p>
+      `,
     });
 
     return NextResponse.json({ ok: true });
-  } catch (sendErr) {
-    console.error("SEND FAILED — Brevo rejected or connection dropped:", {
-      message: (sendErr as Error).message,
-      code: (sendErr as { code?: unknown }).code,
-      command: (sendErr as { command?: unknown }).command,
-      response: (sendErr as { response?: unknown }).response,
-      responseCode: (sendErr as { responseCode?: unknown }).responseCode,
-      stack: (sendErr as Error).stack,
-    });
-
+  } catch (err) {
+    console.error("Resend error:", err);
     return NextResponse.json(
-      { error: "Failed to send message. Check server logs." },
+      { error: "Failed to send message. Please try again." },
       { status: 500 }
     );
   }
 }
-
