@@ -6,7 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="02c9b464-ad10-4ab0-bbd2-c9e16c6b4552" name="Changes" comment="j">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/api/contact/route.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/api/contact/route.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -341,7 +340,15 @@
       <option name="project" value="LOCAL" />
       <updated>1774867152079</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="j">
+      <option name="closed" value="true" />
+      <created>1774867618874</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1774867618874</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
