@@ -60,10 +60,7 @@ export default function Contact() {
               </ul>
             </div>
           </div>
-          <div className="surface p-6 sm:p-8">
-            <h2 className="font-serif text-2xl text-[var(--gold)]">
-              Send a Message
-            </h2>
+          <div className="surface">
             <ContactForm />
           </div>
         </div>

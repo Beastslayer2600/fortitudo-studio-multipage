@@ -1,114 +1,114 @@
 "use client";
 
-import { useState } from "react";
-
-type Status = "idle" | "sending" | "success" | "error";
+import { useRef, useState } from "react";
+import emailjs from "@emailjs/browser";
 
 export default function ContactForm() {
-  const [status, setStatus] = useState<Status>("idle");
-  const [errorMessage, setErrorMessage] = useState("");
+  const form = useRef<HTMLFormElement>(null);
+  const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
 
-  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+  const sendEmail = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setStatus("sending");
-    setErrorMessage("");
-
-    const form = event.currentTarget;
-    const data = {
-      name: (form.elements.namedItem("name") as HTMLInputElement).value,
-      email: (form.elements.namedItem("email") as HTMLInputElement).value,
-      phone: (form.elements.namedItem("phone") as HTMLInputElement).value,
-      message: (form.elements.namedItem("message") as HTMLTextAreaElement).value,
-    };
-
-    try {
-      const res = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
-
-      const json = await res.json();
-
-      if (!res.ok) {
-        throw new Error(json.error || "Failed to send message.");
-      }
-
-      setStatus("success");
-      form.reset();
-    } catch (err) {
-      setStatus("error");
-      setErrorMessage((err as Error).message || "Failed to send message.");
+    if (!form.current) {
+      return;
     }
-  }
+
+    setStatus("sending");
+
+    emailjs
+      .sendForm(
+        "service_j5nb1ym",
+        "template_5lecm3j",
+        form.current,
+        "k_vl6HOasO_-RMVAR"
+      )
+      .then((result) => {
+        console.log(result.text);
+        setStatus("success");
+        form.current?.reset();
+      })
+      .catch((error) => {
+        console.error(error.text);
+        setStatus("error");
+      });
+  };
 
   return (
-    <div>
-      <form className="mt-6 space-y-4" onSubmit={handleSubmit} noValidate>
+    <div className="max-w-2xl mx-auto p-6">
+      <h2 className="mb-8 font-serif text-3xl text-[var(--gold)]">Send a Message</h2>
+
+      <form ref={form} onSubmit={sendEmail} className="space-y-6">
         <div>
-          <label htmlFor="name" className="text-sm font-medium text-white/80">
+          <label htmlFor="name" className="mb-2 block text-sm">
             Full Name
           </label>
           <input
             id="name"
-            name="name"
             type="text"
-            autoComplete="name"
+            name="name"
             required
-            className="mt-2 w-full rounded-xl border border-white/10 bg-[#0f1216] px-4 py-3 text-sm text-[var(--cream)] placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-[var(--gold)]/40"
+            className="w-full rounded-xl border border-[var(--gold)]/30 bg-[#0B0D10] px-4 py-3 focus:border-[var(--gold)] focus:outline-none"
           />
         </div>
+
         <div>
-          <label htmlFor="email" className="text-sm font-medium text-white/80">
+          <label htmlFor="email" className="mb-2 block text-sm">
             Email Address
           </label>
           <input
             id="email"
-            name="email"
             type="email"
-            autoComplete="email"
+            name="email"
             required
-            className="mt-2 w-full rounded-xl border border-white/10 bg-[#0f1216] px-4 py-3 text-sm text-[var(--cream)] placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-[var(--gold)]/40"
+            className="w-full rounded-xl border border-[var(--gold)]/30 bg-[#0B0D10] px-4 py-3 focus:border-[var(--gold)] focus:outline-none"
           />
         </div>
+
         <div>
-          <label htmlFor="phone" className="text-sm font-medium text-white/80">
+          <label htmlFor="phone" className="mb-2 block text-sm">
             Phone Number
           </label>
           <input
             id="phone"
-            name="phone"
             type="tel"
-            autoComplete="tel"
-            className="mt-2 w-full rounded-xl border border-white/10 bg-[#0f1216] px-4 py-3 text-sm text-[var(--cream)] placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-[var(--gold)]/40"
+            name="phone"
+            className="w-full rounded-xl border border-[var(--gold)]/30 bg-[#0B0D10] px-4 py-3 focus:border-[var(--gold)] focus:outline-none"
           />
         </div>
+
         <div>
-          <label htmlFor="message" className="text-sm font-medium text-white/80">
+          <label htmlFor="message" className="mb-2 block text-sm">
             Message
           </label>
           <textarea
             id="message"
             name="message"
-            rows={5}
             required
-            className="mt-2 w-full rounded-xl border border-white/10 bg-[#0f1216] px-4 py-3 text-sm text-[var(--cream)] placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-[var(--gold)]/40"
+            rows={6}
+            className="w-full resize-y rounded-xl border border-[var(--gold)]/30 bg-[#0B0D10] px-4 py-3 focus:border-[var(--gold)] focus:outline-none"
           />
         </div>
+
         <button
           type="submit"
-          className="inline-flex w-full sm:w-auto items-center justify-center border border-[var(--gold)] text-[var(--gold)] px-6 py-3 text-xs tracking-[0.18em] uppercase hover:bg-[var(--gold)] hover:text-[#0B0D10] transition-colors disabled:opacity-60"
           disabled={status === "sending"}
+          className="w-full rounded-xl bg-[var(--gold)] py-4 font-medium text-black transition-all hover:bg-white disabled:opacity-50"
         >
           {status === "sending" ? "Sending..." : "Send Message"}
         </button>
+
+        {status === "success" && (
+          <p className="text-center text-green-400">
+            Message sent successfully! Thank you.
+          </p>
+        )}
+
+        {status === "error" && (
+          <p className="text-center text-red-400">
+            Failed to send message. Please try again.
+          </p>
+        )}
       </form>
-      {status === "success" && (
-        <p className="mt-4 text-sm text-[var(--gold)]">Thanks, your message has been sent.</p>
-      )}
-      {status === "error" && (
-        <p className="mt-4 text-sm text-red-400">{errorMessage}</p>
-      )}
     </div>
   );
 }
