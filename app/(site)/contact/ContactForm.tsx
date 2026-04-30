@@ -6,6 +6,7 @@ import emailjs from "@emailjs/browser";
 export default function ContactForm() {
   const form = useRef<HTMLFormElement>(null);
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
+  const [errorMsg, setErrorMsg] = useState("");
 
   const sendEmail = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -14,6 +15,7 @@ export default function ContactForm() {
     }
 
     setStatus("sending");
+    setErrorMsg("");
 
     emailjs
       .sendForm(
@@ -23,13 +25,14 @@ export default function ContactForm() {
         "k_vl6HOasO_-RMVAR"
       )
       .then((result) => {
-        console.log(result.text);
+        console.log("SUCCESS!", result.text);
         setStatus("success");
         form.current?.reset();
       })
       .catch((error) => {
-        console.error(error.text);
+        console.error("EmailJS Error:", error);
         setStatus("error");
+        setErrorMsg(error.text || "Failed to send message. Please try again.");
       });
   };
 
@@ -98,15 +101,11 @@ export default function ContactForm() {
         </button>
 
         {status === "success" && (
-          <p className="text-center text-green-400">
-            Message sent successfully! Thank you.
-          </p>
+          <p className="text-center text-green-400">Message sent successfully!</p>
         )}
 
         {status === "error" && (
-          <p className="text-center text-red-400">
-            Failed to send message. Please try again.
-          </p>
+          <p className="text-center text-red-400">{errorMsg}</p>
         )}
       </form>
     </div>
