@@ -22,7 +22,7 @@ export default function ContactForm() {
         "service_j5nb1ym",
         "template_5lecm3j",
         form.current,
-        "k_vl6HOasO_-RMVAR"
+        "N7BQYsyCGc0luSO4R"
       )
       .then((result) => {
         console.log("SUCCESS!", result.text);
