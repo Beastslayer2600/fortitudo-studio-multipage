@@ -1,52 +1,102 @@
 @import "tailwindcss";
 
-/* Brand palette */
-:root{
-  --green:#0d2a1f;      /* deep racing green */
-  --greenDark:#0a231a;
-  --cream:#f8f4ea;      /* parchment */
-  --gold:#bca472;       /* muted gold */
-  --ink:#1b1b1b;        /* warm black */
+/* ── Design Tokens ─────────────────────────────────────── */
+@theme {
+  /* Colors */
+  --color-dark:        #07090F;
+  --color-navy:        #0B0F1E;
+  --color-navy-light:  #111829;
+  --color-gold:        #C9A84C;
+  --color-gold-light:  #E2C06A;
+  --color-cream:       #EAE4D6;
+
+  /* Fonts – populated at runtime by next/font */
+  --font-heading: var(--font-playfair), Georgia, "Times New Roman", serif;
+  --font-body:    var(--font-inter),    system-ui, sans-serif;
 }
 
-html,body{height:100%}
-body{
-  background:#0B0D10;
-  color:var(--cream);
-  font-feature-settings:"liga","kern";
+/* ── Base ──────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background-color: #07090F;
+  color: #EAE4D6;
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Typography */
-h1,h2,h3,h4{font-family: Georgia, "Times New Roman", Times, serif}
-.lead{ @apply text-lg sm:text-xl; color: rgb(248 244 234 / 78%); }
+/* ── Typography helpers ────────────────────────────────── */
+h1, h2, h3, h4, h5 { font-family: var(--font-heading); }
 
-/* Layout helpers */
-.container{ @apply mx-auto max-w-6xl px-4 sm:px-6 lg:px-8; }
-
-/* Card & surface */
-.surface{
-  background: rgb(11 13 16 / 58%);
-  border:1px solid rgb(188 164 114 / 38%);
-  @apply rounded-2xl shadow-xl shadow-black/30;
+.section-label {
+  font-size: 0.6875rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #C9A84C;
+  font-family: var(--font-body);
 }
 
-/* Buttons */
-.btn{ @apply inline-flex items-center justify-center rounded-2xl px-5 py-3 text-sm font-medium transition-transform;
-  border:1px solid transparent;
+/* ── Layout helper ─────────────────────────────────────── */
+.site-container {
+  width: 100%;
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: 1.5rem;
 }
-.btn:hover{ transform:translateY(-2px) }
-.btn-primary{ background:var(--gold); color:#0b0f0d }
-.btn-ghost{ background:transparent; border-color:var(--gold); color:var(--gold) }
 
-/* Luxe details */
-.rule{ height:1px; background:linear-gradient(90deg,transparent, var(--gold), transparent) }
-.frame{ box-shadow: inset 0 0 0 1px var(--gold); }
+/* ── Surface / card ─────────────────────────────────────── */
+.surface {
+  background: rgba(11, 15, 30, 0.7);
+  border: 1px solid rgba(201, 168, 76, 0.18);
+  border-radius: 1rem;
+  backdrop-filter: blur(8px);
+}
 
-/* Crest watermark (for hero background texture if you add /crest.svg) */
-.watermark{
-  background-image:url('/crest.svg');
-  background-repeat:no-repeat;
-  background-position:right -40px top -20px;
-  background-size:240px;
-  opacity:.06;
+/* ── Gold divider ──────────────────────────────────────── */
+.gold-rule {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #C9A84C 35%, #C9A84C 65%, transparent);
+  opacity: 0.35;
+}
+
+/* ── Buttons ───────────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 0.625rem;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  transition: all 0.25s ease;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.btn-primary {
+  background: #C9A84C;
+  color: #07090F;
+  padding: 0.75rem 1.75rem;
+  border: 1px solid #C9A84C;
+}
+.btn-primary:hover {
+  background: #E2C06A;
+  border-color: #E2C06A;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px rgba(201, 168, 76, 0.28);
+}
+.btn-ghost {
+  background: transparent;
+  color: #C9A84C;
+  padding: 0.75rem 1.75rem;
+  border: 1px solid rgba(201, 168, 76, 0.45);
+}
+.btn-ghost:hover {
+  background: rgba(201, 168, 76, 0.08);
+  border-color: #C9A84C;
+  transform: translateY(-1px);
 }
