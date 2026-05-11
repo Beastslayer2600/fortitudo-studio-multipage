@@ -1,6 +1,7 @@
 ﻿import type { Metadata } from "next";
 import Link from "next/link";
 import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import QuickMenu from "./components/QuickMenu";
 import AnimatedLines from "./components/AnimatedLines";
 import "./globals.css";
@@ -65,6 +66,7 @@ export default function RootLayout({
           </footer>
         </div>
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
