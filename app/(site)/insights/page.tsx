@@ -1,83 +1,147 @@
 import type { Metadata } from "next";
+import Link from "next/link";
+import { ArrowRight, Calendar, Tag } from "lucide-react";
 
+// [REPLACE: SEO metadata]
 export const metadata: Metadata = {
-  title: "Insights | Gert Fourie Financial Adviser",
+  title: "Insights",
   description:
-    "Structured perspectives on economic cycles, portfolio construction, tax developments, risk management, and behavioural finance in South Africa.",
+    "Financial insights, market perspectives, and planning guidance from Ryno Greyling — helping you make decisions grounded in evidence.",
+};
+
+// [REPLACE: Replace with real blog posts or a CMS integration]
+const posts = [
+  {
+    slug: "#",
+    category: "Investor Behaviour",
+    date: "March 2025",
+    title: "Why Market Timing Fails Most Investors",
+    excerpt:
+      "The data on market timing is clear: attempts to enter and exit at the right moment consistently destroy long-term returns. Here is what the research shows — and what to do instead.",
+    readTime: "5 min read",
+  },
+  {
+    slug: "#",
+    category: "Retirement",
+    date: "February 2025",
+    title: "The Retirement Income Gap: Planning for What Lies Ahead",
+    excerpt:
+      "South Africans are living longer than ever. Most retirement plans have not adjusted. Understanding the gap between projected income and actual needs is the first step to closing it.",
+    readTime: "7 min read",
+  },
+  {
+    slug: "#",
+    category: "Tax Planning",
+    date: "January 2025",
+    title: "Tax-Efficient Investing: Strategies for High Earners",
+    excerpt:
+      "Your marginal tax rate is one of the biggest threats to long-term wealth accumulation. From TFSAs to retirement annuities, the right structures can make a substantial difference.",
+    readTime: "6 min read",
+  },
+];
+
+const categoryColors: Record<string, string> = {
+  "Investor Behaviour": "bg-[rgba(201,168,76,0.12)] text-[#C9A84C]",
+  "Retirement":         "bg-[rgba(11,15,30,0.8)] text-[rgba(234,228,214,0.7)]",
+  "Tax Planning":       "bg-[rgba(11,15,30,0.8)] text-[rgba(234,228,214,0.7)]",
 };
 
 export default function InsightsPage() {
   return (
-    <main className="relative z-10 min-h-screen text-[var(--cream)] pt-24 pb-16 md:pt-28 md:pb-24">
-      <div className="mx-auto max-w-4xl px-6 lg:px-8">
-        <div className="mx-auto max-w-3xl text-center">
-          <h1 className="text-4xl font-bold tracking-tight sm:text-5xl font-serif">Insights</h1>
-          <p className="mt-6 text-2xl font-semibold text-[var(--gold)]">
-            Clarity creates confidence.
+    <div className="text-[#EAE4D6]">
+      {/* Hero bar */}
+      <div className="relative border-b border-[rgba(201,168,76,0.12)] pt-28 pb-20 px-6">
+        <div
+          className="pointer-events-none absolute inset-0 opacity-[0.03]"
+          style={{
+            backgroundImage:
+              "repeating-linear-gradient(135deg, transparent 0, transparent 88px, rgba(201,168,76,1) 88px, rgba(201,168,76,1) 90px)",
+            backgroundSize: "180px 180px",
+          }}
+        />
+        <div className="site-container relative">
+          <p className="section-label mb-4">Insights</p>
+          <h1 className="font-heading text-4xl font-bold text-[#EAE4D6] md:text-5xl">
+            Clarity creates confidence
+          </h1>
+          <p className="mt-4 max-w-2xl text-[rgba(234,228,214,0.65)]">
+            Structured perspectives on markets, retirement, tax, and the psychology of financial
+            decision-making in South Africa.
           </p>
-          <p className="mt-6 text-lg leading-8 text-white/70">
-            Capital does not grow through reaction. It grows through structure, discipline, and
-            informed decision-making.
-          </p>
-          <p className="mt-6 text-lg text-white/70">
-            This section is dedicated to rigorous thinking around markets, capital allocation, risk
-            management, and investor behaviour within the South African context.
-          </p>
-          <p className="mt-6 text-lg text-white/70">Here you will find structured perspectives on:</p>
-          <ul className="mt-4 space-y-3 text-lg text-white/70 max-w-xl mx-auto">
-            <li className="flex items-start justify-center">
-              <span className="mr-3 text-[var(--gold)] font-bold">&bull;</span> Economic cycles and
-              market structure
-            </li>
-            <li className="flex items-start justify-center">
-              <span className="mr-3 text-[var(--gold)] font-bold">&bull;</span> Portfolio
-              construction and asset allocation strategy
-            </li>
-            <li className="flex items-start justify-center">
-              <span className="mr-3 text-[var(--gold)] font-bold">&bull;</span> Legislative and tax
-              developments affecting investors
-            </li>
-            <li className="flex items-start justify-center">
-              <span className="mr-3 text-[var(--gold)] font-bold">&bull;</span> Risk management and
-              capital preservation
-            </li>
-            <li className="flex items-start justify-center">
-              <span className="mr-3 text-[var(--gold)] font-bold">&bull;</span> Behavioural patterns
-              that influence financial decision-making
-            </li>
-          </ul>
-          <p className="mt-8 text-xl font-medium text-white/80">
-            Markets reward patience. Volatility rewards discipline.
-          </p>
-          <p className="mt-4 text-lg text-white/70">
-            Investors often lose not because of poor assets, but because of poor reactions.
-          </p>
-          <p className="mt-4 text-lg text-white/70">
-            My role is not to predict short-term noise. It is to interpret structural trends, manage
-            risk deliberately, and position capital intelligently across cycles.
-          </p>
-          <p className="mt-6 text-lg text-white/70">
-            Insight is the difference between reacting to headlines and understanding probability.
-          </p>
-          <p className="mt-4 text-lg text-white/70">Capital compounds where thinking is measured.</p>
-        </div>
-
-        <div className="my-12 h-px w-full bg-white/10" />
-
-        <div className="text-center">
-          <p className="text-lg font-medium text-white/80">
-            Structured analysis published regularly for clients and serious investors.
-          </p>
-          <a
-            href="/contact"
-            className="mt-6 inline-flex items-center justify-center border border-[var(--gold)] text-[var(--gold)] px-8 py-4 text-sm tracking-[0.12em] uppercase hover:bg-[var(--gold)] hover:text-[#0B0D10] transition-colors"
-          >
-            Request a Strategic Consultation
-          </a>
         </div>
       </div>
-    </main>
+
+      {/* Post grid */}
+      <section className="py-20 px-6">
+        <div className="site-container">
+          <div className="grid gap-8 md:grid-cols-3">
+            {posts.map((post, i) => (
+              <article
+                key={post.title}
+                className="group surface flex flex-col overflow-hidden transition-all duration-300 hover:border-[rgba(201,168,76,0.45)] hover:shadow-[0_0_28px_rgba(201,168,76,0.1)]"
+                style={{ animationDelay: `${i * 0.08}s` }}
+              >
+                {/* Category band */}
+                <div className="border-b border-[rgba(201,168,76,0.12)] px-6 py-4 flex items-center justify-between">
+                  <span
+                    className={`inline-flex items-center gap-1.5 rounded-md px-2.5 py-1 text-xs font-medium ${
+                      categoryColors[post.category] ?? "bg-[rgba(201,168,76,0.1)] text-[#C9A84C]"
+                    }`}
+                  >
+                    <Tag size={11} strokeWidth={2} />
+                    {post.category}
+                  </span>
+                  <span className="flex items-center gap-1.5 text-xs text-[rgba(234,228,214,0.4)]">
+                    <Calendar size={11} strokeWidth={1.8} />
+                    {post.date}
+                  </span>
+                </div>
+
+                {/* Content */}
+                <div className="flex flex-1 flex-col gap-4 p-6">
+                  <h2 className="font-heading text-xl font-semibold leading-snug text-[#EAE4D6] group-hover:text-[#C9A84C] transition-colors">
+                    {post.title}
+                  </h2>
+                  <p className="flex-1 text-sm leading-relaxed text-[rgba(234,228,214,0.6)]">
+                    {post.excerpt}
+                  </p>
+                  <div className="flex items-center justify-between border-t border-[rgba(201,168,76,0.1)] pt-4 text-xs text-[rgba(234,228,214,0.4)]">
+                    <span>{post.readTime}</span>
+                    <Link
+                      href={post.slug}
+                      className="flex items-center gap-1.5 text-[#C9A84C] transition-all hover:gap-2.5"
+                    >
+                      Read
+                      <ArrowRight size={13} strokeWidth={2} />
+                    </Link>
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+
+          {/* More coming soon */}
+          <div className="mt-16 text-center">
+            <div className="gold-rule mx-auto mb-8 max-w-xs" />
+            <p className="text-[rgba(234,228,214,0.45)] text-sm">
+              {/* [REPLACE: Update or remove once CMS is connected] */}
+              More articles published regularly. Subscribe via the contact form to be notified.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="py-16 px-6">
+        <div className="site-container text-center">
+          <p className="font-heading mb-6 text-2xl text-[#EAE4D6]">
+            Capital compounds where thinking is measured.
+          </p>
+          <Link href="/contact" className="btn btn-primary">
+            Request a Strategy Consultation
+          </Link>
+        </div>
+      </section>
+    </div>
   );
 }
-
-

@@ -1,62 +1,133 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+import ServiceCard from "@/components/ServiceCard";
+
+// [REPLACE: SEO metadata]
+export const metadata: Metadata = {
+  title: "Services",
+  description:
+    "Life & risk insurance, investments, retirement planning, and estate planning — comprehensive financial guidance by Ryno Greyling.",
+};
+
 const services = [
   {
-    title: "Retirement Clarity",
+    iconName: "Shield",
+    title: "Life & Risk Insurance",
     description:
-      "Turn the question 'Will I have enough?' into a clear income plan with steady milestones.",
+      "Protect what matters most. We design risk cover that replaces your income if illness, disability, or death intervenes — giving your family financial certainty when they need it most.",
+    detail: [
+      "Life cover structured to your income and liabilities",
+      "Disability and income protection planning",
+      "Dread disease / critical illness cover",
+      "Business assurance and key-person cover",
+    ],
   },
   {
-    title: "Investment Discipline",
+    iconName: "TrendingUp",
+    title: "Investments",
     description:
-      "A strategy that reduces emotional decision-making when markets feel uncertain.",
+      "Evidence-based, disciplined portfolio construction tailored to your goals, time horizon, and risk profile — designed for long-term wealth accumulation.",
+    detail: [
+      "Unit trusts and multi-asset funds",
+      "Tax-Free Savings Accounts (TFSA)",
+      "Endowment policies for tax-efficient growth",
+      "Regular savings and lump-sum investment structuring",
+    ],
   },
   {
-    title: "Protection That Lasts",
+    iconName: "Clock",
+    title: "Retirement Planning",
     description:
-      "Insurance planning that removes the fear of disruption and protects your family.",
+      "A clear roadmap to financial independence — turning today's earnings into tomorrow's income stream with structured milestones and tax-efficient vehicles.",
+    detail: [
+      "Retirement annuity (RA) contributions and structuring",
+      "Pension and provident fund consolidation",
+      "Projected retirement income analysis",
+      "Drawdown and living annuity strategy",
+    ],
   },
   {
-    title: "Legacy & Estate Planning",
+    iconName: "Building2",
+    title: "Estate Planning",
     description:
-      "Structure your estate so the people you love are cared for and confusion is avoided.",
-  },
-  {
-    title: "Tax-Efficient Structure",
-    description:
-      "Use allowances and smart structuring so more of your money stays working for you.",
-  },
-  {
-    title: "Risk Management",
-    description:
-      "Identify vulnerabilities early and build safeguards around what matters most.",
+      "Ensure your legacy is transferred with precision — minimising estate duty, honouring your wishes, and sparing your family from unnecessary complexity.",
+    detail: [
+      "Will drafting and estate structuring (in conjunction with attorneys)",
+      "Estate duty and executor fee planning",
+      "Trust planning and beneficiary nomination",
+      "Liquidity planning to cover estate costs",
+    ],
   },
 ];
 
-export default function Services() {
+export default function ServicesPage() {
   return (
-    <main className="relative z-10 min-h-screen text-[var(--cream)] pt-24 pb-16 sm:pt-28 sm:pb-24">
-      <div className="container max-w-5xl">
-        <h1 className="font-serif text-3xl text-[var(--cream)]">
-          How I Help
-        </h1>
-        <p className="mt-3 text-white/70 max-w-2xl">
-          Practical, fear-reducing planning under Liberty Group Limited (FSP 2409).
-        </p>
-        <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {services.map((service) => (
-            <div key={service.title} className="surface p-6">
-              <h2 className="font-serif text-xl text-[var(--gold)]">
-                {service.title}
-              </h2>
-              <p className="mt-2 text-sm text-white/70">{service.description}</p>
-            </div>
-          ))}
+    <div className="text-[#EAE4D6]">
+      {/* Hero bar */}
+      <div className="relative border-b border-[rgba(201,168,76,0.12)] pt-28 pb-20 px-6">
+        <div
+          className="pointer-events-none absolute inset-0 opacity-[0.03]"
+          style={{
+            backgroundImage:
+              "repeating-linear-gradient(135deg, transparent 0, transparent 88px, rgba(201,168,76,1) 88px, rgba(201,168,76,1) 90px)",
+            backgroundSize: "180px 180px",
+          }}
+        />
+        <div className="site-container relative">
+          <p className="section-label mb-4">Services</p>
+          <h1 className="font-heading text-4xl font-bold text-[#EAE4D6] md:text-5xl">
+            Comprehensive financial guidance
+          </h1>
+          <p className="mt-4 max-w-2xl text-[rgba(234,228,214,0.65)]">
+            Every service is delivered under Liberty Group Limited (FSP 2409) after a thorough needs analysis — no
+            generic products, no shortcuts.
+          </p>
         </div>
-        <p className="mt-8 text-sm text-white/60">
-          All services are provided under Liberty Group Limited (FSP 2409) after a full needs analysis.
-        </p>
       </div>
-    </main>
+
+      {/* Service cards */}
+      <section className="py-20 px-6">
+        <div className="site-container">
+          <div className="grid gap-8 sm:grid-cols-2">
+            {services.map((service, i) => (
+              <div key={service.title} className="flex flex-col gap-0">
+                <ServiceCard
+                  iconName={service.iconName}
+                  title={service.title}
+                  description={service.description}
+                  delay={i * 0.08}
+                />
+                {/* Detail list */}
+                <ul className="mt-3 space-y-1.5 px-1">
+                  {service.detail.map((item) => (
+                    <li key={item} className="flex items-start gap-2 text-sm text-[rgba(234,228,214,0.55)]">
+                      <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-[#C9A84C] opacity-70" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Disclaimer + CTA */}
+      <section className="py-16 px-6">
+        <div className="site-container">
+          <div className="gold-rule mb-10" />
+          <div className="grid gap-10 md:grid-cols-[1fr_auto] items-center">
+            <p className="text-sm leading-relaxed text-[rgba(234,228,214,0.4)]">
+              All financial services are provided under Liberty Group Limited (FSP 2409) and are subject to a full
+              needs analysis. This page is general information only and does not constitute financial advice.
+              Personalised recommendations are made only after a comprehensive review of your circumstances.
+            </p>
+            <Link href="/contact" className="btn btn-primary shrink-0">
+              Book a Consultation
+            </Link>
+          </div>
+        </div>
+      </section>
+    </div>
   );
 }
-
-
