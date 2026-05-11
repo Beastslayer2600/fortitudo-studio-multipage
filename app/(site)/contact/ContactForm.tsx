@@ -2,6 +2,7 @@
 
 import { useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
+import { trackEvent } from "../../lib/analytics";
 
 export default function ContactForm() {
   const form = useRef<HTMLFormElement>(null);
@@ -28,6 +29,7 @@ export default function ContactForm() {
         console.log("SUCCESS!", result.text);
         setStatus("success");
         form.current?.reset();
+        trackEvent("generate_lead", { event_category: "Contact", event_label: "Contact Form" });
       })
       .catch((error) => {
         console.error("EmailJS Error:", error);

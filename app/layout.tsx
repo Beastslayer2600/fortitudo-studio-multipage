@@ -3,6 +3,8 @@ import Link from "next/link";
 import { Analytics } from "@vercel/analytics/next";
 import QuickMenu from "./components/QuickMenu";
 import AnimatedLines from "./components/AnimatedLines";
+import GoogleAnalytics from "./components/GoogleAnalytics";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -22,6 +24,8 @@ export default function RootLayout({
         <meta charSet="utf-8" />
       </head>
       <body className="relative min-h-screen overflow-x-hidden">
+        <GoogleAnalytics />
+        <Analytics />
         <div aria-hidden="true" className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
           <AnimatedLines />
           <div className="absolute inset-0 bg-black/0" />
