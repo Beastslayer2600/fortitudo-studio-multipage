@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
+import { contactNotificationHtml, contactAutoReplyHtml } from "../../email/templates";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -44,19 +45,21 @@ export async function POST(request: Request) {
   const resend = new Resend(apiKey);
 
   try {
-    await resend.emails.send({
-      from: "Fortitudo Studio <no-reply@fortitudostudios.site>",
-      to: "fortitudostudios@protonmail.com",
-      replyTo: email,
-      subject: `New enquiry from ${name}`,
-      html: `
-        <p><strong>Name:</strong> ${name}</p>
-        <p><strong>Email:</strong> ${email}</p>
-        <p><strong>Phone:</strong> ${phone || "(not provided)"}</p>
-        <p><strong>Message:</strong></p>
-        <p>${message.replace(/\n/g, "<br />")}</p>
-      `,
-    });
+    await Promise.all([
+      resend.emails.send({
+        from: "Fortitudo Studios <no-reply@fortitudostudios.site>",
+        to: "fortitudostudios@protonmail.com",
+        replyTo: email,
+        subject: `New enquiry from ${name}`,
+        html: contactNotificationHtml({ name, email, phone, message }),
+      }),
+      resend.emails.send({
+        from: "Gert Fourie | Fortitudo Studios <no-reply@fortitudostudios.site>",
+        to: email,
+        subject: "Your message has been received — Fortitudo Studios",
+        html: contactAutoReplyHtml({ name }),
+      }),
+    ]);
 
     return NextResponse.json({ ok: true });
   } catch (err) {
