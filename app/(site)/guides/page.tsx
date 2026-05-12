@@ -5,6 +5,25 @@ export const metadata: Metadata = {
   title: "Guides & Videos",
 };
 
+const guides = [
+  {
+    title: "Building Wealth on a Starter Salary",
+    description:
+      "A practical framework for young professionals who want to start building wealth early through better cash-flow structure, protection, and disciplined investing.",
+    coverage:
+      "Covers emergency reserves, TFSA use, retirement contributions, cover, and habit design.",
+    href: "/guides/building-wealth-on-a-starter-salary",
+  },
+  {
+    title: "Why Saving Feels Painful",
+    description:
+      "A guide to the psychology and neuroscience behind spending impulses, delayed reward, and why saving feels harder than it should.",
+    coverage:
+      "Covers dopamine, delay discounting, scarcity mindset, money scripts, and practical behavior design.",
+    href: "/guides/why-saving-feels-painful",
+  },
+] as const;
+
 export default function Guides() {
   return (
     <main className="relative z-10 min-h-screen text-[var(--cream)] pt-24 pb-16 sm:pt-28 sm:pb-24">
@@ -17,29 +36,23 @@ export default function Guides() {
           planning, and disciplined investing.
         </p>
 
-        <div className="mt-8">
-          <article className="surface p-6 sm:p-8">
-            <p className="text-xs uppercase tracking-[0.16em] text-[var(--gold)]">Guide</p>
-            <h2 className="mt-3 font-serif text-2xl text-white sm:text-3xl">
-              Building Wealth on a Starter Salary
-            </h2>
-            <p className="mt-4 text-white/70">
-              A practical framework for young professionals who want to start building wealth early
-              through better cash-flow structure, protection, and disciplined investing.
-            </p>
-            <div className="mt-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-              <p className="text-sm text-white/55">
-                Covers emergency reserves, TFSA use, retirement contributions, cover, and habit
-                design.
-              </p>
-              <Link
-                href="/guides/building-wealth-on-a-starter-salary"
-                className="inline-flex items-center justify-center rounded-xl border border-[var(--gold)] px-5 py-3 text-sm tracking-[0.12em] uppercase text-[var(--gold)] transition-colors hover:bg-[var(--gold)] hover:text-[#0B0D10]"
-              >
-                Read guide
-              </Link>
-            </div>
-          </article>
+        <div className="mt-8 space-y-6">
+          {guides.map((guide) => (
+            <article key={guide.href} className="surface p-6 sm:p-8">
+              <p className="text-xs uppercase tracking-[0.16em] text-[var(--gold)]">Guide</p>
+              <h2 className="mt-3 font-serif text-2xl text-white sm:text-3xl">{guide.title}</h2>
+              <p className="mt-4 text-white/70">{guide.description}</p>
+              <div className="mt-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                <p className="text-sm text-white/55">{guide.coverage}</p>
+                <Link
+                  href={guide.href}
+                  className="inline-flex items-center justify-center rounded-xl border border-[var(--gold)] px-5 py-3 text-sm tracking-[0.12em] uppercase text-[var(--gold)] transition-colors hover:bg-[var(--gold)] hover:text-[#0B0D10]"
+                >
+                  Read guide
+                </Link>
+              </div>
+            </article>
+          ))}
         </div>
 
         <div className="mt-8 surface p-6">
