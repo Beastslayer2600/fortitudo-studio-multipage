@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="02c9b464-ad10-4ab0-bbd2-c9e16c6b4552" name="Changes" comment="Insights" />
+    <list default="true" id="02c9b464-ad10-4ab0-bbd2-c9e16c6b4552" name="Changes" comment="Saving is painful guide" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -456,7 +456,15 @@
       <option name="project" value="LOCAL" />
       <updated>1778577854316</updated>
     </task>
-    <option name="localTasksCounter" value="45" />
+    <task id="LOCAL-00045" summary="Saving is painful guide">
+      <option name="closed" value="true" />
+      <created>1778578311731</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1778578311731</updated>
+    </task>
+    <option name="localTasksCounter" value="46" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -489,6 +497,7 @@
     <MESSAGE value="j" />
     <MESSAGE value="h" />
     <MESSAGE value="Insights" />
-    <option name="LAST_COMMIT_MESSAGE" value="Insights" />
+    <MESSAGE value="Saving is painful guide" />
+    <option name="LAST_COMMIT_MESSAGE" value="Saving is painful guide" />
   </component>
 </project>
