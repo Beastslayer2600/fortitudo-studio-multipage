@@ -4,6 +4,7 @@ import QuickMenu from "./components/QuickMenu";
 import AnimatedLines from "./components/AnimatedLines";
 import GoogleAnalytics from "./components/GoogleAnalytics";
 import { Analytics } from "@vercel/analytics/next";
+import Script from "next/script";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -25,6 +26,13 @@ export default function RootLayout({
       <body className="relative min-h-screen overflow-x-hidden">
         <GoogleAnalytics />
         <Analytics />
+        <Script id="apollo-tracker" strategy="afterInteractive">{`
+          var n=Math.random().toString(36).substring(7),o=document.createElement("script");
+          o.src="https://assets.apollo.io/micro/website-tracker/tracker.iife.js?nocache="+n;
+          o.async=true;o.defer=true;
+          o.onload=function(){window.trackingFunctions.onLoad({appId:"6a05972c81c989000d5601a4"})};
+          document.head.appendChild(o);
+        `}</Script>
         <div aria-hidden="true" className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
           <AnimatedLines />
           <div className="absolute inset-0 bg-black/0" />
