@@ -17,7 +17,31 @@ export default function Guides() {
           planning, and disciplined investing.
         </p>
 
-        <div className="mt-8">
+        <div className="mt-8 space-y-6">
+          <article className="surface p-6 sm:p-8">
+            <p className="text-xs uppercase tracking-[0.16em] text-[var(--gold)]">Guide</p>
+            <h2 className="mt-3 font-serif text-2xl text-white sm:text-3xl">
+              How a Tax-Free Savings Account Actually Works
+            </h2>
+            <p className="mt-4 text-white/70">
+              A clear guide to South African TFSAs — the annual and lifetime limits, what to hold
+              inside one, how withdrawals permanently affect your allowance, and how to use the
+              wrapper strategically over the long term.
+            </p>
+            <div className="mt-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+              <p className="text-sm text-white/55">
+                Covers contribution limits, the 40% penalty, investment vehicles, withdrawal rules,
+                and common mistakes.
+              </p>
+              <Link
+                href="/guides/how-a-tax-free-savings-account-works"
+                className="inline-flex items-center justify-center rounded-xl border border-[var(--gold)] px-5 py-3 text-sm tracking-[0.12em] uppercase text-[var(--gold)] transition-colors hover:bg-[var(--gold)] hover:text-[#0B0D10]"
+              >
+                Read guide
+              </Link>
+            </div>
+          </article>
+
           <article className="surface p-6 sm:p-8">
             <p className="text-xs uppercase tracking-[0.16em] text-[var(--gold)]">Guide</p>
             <h2 className="mt-3 font-serif text-2xl text-white sm:text-3xl">
