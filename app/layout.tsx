@@ -5,6 +5,7 @@ import AnimatedLines from "./components/AnimatedLines";
 import GoogleAnalytics from "./components/GoogleAnalytics";
 import { Analytics } from "@vercel/analytics/next";
 import Script from "next/script";
+import Image from "next/image";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -55,6 +56,17 @@ export default function RootLayout({
 
           <footer className="mt-auto border-t border-[var(--gold)]/25 bg-[#060a08]/90 py-10 text-center text-sm text-[var(--cream)] backdrop-blur-[2px]">
             <div className="container mx-auto max-w-5xl px-6">
+              <div className="mb-6 flex justify-center">
+                <div className="rounded-xl bg-white/95 px-6 py-4">
+                  <Image
+                    src="/liberty-logo.png"
+                    alt="Liberty — Standard Bank Group"
+                    width={100}
+                    height={110}
+                    className="h-auto w-[100px]"
+                  />
+                </div>
+              </div>
               <p className="mb-3 font-medium text-white/90">
                 &copy; {new Date().getFullYear()} Gert Fourie | Financial Advisor &ndash; Liberty Group Limited (FSP 2409) | Pretoria
               </p>
