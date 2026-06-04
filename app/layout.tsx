@@ -68,6 +68,7 @@ export default function RootLayout({
                     width={100}
                     height={110}
                     className="h-auto w-[100px]"
+                    unoptimized
                   />
                 </div>
               </div>
