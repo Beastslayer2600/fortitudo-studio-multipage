@@ -19,6 +19,30 @@ export default function Guides() {
 
         <div className="mt-8 space-y-6">
           <article className="surface p-6 sm:p-8">
+            <p className="text-xs uppercase tracking-[0.16em] text-[var(--gold)]">In-Depth Guide</p>
+            <h2 className="mt-3 font-serif text-2xl text-white sm:text-3xl">
+              Retirement Annuities Explained
+            </h2>
+            <p className="mt-4 text-white/70">
+              The 27.5% tax deduction, tax-free compounding, the lock-in rules, living vs
+              guaranteed annuities, creditor protection, and every expensive mistake to avoid.
+              The most complete RA guide written for South Africans.
+            </p>
+            <div className="mt-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+              <p className="text-sm text-white/55">
+                Covers contributions, tax treatment, retirement income structure, estate bypass,
+                and drawdown strategy.
+              </p>
+              <Link
+                href="/guides/retirement-annuities-explained"
+                className="inline-flex items-center justify-center rounded-xl border border-[var(--gold)] px-5 py-3 text-sm tracking-[0.12em] uppercase text-[var(--gold)] transition-colors hover:bg-[var(--gold)] hover:text-[#0B0D10]"
+              >
+                Read guide
+              </Link>
+            </div>
+          </article>
+
+          <article className="surface p-6 sm:p-8">
             <p className="text-xs uppercase tracking-[0.16em] text-[var(--gold)]">Guide</p>
             <h2 className="mt-3 font-serif text-2xl text-white sm:text-3xl">
               Why You Avoid Money. And What It&rsquo;s Actually Costing You.
