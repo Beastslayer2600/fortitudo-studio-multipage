@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 250" width="220" height="250">
+  <!-- Outer circle -->
+  <circle cx="110" cy="95" r="78" fill="none" stroke="#002B6C" stroke-width="7"/>
+
+  <!-- Liberty flame (stylised torch flame with three tongues) -->
+  <!-- Left flame tongue -->
+  <path d="M88 100 C80 85 72 68 82 52 C78 65 85 72 90 80 C88 72 90 60 98 50 C96 65 94 75 96 85 Z"
+        fill="#002B6C"/>
+  <!-- Right flame tongue -->
+  <path d="M132 100 C140 85 148 68 138 52 C142 65 135 72 130 80 C132 72 130 60 122 50 C124 65 126 75 124 85 Z"
+        fill="#002B6C"/>
+  <!-- Centre flame tongue (tallest) -->
+  <path d="M110 45 C104 58 98 70 100 85 C103 75 107 68 110 60 C113 68 117 75 120 85 C122 70 116 58 110 45 Z"
+        fill="#002B6C"/>
+  <!-- Flame base / bowl -->
+  <path d="M90 105 C90 95 95 90 110 90 C125 90 130 95 130 105 C130 118 122 125 110 128 C98 125 90 118 90 105 Z"
+        fill="#002B6C"/>
+  <!-- Inner circle highlight (white gap between flame base and outer ring) -->
+  <circle cx="110" cy="95" r="63" fill="none" stroke="white" stroke-width="3"/>
+
+  <!-- LIBERTY text -->
+  <text
+    x="110" y="196"
+    font-family="Arial Black, Arial, sans-serif"
+    font-weight="900"
+    font-size="34"
+    letter-spacing="3"
+    fill="#002B6C"
+    text-anchor="middle"
+  >LIBERTY</text>
+
+  <!-- Standard Bank Group text -->
+  <text
+    x="110" y="220"
+    font-family="Arial, sans-serif"
+    font-weight="400"
+    font-size="14"
+    letter-spacing="0.5"
+    fill="#002B6C"
+    text-anchor="middle"
+  >Standard Bank Group</text>
+</svg>
