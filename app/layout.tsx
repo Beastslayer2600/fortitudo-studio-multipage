@@ -1,4 +1,5 @@
 ﻿import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
@@ -45,6 +46,15 @@ export default function RootLayout({
 
           <footer className="mt-auto border-t border-[var(--gold)]/25 bg-[#060a08]/90 py-10 text-center text-sm text-[var(--cream)] backdrop-blur-[2px]">
             <div className="container mx-auto max-w-5xl px-6">
+              <div className="mb-6 flex justify-center">
+                <Image
+                  src="/liberty-standard-bank-group.png"
+                  alt="Liberty Standard Bank Group logo"
+                  width={160}
+                  height={160}
+                  className="h-auto w-28 md:w-32"
+                />
+              </div>
               <p className="mb-3 font-medium text-white/90">
                 &copy; {new Date().getFullYear()} Gert Fourie | Financial Advisor &ndash; Liberty Group Limited (FSP 2409) | Pretoria
               </p>

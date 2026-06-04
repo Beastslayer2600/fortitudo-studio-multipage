@@ -1,6 +1,7 @@
 ﻿"use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 import Link from "next/link";
 
 export default function Home() {
@@ -14,6 +15,17 @@ export default function Home() {
             <p className="text-[var(--gold)] tracking-widest text-sm mb-4 uppercase">
               Liberty Group (FSP 2409) - Pretoria
             </p>
+
+            <div className="mb-8 flex justify-center">
+              <Image
+                src="/liberty-standard-bank-group.png"
+                alt="Liberty Standard Bank Group logo"
+                width={176}
+                height={176}
+                priority
+                className="h-auto w-28 md:w-36"
+              />
+            </div>
 
             <h1 className="text-5xl md:text-7xl font-serif font-bold mb-6 leading-tight">
               You work hard for your money.<br />
