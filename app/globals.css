@@ -42,7 +42,12 @@ h1,h2,h3,h4{font-family: Georgia, "Times New Roman", Times, serif}
 .rule{ height:1px; background:linear-gradient(90deg,transparent, var(--gold), transparent) }
 .frame{ box-shadow: inset 0 0 0 1px var(--gold); }
 
-/* Crest watermark (for hero background texture if you add /crest.svg) */
+/* Background animation keyframes — transform-only (GPU composited) */
+@keyframes bg-fwd    { to { transform: translate(176px, 176px); } }
+@keyframes bg-rev    { to { transform: translate(-210px, -210px); } }
+@keyframes bg-tracer { to { transform: translate(260px, -260px); } }
+@keyframes glow-pulse { 0%,100% { opacity: 0.28; } 50% { opacity: 0.42; } }
+@keyframes sweep-fade { 0%,100% { opacity: 0.10; } 50% { opacity: 0.22; } }
 .watermark{
   background-image:url('/crest.svg');
   background-repeat:no-repeat;
