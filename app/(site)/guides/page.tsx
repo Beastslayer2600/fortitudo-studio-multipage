@@ -21,6 +21,29 @@ export default function Guides() {
           <article className="surface p-6 sm:p-8">
             <p className="text-xs uppercase tracking-[0.16em] text-[var(--gold)]">Guide</p>
             <h2 className="mt-3 font-serif text-2xl text-white sm:text-3xl">
+              Why You Avoid Money. And What It&rsquo;s Actually Costing You.
+            </h2>
+            <p className="mt-4 text-white/70">
+              The psychology behind why smart people stay financially stuck — shame loops, identity
+              spending, temporal discounting, and how to finally change it.
+            </p>
+            <div className="mt-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+              <p className="text-sm text-white/55">
+                Covers emotional wiring, the shame loop, future-self psychology, and the
+                avoidance-regret cycle.
+              </p>
+              <Link
+                href="/guides/why-you-avoid-money"
+                className="inline-flex items-center justify-center rounded-xl border border-[var(--gold)] px-5 py-3 text-sm tracking-[0.12em] uppercase text-[var(--gold)] transition-colors hover:bg-[var(--gold)] hover:text-[#0B0D10]"
+              >
+                Read guide
+              </Link>
+            </div>
+          </article>
+
+          <article className="surface p-6 sm:p-8">
+            <p className="text-xs uppercase tracking-[0.16em] text-[var(--gold)]">Guide</p>
+            <h2 className="mt-3 font-serif text-2xl text-white sm:text-3xl">
               How a Tax-Free Savings Account Actually Works
             </h2>
             <p className="mt-4 text-white/70">

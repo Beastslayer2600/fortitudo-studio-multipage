@@ -12,6 +12,10 @@ export const metadata: Metadata = {
   title: "Gert Fourie | Financial Advisor | Liberty Group FSP 2409 | Pretoria",
   description:
     "Calm, structured financial planning that replaces worry with clarity - Pretoria & Gauteng",
+  icons: {
+    icon: "/liberty-logo.png",
+    apple: "/liberty-logo.png",
+  },
 };
 
 export default function RootLayout({
