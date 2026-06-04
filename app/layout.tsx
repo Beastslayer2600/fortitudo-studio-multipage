@@ -13,8 +13,8 @@ export const metadata: Metadata = {
   description:
     "Calm, structured financial planning that replaces worry with clarity - Pretoria & Gauteng",
   icons: {
-    icon: "/liberty-logo.svg",
-    apple: "/liberty-logo.svg",
+    icon: "/liberty-logo.png",
+    apple: "/liberty-logo.png",
   },
 };
 
@@ -63,7 +63,7 @@ export default function RootLayout({
               <div className="mb-6 flex justify-center">
                 <div className="rounded-xl bg-white/95 px-6 py-4">
                   <Image
-                    src="/liberty-logo.svg"
+                    src="/liberty-logo.png"
                     alt="Liberty — Standard Bank Group"
                     width={100}
                     height={110}
