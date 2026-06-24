@@ -19,6 +19,30 @@ export default function Guides() {
 
         <div className="mt-8 space-y-6">
           <article className="surface p-6 sm:p-8">
+            <p className="text-xs uppercase tracking-[0.16em] text-[var(--gold)]">Guide</p>
+            <h2 className="mt-3 font-serif text-2xl text-white sm:text-3xl">
+              The Cost of Looking Successful
+            </h2>
+            <p className="mt-4 text-white/70">
+              How status spending, lifestyle inflation, and social comparison quietly delay
+              long-term wealth creation — and how to build a financial life based on stability
+              rather than performance.
+            </p>
+            <div className="mt-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+              <p className="text-sm text-white/55">
+                Covers status psychology, lifestyle inflation, high-earner stress, visible vs
+                actual wealth, and redefining financial success.
+              </p>
+              <Link
+                href="/guides/the-cost-of-looking-successful"
+                className="inline-flex items-center justify-center rounded-xl border border-[var(--gold)] px-5 py-3 text-sm tracking-[0.12em] uppercase text-[var(--gold)] transition-colors hover:bg-[var(--gold)] hover:text-[#0B0D10]"
+              >
+                Read guide
+              </Link>
+            </div>
+          </article>
+
+          <article className="surface p-6 sm:p-8">
             <p className="text-xs uppercase tracking-[0.16em] text-[var(--gold)]">In-Depth Guide</p>
             <h2 className="mt-3 font-serif text-2xl text-white sm:text-3xl">
               Retirement Annuities Explained
