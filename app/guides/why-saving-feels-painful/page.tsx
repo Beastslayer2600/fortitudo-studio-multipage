@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import SavingPainfulGuideClient from './SavingPainfulGuideClient'
 
 export const metadata: Metadata = {
-  title: 'Why Saving Feels Painful | Gert Pretorius',
+  title: 'Why Saving Feels Painful | Gert Fourie',
   description:
     'The neuroscience of instant gratification vs delayed reward — and why your brain is working against your bank account.',
 }

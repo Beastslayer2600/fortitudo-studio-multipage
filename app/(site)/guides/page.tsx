@@ -22,6 +22,14 @@ const guides = [
       "Covers dopamine, delay discounting, scarcity mindset, money scripts, and practical behavior design.",
     href: "/guides/why-saving-feels-painful",
   },
+  {
+    title: "Rules & Foundations of a Wealthy Mindset",
+    description:
+      "A 10-part series — from classic wealth literature to modern behavioural finance — with each principle broken into its own deep-dive guide.",
+    coverage:
+      "Covers definite purpose, assets vs. liabilities, automation, loss aversion, compounding, delayed gratification, and financial habit design.",
+    href: "/guides/rules-of-a-wealthy-mindset",
+  },
 ] as const;
 
 export default function Guides() {
