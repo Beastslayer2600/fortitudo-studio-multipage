@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="02c9b464-ad10-4ab0-bbd2-c9e16c6b4552" name="Changes" comment="Saving is painful guide">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/(site)/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/(site)/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/layout.tsx" afterDir="false" />
-    </list>
+    <list default="true" id="02c9b464-ad10-4ab0-bbd2-c9e16c6b4552" name="Changes" comment="Fovicon" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -497,7 +493,15 @@
       <option name="project" value="LOCAL" />
       <updated>1778579563285</updated>
     </task>
-    <option name="localTasksCounter" value="49" />
+    <task id="LOCAL-00049" summary="Fovicon">
+      <option name="closed" value="true" />
+      <created>1780585624219</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1780585624219</updated>
+    </task>
+    <option name="localTasksCounter" value="50" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -531,6 +535,7 @@
     <MESSAGE value="h" />
     <MESSAGE value="Insights" />
     <MESSAGE value="Saving is painful guide" />
-    <option name="LAST_COMMIT_MESSAGE" value="Saving is painful guide" />
+    <MESSAGE value="Fovicon" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fovicon" />
   </component>
 </project>
