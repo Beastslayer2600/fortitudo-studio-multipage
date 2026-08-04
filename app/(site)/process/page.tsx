@@ -1,3 +1,11 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "My Process",
+  description:
+    "A structured, four-step approach - strategic clarity, financial analysis, plan design, and ongoing review - built to turn financial anxiety into confidence.",
+};
+
 export default function Process() {
   const steps = [
     {
@@ -73,5 +81,3 @@ export default function Process() {
     </div>
   );
 }
-
-
