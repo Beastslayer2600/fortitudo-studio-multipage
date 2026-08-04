@@ -1,3 +1,11 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "About Gert Fourie",
+  description:
+    "Gert Fourie is a Liberty accredited financial adviser in Pretoria, helping professionals, business owners, and families build wealth through structure, discipline, and long-term clarity.",
+};
+
 export default function About() {
   return (
     <div className="relative z-10 min-h-screen text-[var(--cream)]">
@@ -43,5 +51,3 @@ export default function About() {
     </div>
   );
 }
-
-
