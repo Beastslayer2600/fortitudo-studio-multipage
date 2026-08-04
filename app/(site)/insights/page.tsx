@@ -1,10 +1,35 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Insights | Gert Fourie Financial Adviser",
   description:
     "Structured perspectives on economic cycles, portfolio construction, tax developments, risk management, and behavioural finance in South Africa.",
 };
+
+const insights = [
+  {
+    category: "Risk Management",
+    title: "Sequence-of-Returns Risk: The Retirement Danger Few People Plan For",
+    description:
+      "Why the order investment returns arrive in - not just the average - can determine whether a retirement income plan survives.",
+    href: "/insights/sequence-of-returns-risk",
+  },
+  {
+    category: "Legislative & Tax Developments",
+    title: "South Africa's Two-Pot Retirement System: What It Actually Changes",
+    description:
+      "What the two-pot retirement reform changes for your contributions, access to funds, and long-term retirement planning - explained plainly.",
+    href: "/insights/two-pot-retirement-system",
+  },
+  {
+    category: "Portfolio Construction",
+    title: "Why Diversification Isn't Just About Asset Classes",
+    description:
+      "Real diversification goes deeper than splitting money between shares, bonds, and cash. The hidden correlations that undermine portfolios that look diversified on paper.",
+    href: "/insights/why-diversification-isnt-just-about-asset-classes",
+  },
+] as const;
 
 export default function InsightsPage() {
   return (
@@ -23,43 +48,28 @@ export default function InsightsPage() {
             This section is dedicated to rigorous thinking around markets, capital allocation, risk
             management, and investor behaviour within the South African context.
           </p>
-          <p className="mt-6 text-lg text-white/70">Here you will find structured perspectives on:</p>
-          <ul className="mt-4 space-y-3 text-lg text-white/70 max-w-xl mx-auto">
-            <li className="flex items-start justify-center">
-              <span className="mr-3 text-[var(--gold)] font-bold">&bull;</span> Economic cycles and
-              market structure
-            </li>
-            <li className="flex items-start justify-center">
-              <span className="mr-3 text-[var(--gold)] font-bold">&bull;</span> Portfolio
-              construction and asset allocation strategy
-            </li>
-            <li className="flex items-start justify-center">
-              <span className="mr-3 text-[var(--gold)] font-bold">&bull;</span> Legislative and tax
-              developments affecting investors
-            </li>
-            <li className="flex items-start justify-center">
-              <span className="mr-3 text-[var(--gold)] font-bold">&bull;</span> Risk management and
-              capital preservation
-            </li>
-            <li className="flex items-start justify-center">
-              <span className="mr-3 text-[var(--gold)] font-bold">&bull;</span> Behavioural patterns
-              that influence financial decision-making
-            </li>
-          </ul>
-          <p className="mt-8 text-xl font-medium text-white/80">
-            Markets reward patience. Volatility rewards discipline.
-          </p>
-          <p className="mt-4 text-lg text-white/70">
-            Investors often lose not because of poor assets, but because of poor reactions.
-          </p>
-          <p className="mt-4 text-lg text-white/70">
-            My role is not to predict short-term noise. It is to interpret structural trends, manage
-            risk deliberately, and position capital intelligently across cycles.
-          </p>
-          <p className="mt-6 text-lg text-white/70">
-            Insight is the difference between reacting to headlines and understanding probability.
-          </p>
-          <p className="mt-4 text-lg text-white/70">Capital compounds where thinking is measured.</p>
+        </div>
+
+        <div className="my-12 h-px w-full bg-white/10" />
+
+        <div className="space-y-6">
+          {insights.map((insight) => (
+            <article key={insight.href} className="surface p-6 sm:p-8">
+              <p className="text-xs uppercase tracking-[0.16em] text-[var(--gold)]">
+                {insight.category}
+              </p>
+              <h2 className="mt-3 font-serif text-2xl text-white sm:text-3xl">{insight.title}</h2>
+              <p className="mt-4 text-white/70">{insight.description}</p>
+              <div className="mt-6">
+                <Link
+                  href={insight.href}
+                  className="inline-flex items-center justify-center rounded-xl border border-[var(--gold)] px-5 py-3 text-sm tracking-[0.12em] uppercase text-[var(--gold)] transition-colors hover:bg-[var(--gold)] hover:text-[#0B0D10]"
+                >
+                  Read insight
+                </Link>
+              </div>
+            </article>
+          ))}
         </div>
 
         <div className="my-12 h-px w-full bg-white/10" />
@@ -79,5 +89,3 @@ export default function InsightsPage() {
     </main>
   );
 }
-
-
