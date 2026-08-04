@@ -1,3 +1,11 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Services",
+  description:
+    "Retirement clarity, investment discipline, protection, estate planning, tax-efficient structuring, and risk management - practical financial planning under Liberty Group Limited (FSP 2409).",
+};
+
 const services = [
   {
     title: "Retirement Clarity",
@@ -58,5 +66,3 @@ export default function Services() {
     </main>
   );
 }
-
-
