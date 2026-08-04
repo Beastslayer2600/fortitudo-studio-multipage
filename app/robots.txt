@@ -1,3 +1,4 @@
 User-agent: *
 Allow: /
-Sitemap: https://fortitudostudios.site/sitemap.xml
+
+Sitemap: https://www.fortitudostudios.site/sitemap.xml
