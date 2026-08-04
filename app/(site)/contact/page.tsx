@@ -3,6 +3,8 @@ import ContactForm from "./ContactForm";
 
 export const metadata: Metadata = {
   title: "Contact",
+  description:
+    "Book a consultation with Gert Fourie, Liberty accredited financial adviser in Pretoria - reach out by phone, email, or the contact form.",
 };
 
 export default function Contact() {
@@ -29,8 +31,8 @@ export default function Contact() {
             <div className="space-y-2 text-white/70">
               <p>
                 <span className="font-medium text-[var(--cream)]">Phone:</span>{" "}
-                <a href="tel:0722436950" className="hover:underline">
-                  0722436950
+                <a href="tel:+27722436950" className="hover:underline">
+                  072 243 6950
                 </a>
               </p>
               <p>
@@ -68,5 +70,3 @@ export default function Contact() {
     </main>
   );
 }
-
-
