@@ -30,9 +30,15 @@ export default function Contact() {
             </div>
             <div className="space-y-2 text-white/70">
               <p>
-                <span className="font-medium text-[var(--cream)]">Phone:</span>{" "}
+                <span className="font-medium text-[var(--cream)]">Cell:</span>{" "}
                 <a href="tel:+27722436950" className="hover:underline">
                   072 243 6950
+                </a>
+              </p>
+              <p>
+                <span className="font-medium text-[var(--cream)]">Tel:</span>{" "}
+                <a href="tel:+27124337241" className="hover:underline">
+                  012 433 7241
                 </a>
               </p>
               <p>
