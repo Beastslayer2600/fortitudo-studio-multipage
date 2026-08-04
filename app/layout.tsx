@@ -12,6 +12,89 @@ const siteTitle = "Gert Fourie | Financial Advisor | Liberty Group FSP 2409 | Pr
 const siteDescription =
   "Calm, structured financial planning that replaces worry with clarity - Pretoria & Gauteng";
 
+const structuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "FinancialService",
+      "@id": `${siteUrl}/#organization`,
+      name: "Gert Fourie | Financial Advisor",
+      alternateName: "Fortitudo Studios",
+      url: siteUrl,
+      description: siteDescription,
+      image: `${siteUrl}/og-image.png`,
+      logo: `${siteUrl}/icon-512.png`,
+      telephone: ["+27722436950", "+27124337241"],
+      email: "gert.fourie@liblink.co.za",
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Pretoria",
+        addressRegion: "Gauteng",
+        addressCountry: "ZA",
+      },
+      areaServed: [
+        { "@type": "City", name: "Pretoria" },
+        { "@type": "AdministrativeArea", name: "Gauteng" },
+        { "@type": "Country", name: "South Africa" },
+      ],
+      parentOrganization: {
+        "@type": "Organization",
+        name: "Liberty Group Limited",
+        identifier: "FSP 2409",
+        url: "https://www.liberty.co.za",
+      },
+      sameAs: [
+        "https://www.instagram.com/gert_wealth",
+        "https://www.linkedin.com/in/gert-fourie-wealth",
+      ],
+      knowsLanguage: ["en", "af"],
+      hasOfferCatalog: {
+        "@type": "OfferCatalog",
+        name: "Financial Planning Services",
+        itemListElement: [
+          "Retirement Clarity",
+          "Investment Discipline",
+          "Protection That Lasts",
+          "Legacy & Estate Planning",
+          "Tax-Efficient Structure",
+          "Risk Management",
+        ].map((service) => ({
+          "@type": "Offer",
+          itemOffered: { "@type": "Service", name: service },
+        })),
+      },
+    },
+    {
+      "@type": "Person",
+      "@id": `${siteUrl}/#gert-fourie`,
+      name: "Gert Fourie",
+      jobTitle: "Financial Adviser",
+      url: `${siteUrl}/about`,
+      email: "gert.fourie@liblink.co.za",
+      telephone: "+27722436950",
+      worksFor: { "@id": `${siteUrl}/#organization` },
+      affiliation: {
+        "@type": "Organization",
+        name: "Liberty Group Limited",
+        identifier: "FSP 2409",
+      },
+      sameAs: [
+        "https://www.instagram.com/gert_wealth",
+        "https://www.linkedin.com/in/gert-fourie-wealth",
+      ],
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${siteUrl}/#website`,
+      url: siteUrl,
+      name: siteTitle,
+      description: siteDescription,
+      inLanguage: "en-ZA",
+      publisher: { "@id": `${siteUrl}/#organization` },
+    },
+  ],
+};
+
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: siteTitle,
@@ -58,6 +141,10 @@ export default function RootLayout({
       <head>
         <meta charSet="utf-8" />
         <meta name="theme-color" content="#0a231a" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
       </head>
       <body className="relative min-h-screen overflow-x-hidden">
         <div aria-hidden="true" className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
