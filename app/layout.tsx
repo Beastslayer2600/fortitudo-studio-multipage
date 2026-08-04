@@ -1,4 +1,4 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { Analytics } from "@vercel/analytics/next";
@@ -7,10 +7,45 @@ import QuickMenu from "./components/QuickMenu";
 import AnimatedLines from "./components/AnimatedLines";
 import "./globals.css";
 
+const siteUrl = "https://www.fortitudostudios.site";
+const siteTitle = "Gert Fourie | Financial Advisor | Liberty Group FSP 2409 | Pretoria";
+const siteDescription =
+  "Calm, structured financial planning that replaces worry with clarity - Pretoria & Gauteng";
+
 export const metadata: Metadata = {
-  title: "Gert Fourie | Financial Advisor | Liberty Group FSP 2409 | Pretoria",
-  description:
-    "Calm, structured financial planning that replaces worry with clarity - Pretoria & Gauteng",
+  metadataBase: new URL(siteUrl),
+  title: siteTitle,
+  description: siteDescription,
+  manifest: "/manifest.webmanifest",
+  icons: {
+    icon: [
+      { url: "/icon-192.png", sizes: "192x192", type: "image/png" },
+      { url: "/icon-512.png", sizes: "512x512", type: "image/png" },
+    ],
+    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
+  },
+  openGraph: {
+    type: "website",
+    url: siteUrl,
+    siteName: "Gert Fourie | Financial Advisor",
+    title: siteTitle,
+    description: siteDescription,
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Gert Fourie | Financial Advisor | Liberty Group FSP 2409 | Pretoria",
+      },
+    ],
+    locale: "en_ZA",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: siteTitle,
+    description: siteDescription,
+    images: ["/og-image.png"],
+  },
 };
 
 export default function RootLayout({
@@ -22,6 +57,7 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <meta charSet="utf-8" />
+        <meta name="theme-color" content="#0a231a" />
       </head>
       <body className="relative min-h-screen overflow-x-hidden">
         <div aria-hidden="true" className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
