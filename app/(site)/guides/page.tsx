@@ -7,6 +7,14 @@ export const metadata: Metadata = {
 
 const guides = [
   {
+    title: "The 7-Question Financial Health Check",
+    description:
+      "A two-minute, scored self-assessment covering the seven areas that decide whether your financial position holds up under pressure.",
+    coverage:
+      "Covers your reserve, income continuation, dependants, retirement rate, debt structure, education funding, and estate readiness.",
+    href: "/guides/financial-health-check",
+  },
+  {
     title: "Building Wealth on a Starter Salary",
     description:
       "A practical framework for young professionals who want to start building wealth early through better cash-flow structure, protection, and disciplined investing.",
@@ -65,12 +73,14 @@ export default function Guides() {
 
         <div className="mt-8 surface p-6">
           <p className="text-sm text-white/70">
-            Want to be notified when new content drops? Send a message via the contact page.
+            Want to be notified when new content drops? Send a message via the{" "}
+            <Link href="/contact" className="text-[var(--gold)] underline underline-offset-2">
+              contact page
+            </Link>
+            .
           </p>
         </div>
       </div>
     </main>
   );
 }
-
-
