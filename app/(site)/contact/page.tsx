@@ -31,8 +31,19 @@ export default function Contact() {
             <div className="space-y-2 text-white/70">
               <p>
                 <span className="font-medium text-[var(--cream)]">Cell:</span>{" "}
-                <a href="tel:+27722436950" className="hover:underline">
-                  072 243 6950
+                <a href="tel:+27773866299" className="hover:underline">
+                  077 386 6299
+                </a>
+              </p>
+              <p>
+                <span className="font-medium text-[var(--cream)]">WhatsApp:</span>{" "}
+                <a
+                  href="https://wa.me/27773866299"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:underline"
+                >
+                  Chat on WhatsApp &ndash; 077 386 6299
                 </a>
               </p>
               <p>
