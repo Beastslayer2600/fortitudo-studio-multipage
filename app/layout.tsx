@@ -24,7 +24,7 @@ const structuredData = {
       description: siteDescription,
       image: `${siteUrl}/og-image.png`,
       logo: `${siteUrl}/icon-512.png`,
-      telephone: ["+27722436950", "+27124337241"],
+      telephone: ["+27773866299", "+27124337241"],
       email: "gert.fourie@liblink.co.za",
       address: {
         "@type": "PostalAddress",
@@ -71,7 +71,7 @@ const structuredData = {
       jobTitle: "Financial Adviser",
       url: `${siteUrl}/about`,
       email: "gert.fourie@liblink.co.za",
-      telephone: "+27722436950",
+      telephone: "+27773866299",
       worksFor: { "@id": `${siteUrl}/#organization` },
       affiliation: {
         "@type": "Organization",
