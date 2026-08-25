@@ -37,7 +37,6 @@ function makeRenderer(THREE: THREE_NS, canvas: HTMLCanvasElement) {
   renderer.setClearAlpha(0);
   // Soften tone mapping differences across browsers
   if ('outputColorSpace' in renderer) {
-    // @ts-expect-error three version variance
     renderer.outputColorSpace = THREE.SRGBColorSpace;
   }
   return renderer;
