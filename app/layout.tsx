@@ -10,7 +10,7 @@ import "./globals.css";
 const siteUrl = "https://www.fortitudostudios.site";
 const siteTitle = "Gert Fourie | Financial Advisor | Liberty Group FSP 2409 | Pretoria";
 const siteDescription =
-  "Calm, structured financial planning that replaces worry with clarity - Pretoria & Gauteng";
+  "Structured financial planning for professionals who want clarity, not complexity — Pretoria & Gauteng";
 
 const structuredData = {
   "@context": "https://schema.org",
@@ -97,7 +97,10 @@ const structuredData = {
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: siteTitle,
+  title: {
+    default: siteTitle,
+    template: "%s | Gert Fourie | Pretoria",
+  },
   description: siteDescription,
   manifest: "/manifest.webmanifest",
   icons: {
@@ -131,6 +134,15 @@ export const metadata: Metadata = {
   },
 };
 
+const desktopNav = [
+  { href: "/about", label: "About" },
+  { href: "/services", label: "Services" },
+  { href: "/process", label: "Process" },
+  { href: "/insights", label: "Insights" },
+  { href: "/guides", label: "Guides" },
+  { href: "/contact", label: "Contact" },
+];
+
 export default function RootLayout({
   children,
 }: {
@@ -153,15 +165,38 @@ export default function RootLayout({
         </div>
 
         <div className="relative z-10 flex min-h-screen flex-col">
-          <header className="sticky top-0 z-40 border-b border-[var(--gold)]/30 bg-[#0a110d]/85 backdrop-blur-md">
-            <div className="container flex items-center justify-between py-4">
+          <header className="sticky top-0 z-40 border-b border-[var(--gold)]/25 bg-[#0a110d]/88 backdrop-blur-md">
+            <div className="container flex items-center justify-between gap-4 py-3.5 md:py-4">
               <Link
                 href="/"
-                className="font-serif text-xl tracking-[0.12em] text-[var(--cream)] transition-colors hover:text-[var(--gold)]"
+                className="font-serif text-lg tracking-[0.14em] text-[var(--cream)] transition-colors hover:text-[var(--gold)] md:text-xl"
               >
                 GERT FOURIE
               </Link>
-              <QuickMenu />
+
+              <nav className="hidden items-center gap-7 lg:flex" aria-label="Primary">
+                {desktopNav.map((item) => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className="text-xs uppercase tracking-[0.14em] text-white/70 transition-colors hover:text-[var(--gold)]"
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+              </nav>
+
+              <div className="flex items-center gap-3">
+                <Link
+                  href="/contact"
+                  className="hidden rounded-xl border border-[var(--gold)]/50 px-4 py-2 text-xs uppercase tracking-[0.12em] text-[var(--gold)] transition-colors hover:bg-[var(--gold)]/10 md:inline-flex"
+                >
+                  Book session
+                </Link>
+                <div className="lg:hidden">
+                  <QuickMenu />
+                </div>
+              </div>
             </div>
           </header>
 
@@ -179,21 +214,29 @@ export default function RootLayout({
                 />
               </div>
               <p className="mb-3 font-medium text-white/90">
-                &copy; {new Date().getFullYear()} Gert Fourie | Financial Advisor &ndash; Liberty Group Limited (FSP 2409) | Pretoria
+                &copy; {new Date().getFullYear()} Gert Fourie | Financial Advisor &ndash; Liberty Group Limited (FSP
+                2409) | Pretoria
               </p>
               <p className="mx-auto max-w-4xl leading-relaxed text-white/65">
-                Liberty Group Limited is an Authorised Financial Services Provider (FSP 2409) in terms of the Financial Advisory
-                and Intermediary Services Act 37 of 2002. Gert Fourie is a representative of Liberty Group Limited. All content on
-                fortitudostudios.site is general information only and does not constitute financial advice, a recommendation or
-                solicitation. Personalised advice is provided only after a full needs analysis. Past performance is not indicative
-                of future results. Investments carry risk, including possible loss of capital.
+                Liberty Group Limited is an Authorised Financial Services Provider (FSP 2409) in terms of the Financial
+                Advisory and Intermediary Services Act 37 of 2002. Gert Fourie is a representative of Liberty Group
+                Limited. All content on fortitudostudios.site is general information only and does not constitute
+                financial advice, a recommendation or solicitation. Personalised advice is provided only after a full
+                needs analysis. Past performance is not indicative of future results. Investments carry risk, including
+                possible loss of capital.
               </p>
               <div className="mt-6 space-x-4 text-xs text-white/75">
-                <a href="/disclaimer" className="transition-colors hover:text-[var(--gold)] hover:underline">Disclaimer</a>
+                <a href="/disclaimer" className="transition-colors hover:text-[var(--gold)] hover:underline">
+                  Disclaimer
+                </a>
                 <span aria-hidden="true">&bull;</span>
-                <a href="/privacy" className="transition-colors hover:text-[var(--gold)] hover:underline">Privacy Policy (POPIA)</a>
+                <a href="/privacy" className="transition-colors hover:text-[var(--gold)] hover:underline">
+                  Privacy Policy (POPIA)
+                </a>
                 <span aria-hidden="true">&bull;</span>
-                <a href="/contact" className="transition-colors hover:text-[var(--gold)] hover:underline">Contact</a>
+                <a href="/contact" className="transition-colors hover:text-[var(--gold)] hover:underline">
+                  Contact
+                </a>
               </div>
             </div>
           </footer>
