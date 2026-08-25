@@ -11,18 +11,13 @@ interface Props {
 }
 
 /**
- * Mounts a three.js scene into a canvas, with the three rules that matter:
+ * Mounts a three.js scene into a canvas.
  *
- *  1. `three` is dynamically imported, so it lands in its own chunk and
- *     never blocks first paint.
- *  2. The scene only builds once it scrolls near the viewport, and stops
- *     rendering the moment it leaves — no background frame loops.
- *  3. Everything is disposed on unmount, so client-side route changes
- *     don't leak WebGL contexts. Browsers cap those at ~16; leak them and
- *     the site silently stops rendering after enough navigation.
- *
- * Below 480px or under prefers-reduced-motion it renders nothing at all and
- * whatever CSS background sits behind it shows through.
+ * - Dynamic import of three so it never blocks first paint
+ * - Only builds when near the viewport; pauses when off-screen
+ * - Full dispose on unmount to avoid WebGL context leaks
+ * - Mobile is supported (Safari included) with reduced pixel ratio and no antialias
+ * - Still skips prefers-reduced-motion for accessibility
  */
 export default function Scene3D({ variant, onHandle, className }: Props) {
   const hostRef = useRef<HTMLDivElement>(null);
@@ -33,8 +28,9 @@ export default function Scene3D({ variant, onHandle, className }: Props) {
     const canvas = canvasRef.current;
     if (!host || !canvas) return;
 
+    // Accessibility only — keep motion off when the user asks for it.
+    // Do NOT gate on viewport width: phones (especially Safari) must still get the 3D.
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    if (!window.matchMedia('(min-width: 480px)').matches) return;
 
     let handle: SceneHandle | null = null;
     let raf = 0;
@@ -44,26 +40,35 @@ export default function Scene3D({ variant, onHandle, className }: Props) {
     let visObserver: IntersectionObserver | null = null;
 
     const mount = async () => {
-      const THREE = await import('three');
-      if (cancelled) return;
-
-      handle = buildScene(THREE, variant, canvas);
-      onHandle?.(handle);
-      canvas.style.opacity = '1';
-      start = performance.now();
-
-      const loop = () => {
+      try {
+        const THREE = await import('three');
         if (cancelled) return;
-        if (onScreen && handle) handle.update((performance.now() - start) / 1000);
-        raf = requestAnimationFrame(loop);
-      };
-      loop();
 
-      visObserver = new IntersectionObserver(
-        (entries) => entries.forEach((e) => { onScreen = e.isIntersecting; }),
-        { rootMargin: '120px' },
-      );
-      visObserver.observe(host);
+        handle = buildScene(THREE, variant, canvas);
+        onHandle?.(handle);
+        canvas.style.opacity = '1';
+        start = performance.now();
+
+        const loop = () => {
+          if (cancelled) return;
+          if (onScreen && handle) handle.update((performance.now() - start) / 1000);
+          raf = requestAnimationFrame(loop);
+        };
+        loop();
+
+        visObserver = new IntersectionObserver(
+          (entries) =>
+            entries.forEach((e) => {
+              onScreen = e.isIntersecting;
+            }),
+          { rootMargin: '120px' },
+        );
+        visObserver.observe(host);
+      } catch (err) {
+        // WebGL unavailable / context lost — leave CSS backdrop visible
+        console.warn('[Scene3D] failed to mount', err);
+        canvas.style.opacity = '0';
+      }
     };
 
     const mountObserver = new IntersectionObserver(

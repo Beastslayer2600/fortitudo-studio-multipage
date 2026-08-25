@@ -2,8 +2,7 @@
  * Three scene builders, deliberately framework-agnostic.
  *
  * Nothing here imports React. Each builder takes a canvas, returns a handle
- * with update / dispose, and knows nothing about how it gets mounted. That
- * keeps the WebGL code testable and makes the React wrapper trivial.
+ * with update / dispose, and knows nothing about how it gets mounted.
  *
  * `three` is imported dynamically by the caller so it lands in its own chunk
  * and never blocks first paint.
@@ -20,13 +19,38 @@ export interface SceneHandle {
   dispose: () => void;
 }
 
+function isMobileViewport() {
+  return typeof window !== 'undefined' && window.innerWidth < 700;
+}
+
+/** Safari-friendly WebGL renderer options. */
+function makeRenderer(THREE: THREE_NS, canvas: HTMLCanvasElement) {
+  const mobile = isMobileViewport();
+  const renderer = new THREE.WebGLRenderer({
+    canvas,
+    antialias: !mobile, // antialias is expensive / flaky on mobile Safari
+    alpha: true,
+    powerPreference: mobile ? 'low-power' : 'high-performance',
+    failIfMajorPerformanceCaveat: false,
+    preserveDrawingBuffer: false,
+  });
+  renderer.setClearAlpha(0);
+  // Soften tone mapping differences across browsers
+  if ('outputColorSpace' in renderer) {
+    // @ts-expect-error three version variance
+    renderer.outputColorSpace = THREE.SRGBColorSpace;
+  }
+  return renderer;
+}
+
 /** Shared: keep the drawing buffer locked to the element's real size. */
 function makeSizer(canvas: HTMLCanvasElement, renderer: any, camera: any) {
   return () => {
     const w = canvas.clientWidth;
     const h = canvas.clientHeight;
     if (!w || !h) return;
-    const pr = Math.min(window.devicePixelRatio || 1, window.innerWidth < 700 ? 1.25 : 2);
+    // Cap DPR hard on phones — Safari + high DPR is the usual frame drop
+    const pr = Math.min(window.devicePixelRatio || 1, isMobileViewport() ? 1.15 : 2);
     if (canvas.width !== Math.floor(w * pr) || canvas.height !== Math.floor(h * pr)) {
       renderer.setPixelRatio(pr);
       renderer.setSize(w, h, false);
@@ -40,19 +64,23 @@ function makeSizer(canvas: HTMLCanvasElement, renderer: any, camera: any) {
 function makeBin() {
   const bin: any[] = [];
   return {
-    add<T>(o: T): T { bin.push(o); return o; },
-    flush() { bin.forEach((o) => o?.dispose?.()); bin.length = 0; },
+    add<T>(o: T): T {
+      bin.push(o);
+      return o;
+    },
+    flush() {
+      bin.forEach((o) => o?.dispose?.());
+      bin.length = 0;
+    },
   };
 }
 
 /* ------------------------------------------------------------------ *
  * 1. STRUCTURE — hero backdrop
- *    Glass floors held by brass columns. Reads as architecture.
  * ------------------------------------------------------------------ */
 function buildStructure(THREE: THREE_NS, canvas: HTMLCanvasElement): SceneHandle {
   const bin = makeBin();
-  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
-  renderer.setClearAlpha(0);
+  const renderer = makeRenderer(THREE, canvas);
 
   const scene = new THREE.Scene();
   scene.fog = new THREE.Fog(0x061710, 18, 46);
@@ -60,7 +88,8 @@ function buildStructure(THREE: THREE_NS, canvas: HTMLCanvasElement): SceneHandle
   const g = new THREE.Group();
   scene.add(g);
 
-  const FLOORS = 22;
+  // Fewer floors on mobile = less geometry, better Safari stability
+  const FLOORS = isMobileViewport() ? 14 : 22;
   const H = 0.62;
   const plateGeo = bin.add(new THREE.BoxGeometry(3.4, 0.05, 3.4));
   const plateEdge = bin.add(new THREE.EdgesGeometry(plateGeo));
@@ -69,17 +98,25 @@ function buildStructure(THREE: THREE_NS, canvas: HTMLCanvasElement): SceneHandle
     const wide = i % 4 === 0;
     const plate = new THREE.Mesh(
       plateGeo,
-      bin.add(new THREE.MeshStandardMaterial({
-        color: 0x2f6a52, roughness: 0.25, metalness: 0.4,
-        transparent: true, opacity: wide ? 0.26 : 0.14,
-      })),
+      bin.add(
+        new THREE.MeshStandardMaterial({
+          color: 0x2f6a52,
+          roughness: 0.25,
+          metalness: 0.4,
+          transparent: true,
+          opacity: wide ? 0.26 : 0.14,
+        }),
+      ),
     );
     const edge = new THREE.LineSegments(
       plateEdge,
-      bin.add(new THREE.LineBasicMaterial({
-        color: wide ? 0xe6cf9c : 0xc8a45c,
-        transparent: true, opacity: wide ? 0.75 : 0.34,
-      })),
+      bin.add(
+        new THREE.LineBasicMaterial({
+          color: wide ? 0xe6cf9c : 0xc8a45c,
+          transparent: true,
+          opacity: wide ? 0.75 : 0.34,
+        }),
+      ),
     );
     const floor = new THREE.Group();
     floor.add(plate, edge);
@@ -90,11 +127,22 @@ function buildStructure(THREE: THREE_NS, canvas: HTMLCanvasElement): SceneHandle
     g.add(floor);
   }
 
-  const colMat = bin.add(new THREE.MeshStandardMaterial({
-    color: 0xc8a45c, roughness: 0.35, metalness: 0.8,
-  }));
+  const colMat = bin.add(
+    new THREE.MeshStandardMaterial({
+      color: 0xc8a45c,
+      roughness: 0.35,
+      metalness: 0.8,
+    }),
+  );
   const colGeo = bin.add(new THREE.CylinderGeometry(0.035, 0.035, FLOORS * H, 8));
-  ([[-1.5, -1.5], [1.5, -1.5], [-1.5, 1.5], [1.5, 1.5]] as const).forEach(([x, z]) => {
+  (
+    [
+      [-1.5, -1.5],
+      [1.5, -1.5],
+      [-1.5, 1.5],
+      [1.5, 1.5],
+    ] as const
+  ).forEach(([x, z]) => {
     const col = new THREE.Mesh(colGeo, colMat);
     col.position.set(x, (FLOORS * H) / 2, z);
     g.add(col);
@@ -150,15 +198,14 @@ function buildStructure(THREE: THREE_NS, canvas: HTMLCanvasElement): SceneHandle
  * ------------------------------------------------------------------ */
 function buildCompare(THREE: THREE_NS, canvas: HTMLCanvasElement): SceneHandle {
   const bin = makeBin();
-  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
-  renderer.setClearAlpha(0);
+  const renderer = makeRenderer(THREE, canvas);
 
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(36, 1, 0.1, 100);
   const g = new THREE.Group();
   scene.add(g);
 
-  const N = 30;
+  const N = isMobileViewport() ? 20 : 30;
   const BLK = 0.24;
   const geo = bin.add(new THREE.BoxGeometry(1.5, BLK * 0.86, 1.5));
   const edge = bin.add(new THREE.EdgesGeometry(geo));
@@ -168,12 +215,32 @@ function buildCompare(THREE: THREE_NS, canvas: HTMLCanvasElement): SceneHandle {
     const blocks: any[] = [];
     for (let i = 0; i < N; i++) {
       const b = new THREE.Group();
-      b.add(new THREE.Mesh(geo, bin.add(new THREE.MeshStandardMaterial({
-        color, roughness: 0.4, metalness: 0.3, transparent: true, opacity: 0.4,
-      }))));
-      b.add(new THREE.LineSegments(edge, bin.add(new THREE.LineBasicMaterial({
-        color: edgeColor, transparent: true, opacity: 0.55,
-      }))));
+      b.add(
+        new THREE.Mesh(
+          geo,
+          bin.add(
+            new THREE.MeshStandardMaterial({
+              color,
+              roughness: 0.4,
+              metalness: 0.3,
+              transparent: true,
+              opacity: 0.4,
+            }),
+          ),
+        ),
+      );
+      b.add(
+        new THREE.LineSegments(
+          edge,
+          bin.add(
+            new THREE.LineBasicMaterial({
+              color: edgeColor,
+              transparent: true,
+              opacity: 0.55,
+            }),
+          ),
+        ),
+      );
       b.position.y = i * BLK;
       col.add(b);
       blocks.push(b);
@@ -218,7 +285,10 @@ function buildCompare(THREE: THREE_NS, canvas: HTMLCanvasElement): SceneHandle {
   };
 
   return {
-    set(cashFrac, growFrac) { want.cash = cashFrac; want.grow = growFrac; },
+    set(cashFrac, growFrac) {
+      want.cash = cashFrac;
+      want.grow = growFrac;
+    },
     update(t) {
       fit();
       have.cash += (want.cash - have.cash) * 0.07;
@@ -230,7 +300,10 @@ function buildCompare(THREE: THREE_NS, canvas: HTMLCanvasElement): SceneHandle {
       camera.lookAt(0, 1.4, 0);
       renderer.render(scene, camera);
     },
-    dispose() { bin.flush(); renderer.dispose(); },
+    dispose() {
+      bin.flush();
+      renderer.dispose();
+    },
   };
 }
 
@@ -239,15 +312,14 @@ function buildCompare(THREE: THREE_NS, canvas: HTMLCanvasElement): SceneHandle {
  * ------------------------------------------------------------------ */
 function buildPlan(THREE: THREE_NS, canvas: HTMLCanvasElement): SceneHandle {
   const bin = makeBin();
-  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
-  renderer.setClearAlpha(0);
+  const renderer = makeRenderer(THREE, canvas);
 
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(36, 1, 0.1, 100);
   const g = new THREE.Group();
   scene.add(g);
 
-  const MAX = 43;
+  const MAX = isMobileViewport() ? 30 : 43;
   const STEP = 0.2;
   const TWIST = 0.05;
   const slabGeo = bin.add(new THREE.BoxGeometry(2.4, 0.1, 2.4));
@@ -257,13 +329,28 @@ function buildPlan(THREE: THREE_NS, canvas: HTMLCanvasElement): SceneHandle {
   for (let i = 0; i < MAX; i++) {
     const grp = new THREE.Group();
     const mile = i % 5 === 4;
-    const face = new THREE.Mesh(slabGeo, bin.add(new THREE.MeshStandardMaterial({
-      color: mile ? 0x3d8465 : 0x2f6a52, roughness: 0.3, metalness: 0.3,
-      transparent: true, opacity: 0,
-    })));
-    const ed = new THREE.LineSegments(edgeGeo, bin.add(new THREE.LineBasicMaterial({
-      color: mile ? 0xe6cf9c : 0xc8a45c, transparent: true, opacity: 0,
-    })));
+    const face = new THREE.Mesh(
+      slabGeo,
+      bin.add(
+        new THREE.MeshStandardMaterial({
+          color: mile ? 0x3d8465 : 0x2f6a52,
+          roughness: 0.3,
+          metalness: 0.3,
+          transparent: true,
+          opacity: 0,
+        }),
+      ),
+    );
+    const ed = new THREE.LineSegments(
+      edgeGeo,
+      bin.add(
+        new THREE.LineBasicMaterial({
+          color: mile ? 0xe6cf9c : 0xc8a45c,
+          transparent: true,
+          opacity: 0,
+        }),
+      ),
+    );
     grp.add(face, ed);
     grp.rotation.y = i * TWIST;
     g.add(grp);
@@ -291,7 +378,10 @@ function buildPlan(THREE: THREE_NS, canvas: HTMLCanvasElement): SceneHandle {
   const fit = makeSizer(canvas, renderer, camera);
 
   return {
-    set(years, scale) { want.n = years; want.s = scale; },
+    set(years, scale) {
+      want.n = years;
+      want.s = scale;
+    },
     update(t) {
       fit();
       shown += (want.n - shown) * 0.06;
@@ -313,7 +403,10 @@ function buildPlan(THREE: THREE_NS, canvas: HTMLCanvasElement): SceneHandle {
       camera.lookAt(0, -2.6 + top * 0.55, 0);
       renderer.render(scene, camera);
     },
-    dispose() { bin.flush(); renderer.dispose(); },
+    dispose() {
+      bin.flush();
+      renderer.dispose();
+    },
   };
 }
 
