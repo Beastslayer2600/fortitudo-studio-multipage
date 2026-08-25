@@ -3,12 +3,16 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
+import HeroStructure from "@/components/three/HeroStructure";
+import CostOfWaiting from "@/components/three/CostOfWaiting";
+import PlanCalculator from "@/components/three/PlanCalculator";
 
 export default function Home() {
   return (
     <main className="relative text-[var(--cream)]">
       {/* Hero Section */}
-      <section className="relative min-h-screen overflow-hidden pt-20 md:pt-24">
+      <section className="relative isolate min-h-screen overflow-hidden pt-20 md:pt-24">
+        <HeroStructure />
         <div className="relative z-10 flex min-h-screen items-center justify-center">
         {/* Subtle animated lines - already global from layout */}
           <div className="relative z-10 text-center container px-6 max-w-5xl">
@@ -93,6 +97,10 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <CostOfWaiting />
+
+      <PlanCalculator />
 
       {/* Discipline Over Emotion */}
       <section className="py-32 px-6">
