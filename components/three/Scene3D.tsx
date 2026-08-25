@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useEffect, useRef } from 'react';
 import { buildScene, type SceneHandle, type SceneVariant } from '@/lib/three/scenes';
@@ -11,7 +11,7 @@ interface Props {
 }
 
 /**
- * Mounts a three.js scene into a canvas, with the three rules that matter:
+ * Mounts a three.js scene into a canvas, with the rules that matter:
  *
  *  1. `three` is dynamically imported, so it lands in its own chunk and
  *     never blocks first paint.
@@ -20,10 +20,26 @@ interface Props {
  *  3. Everything is disposed on unmount, so client-side route changes
  *     don't leak WebGL contexts. Browsers cap those at ~16; leak them and
  *     the site silently stops rendering after enough navigation.
+ *  4. Pixel ratio is capped lower under 700px (see makeSizer in scenes.ts),
+ *     which keeps this affordable on phones.
  *
- * Below 480px or under prefers-reduced-motion it renders nothing at all and
- * whatever CSS background sits behind it shows through.
+ * Under prefers-reduced-motion, or on a device that can't actually create a
+ * WebGL context, it renders nothing at all and whatever CSS background sits
+ * behind it shows through — the same graceful fallback, just triggered by
+ * real capability instead of a screen-width guess.
  */
+function hasWebGL(): boolean {
+  try {
+    const canvas = document.createElement('canvas');
+    return !!(
+      window.WebGLRenderingContext &&
+      (canvas.getContext('webgl') || canvas.getContext('experimental-webgl'))
+    );
+  } catch {
+    return false;
+  }
+}
+
 export default function Scene3D({ variant, onHandle, className }: Props) {
   const hostRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -34,7 +50,7 @@ export default function Scene3D({ variant, onHandle, className }: Props) {
     if (!host || !canvas) return;
 
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    if (!window.matchMedia('(min-width: 480px)').matches) return;
+    if (!hasWebGL()) return;
 
     let handle: SceneHandle | null = null;
     let raf = 0;
@@ -44,26 +60,35 @@ export default function Scene3D({ variant, onHandle, className }: Props) {
     let visObserver: IntersectionObserver | null = null;
 
     const mount = async () => {
-      const THREE = await import('three');
-      if (cancelled) return;
-
-      handle = buildScene(THREE, variant, canvas);
-      onHandle?.(handle);
-      canvas.style.opacity = '1';
-      start = performance.now();
-
-      const loop = () => {
+      try {
+        const THREE = await import('three');
         if (cancelled) return;
-        if (onScreen && handle) handle.update((performance.now() - start) / 1000);
-        raf = requestAnimationFrame(loop);
-      };
-      loop();
 
-      visObserver = new IntersectionObserver(
-        (entries) => entries.forEach((e) => { onScreen = e.isIntersecting; }),
-        { rootMargin: '120px' },
-      );
-      visObserver.observe(host);
+        handle = buildScene(THREE, variant, canvas);
+        onHandle?.(handle);
+        canvas.style.opacity = '1';
+        start = performance.now();
+
+        const loop = () => {
+          if (cancelled) return;
+          if (onScreen && handle) handle.update((performance.now() - start) / 1000);
+          raf = requestAnimationFrame(loop);
+        };
+        loop();
+
+        visObserver = new IntersectionObserver(
+          (entries) => entries.forEach((e) => { onScreen = e.isIntersecting; }),
+          { rootMargin: '120px' },
+        );
+        visObserver.observe(host);
+      } catch (err) {
+        // Scene build failed (e.g. WebGL context lost, driver quirk on a
+        // low-end phone) — bail out quietly and let the CSS background
+        // behind the canvas show through, same as the capability check.
+        console.warn('Scene3D: falling back to static background', err);
+        handle?.dispose();
+        handle = null;
+      }
     };
 
     const mountObserver = new IntersectionObserver(
