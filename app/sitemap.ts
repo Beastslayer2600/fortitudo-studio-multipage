@@ -3,6 +3,7 @@ import type { MetadataRoute } from "next";
 const SITE_URL = "https://www.fortitudostudios.site";
 
 const guideSlugs = [
+  "income-interruption-test",
   "financial-health-check",
   "building-wealth-on-a-starter-salary",
   "why-saving-feels-painful",

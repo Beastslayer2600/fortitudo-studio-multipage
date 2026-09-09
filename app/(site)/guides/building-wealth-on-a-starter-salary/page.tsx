@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import GuideClose from "@/app/components/GuideClose";
 
 const buckets = [
   {
@@ -247,6 +248,11 @@ export default function BuildingWealthOnAStarterSalaryPage() {
               Book a free consultation
             </Link>
           </section>
+
+          <GuideClose
+            variant="site"
+            prefill="I read Building Wealth on a Starter Salary and want to work out my own plan."
+          />
         </div>
       </article>
     </main>

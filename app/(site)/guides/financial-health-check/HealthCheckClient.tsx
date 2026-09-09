@@ -3,6 +3,7 @@
 import { useRef, useState } from "react";
 import Link from "next/link";
 import emailjs from "@emailjs/browser";
+import GuideClose from "@/app/components/GuideClose";
 
 const WHATSAPP_NUMBER = "27773866299";
 
@@ -312,6 +313,11 @@ export default function HealthCheckClient() {
             </a>
           </div>
         </div>
+
+        <GuideClose
+          variant="site"
+          prefill="I did the 7-Question Financial Health Check and would like to talk through my results."
+        />
 
         {/* ---------- Compliance note ---------- */}
         <p className="mx-auto mt-10 max-w-3xl text-xs leading-6 text-white/45">

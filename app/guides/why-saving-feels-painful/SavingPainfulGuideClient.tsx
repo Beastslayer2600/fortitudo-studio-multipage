@@ -3,6 +3,7 @@
 import { motion, useScroll, useTransform } from 'framer-motion'
 import Link from 'next/link'
 import { useRef } from 'react'
+import GuideClose from '@/app/components/GuideClose'
 
 const fadeUp = {
   hidden: { opacity: 0, y: 28 },
@@ -318,6 +319,11 @@ export default function SavingPainfulGuideClient() {
           </div>
         </motion.div>
       </section>
+
+      <GuideClose
+        variant="dark"
+        prefill="I read Why Saving Feels Painful and think it explains why I keep stalling. Can you help me fix it?"
+      />
     </main>
   )
 }
