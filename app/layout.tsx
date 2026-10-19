@@ -7,7 +7,7 @@ import QuickMenu from "./components/QuickMenu";
 import AnimatedLines from "./components/AnimatedLines";
 import "./globals.css";
 
-const siteUrl = "https://www.fortitudostudios.site";
+const siteUrl = "https://fortitudostudios.com";
 const siteTitle = "Gert Fourie | Financial Advisor | Liberty Group FSP 2409 | Pretoria";
 const siteDescription =
   "Structured financial planning for professionals who want clarity, not complexity — Pretoria & Gauteng";
@@ -220,7 +220,7 @@ export default function RootLayout({
               <p className="mx-auto max-w-4xl leading-relaxed text-white/65">
                 Liberty Group Limited is an Authorised Financial Services Provider (FSP 2409) in terms of the Financial
                 Advisory and Intermediary Services Act 37 of 2002. Gert Fourie is a representative of Liberty Group
-                Limited. All content on fortitudostudios.site is general information only and does not constitute
+                Limited. All content on fortitudostudios.com is general information only and does not constitute
                 financial advice, a recommendation or solicitation. Personalised advice is provided only after a full
                 needs analysis. Past performance is not indicative of future results. Investments carry risk, including
                 possible loss of capital.

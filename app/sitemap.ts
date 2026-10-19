@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 
-const SITE_URL = "https://www.fortitudostudios.site";
+const SITE_URL = "https://fortitudostudios.com";
 
 const guideSlugs = [
   "financial-health-check",
