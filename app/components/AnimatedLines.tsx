@@ -8,7 +8,7 @@ export default function AnimatedLines() {
     <>
       {/* Primary structural lattice */}
       <motion.div
-        className="pointer-events-none absolute inset-[-14%] z-0 opacity-[0.22]"
+        className="pointer-events-none absolute inset-[-14%] z-0 opacity-[0.16]"
         animate={{
           backgroundPosition: ["0% 0%", "120% 120%"],
         }}
@@ -26,10 +26,9 @@ export default function AnimatedLines() {
 
       {/* Metallic gold diagonal ribbons */}
       <motion.div
-        className="pointer-events-none absolute inset-[-12%] z-0 opacity-[0.18] mix-blend-screen"
+        className="pointer-events-none absolute inset-[-12%] z-0 opacity-[0.05] mix-blend-screen"
         animate={{
           backgroundPosition: ["135% 120%", "0% 0%"],
-          opacity: [0.14, 0.26, 0.14],
         }}
         transition={{
           duration: 20,
@@ -40,27 +39,6 @@ export default function AnimatedLines() {
           backgroundImage:
             "repeating-linear-gradient(135deg, transparent 0px, transparent 78px, rgba(245,199,92,0.16) 78px, rgba(245,199,92,0.16) 82px, rgba(245,199,92,0.94) 82px, rgba(245,199,92,0.94) 86px, rgba(255,231,163,0.96) 86px, rgba(255,231,163,0.96) 88px, rgba(245,199,92,0.3) 88px, rgba(245,199,92,0.3) 92px, transparent 92px, transparent 164px)",
           backgroundSize: "210px 210px",
-          filter: "drop-shadow(0 0 24px rgba(245,199,92,0.26))",
-        }}
-      />
-
-      {/* Fine tracer lines for a sharper look */}
-      <motion.div
-        className="pointer-events-none absolute inset-[-10%] z-0 opacity-[0.12] mix-blend-screen"
-        animate={{
-          backgroundPosition: ["0% 120%", "120% 0%"],
-          opacity: [0.08, 0.16, 0.08],
-        }}
-        transition={{
-          duration: 16,
-          repeat: Infinity,
-          ease: "linear",
-        }}
-        style={{
-          backgroundImage:
-            "repeating-linear-gradient(45deg, transparent 0px, transparent 118px, rgba(255,234,178,0.82) 118px, rgba(255,234,178,0.82) 120px, transparent 120px, transparent 228px)",
-          backgroundSize: "260px 260px",
-          filter: "drop-shadow(0 0 10px rgba(255,234,178,0.12))",
         }}
       />
 

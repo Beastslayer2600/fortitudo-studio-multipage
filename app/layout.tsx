@@ -210,12 +210,12 @@ export default function RootLayout({
                   alt="Liberty Standard Bank Group logo"
                   width={160}
                   height={160}
-                  className="h-auto w-28 md:w-32"
+                  className="h-auto w-24 rounded-md md:w-28"
                 />
               </div>
               <p className="mb-3 font-medium text-white/90">
-                &copy; {new Date().getFullYear()} Gert Fourie | Financial Advisor &ndash; Liberty Group Limited (FSP
-                2409) | Pretoria
+                &copy; {new Date().getFullYear()}{" "}
+                Gert Fourie | Financial Advisor &ndash; Liberty Group Limited (FSP 2409) | Pretoria
               </p>
               <p className="mx-auto max-w-4xl leading-relaxed text-white/65">
                 Liberty Group Limited is an Authorised Financial Services Provider (FSP 2409) in terms of the Financial

@@ -87,7 +87,7 @@ export default function Home() {
                 width={176}
                 height={176}
                 priority
-                className="h-auto w-28 md:w-36"
+                className="h-auto w-24 rounded-md md:w-28"
               />
             </div>
 
@@ -123,7 +123,7 @@ export default function Home() {
         </div>
 
         <motion.div
-          className="absolute bottom-14 left-1/2 flex -translate-x-1/2 flex-col items-center gap-3 text-sm tracking-widest text-[var(--cream)]/70 md:bottom-10"
+          className="absolute bottom-14 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-3 text-sm tracking-widest text-[var(--cream)]/70 md:bottom-10 [@media(min-height:880px)]:flex"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.6, duration: 1 }}
@@ -141,7 +141,7 @@ export default function Home() {
       </section>
 
       {/* Problem */}
-      <section className="border-t border-[var(--gold)]/15 px-6 py-24 md:py-32">
+      <section className="border-t border-[var(--gold)]/15 px-6 py-20 md:py-24">
         <div className="container mx-auto max-w-3xl text-center">
           <p className="mb-4 text-xs uppercase tracking-[0.22em] text-[var(--gold)]">The real problem</p>
           <h2 className="mb-8 font-serif text-3xl text-[var(--gold)] md:text-5xl">
@@ -156,7 +156,7 @@ export default function Home() {
       </section>
 
       {/* Who */}
-      <section className="px-6 py-24 md:py-32">
+      <section className="px-6 py-20 md:py-24">
         <div className="container mx-auto max-w-5xl">
           <h2 className="mb-4 text-center font-serif text-3xl text-[var(--gold)] md:text-5xl">Who this is designed for</h2>
           <p className="mx-auto mb-14 max-w-2xl text-center text-white/65">
@@ -179,7 +179,7 @@ export default function Home() {
       <CostOfWaiting />
 
       {/* Philosophy */}
-      <section className="border-y border-[var(--gold)]/10 px-6 py-24 md:py-32">
+      <section className="border-y border-[var(--gold)]/10 px-6 py-20 md:py-24">
         <div className="container mx-auto max-w-3xl text-center">
           <h2 className="mb-8 font-serif text-3xl text-[var(--gold)] md:text-5xl">
             Discipline over emotion. Structure over speculation.
@@ -196,7 +196,7 @@ export default function Home() {
       <PlanCalculator />
 
       {/* Process */}
-      <section className="px-6 py-24 md:py-32">
+      <section className="px-6 py-20 md:py-24">
         <div className="container mx-auto max-w-5xl">
           <div className="mb-14 text-center">
             <p className="mb-3 text-xs uppercase tracking-[0.22em] text-[var(--gold)]">How we work together</p>
@@ -220,7 +220,7 @@ export default function Home() {
       </section>
 
       {/* Truths */}
-      <section className="border-t border-[var(--gold)]/10 bg-black/25 px-6 py-24 md:py-32">
+      <section className="border-t border-[var(--gold)]/10 bg-black/25 px-6 py-20 md:py-24">
         <div className="container mx-auto max-w-5xl">
           <h2 className="mb-4 text-center font-serif text-3xl text-[var(--gold)] md:text-5xl">
             What most advisors won&apos;t emphasise
