@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion"
 import Link from "next/link"
+import GuideClose from "@/app/components/GuideClose"
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -223,6 +224,11 @@ export default function WealthyMindsetGuideClient() {
           </div>
         </motion.div>
       </section>
+
+      <GuideClose
+        variant="dark"
+        prefill="I read Rules & Foundations of a Wealthy Mindset and want to talk through where I actually stand."
+      />
     </main>
   )
 }

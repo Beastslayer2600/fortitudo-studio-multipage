@@ -7,6 +7,14 @@ export const metadata: Metadata = {
 
 const guides = [
   {
+    label: "Interactive",
+    title: "The Income Interruption Test",
+    description:
+      "Ninety seconds. Find out how long your life keeps running after your income stops.",
+    coverage: "A private calculator, then one tap to send Gert your result on WhatsApp.",
+    href: "/guides/income-interruption-test",
+  },
+  {
     title: "The 7-Question Financial Health Check",
     description:
       "A two-minute, scored self-assessment covering the seven areas that decide whether your financial position holds up under pressure.",
@@ -55,7 +63,9 @@ export default function Guides() {
         <div className="mt-8 space-y-6">
           {guides.map((guide) => (
             <article key={guide.href} className="surface p-6 sm:p-8">
-              <p className="text-xs uppercase tracking-[0.16em] text-[var(--gold)]">Guide</p>
+              <p className="text-xs uppercase tracking-[0.16em] text-[var(--gold)]">
+                {"label" in guide ? guide.label : "Guide"}
+              </p>
               <h2 className="mt-3 font-serif text-2xl text-white sm:text-3xl">{guide.title}</h2>
               <p className="mt-4 text-white/70">{guide.description}</p>
               <div className="mt-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
