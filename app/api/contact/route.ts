@@ -45,7 +45,7 @@ export async function POST(request: Request) {
 
   try {
     await resend.emails.send({
-      from: "Fortitudo Studio <no-reply@fortitudostudios.site>",
+      from: "Fortitudo Studio <no-reply@fortitudostudios.com>",
       to: "fortitudostudios@protonmail.com",
       replyTo: email,
       subject: `New enquiry from ${name}`,
