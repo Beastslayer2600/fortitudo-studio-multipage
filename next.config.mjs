@@ -5,7 +5,7 @@ const nextConfig = {
       {
         source: "/:path*",
         has: [{ type: "host", value: "fortitudostudios.site" }],
-        destination: "https://www.fortitudostudios.site/:path*",
+        destination: "https://www.fortitudostudios.com/:path*",
         permanent: true,
       },
     ];

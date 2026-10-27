@@ -20,6 +20,7 @@ const guideSlugs = [
 ];
 
 const insightSlugs = [
+  "betting-twice-on-ai",
   "sequence-of-returns-risk",
   "two-pot-retirement-system",
   "why-diversification-isnt-just-about-asset-classes",

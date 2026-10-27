@@ -9,6 +9,14 @@ export const metadata: Metadata = {
 
 const insights = [
   {
+    category: "Portfolio Construction",
+    title: "You're Betting Twice on AI",
+    description:
+      "Your career and your retirement fund were supposed to balance each other out. In 2026, they're quietly riding on the same trade.",
+    href: "/insights/betting-twice-on-ai",
+    featured: true,
+  },
+  {
     category: "Risk Management",
     title: "Sequence-of-Returns Risk: The Retirement Danger Few People Plan For",
     description:
@@ -56,7 +64,9 @@ export default function InsightsPage() {
           {insights.map((insight) => (
             <article key={insight.href} className="surface p-6 sm:p-8">
               <p className="text-xs uppercase tracking-[0.16em] text-[var(--gold)]">
-                {insight.category}
+                {"featured" in insight && insight.featured
+                  ? `Latest \u00B7 ${insight.category}`
+                  : insight.category}
               </p>
               <h2 className="mt-3 font-serif text-2xl text-white sm:text-3xl">{insight.title}</h2>
               <p className="mt-4 text-white/70">{insight.description}</p>
