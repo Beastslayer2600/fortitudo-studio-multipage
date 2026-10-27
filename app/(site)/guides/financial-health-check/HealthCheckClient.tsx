@@ -92,7 +92,7 @@ export default function HealthCheckClient() {
     setErrorMsg("");
 
     emailjs
-      .sendForm("service_j5nb1ym", "template_5lecm3j", form.current, "N7BQYsyCGc0luSO4R")
+      .sendForm("service_gzoalin", "template_hhknr7b", form.current, "TsuUEEHJnVF1s01Uh")
       .then(() => {
         setStatus("success");
         form.current?.reset();
