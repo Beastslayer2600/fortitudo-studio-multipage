@@ -47,21 +47,32 @@ const sources = [
 ] as const;
 
 export const metadata: Metadata = {
-  title: `${title} | Gert Fourie`,
+  title,
   description,
   alternates: { canonical },
   openGraph: {
     type: "article",
     url: canonical,
-    title: `${title} | Gert Fourie`,
+    siteName: "Gert Fourie | Financial Advisor",
+    title: `${title} | Gert Fourie | Pretoria`,
     description,
     publishedTime: "2026-10-27",
     authors: ["Gert Fourie"],
+    locale: "en_ZA",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Gert Fourie | Financial Advisor | Liberty Group FSP 2409 | Pretoria",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
-    title: `${title} | Gert Fourie`,
+    title: `${title} | Gert Fourie | Pretoria`,
     description,
+    images: ["/og-image.png"],
   },
 };
 
