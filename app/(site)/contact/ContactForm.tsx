@@ -19,10 +19,10 @@ export default function ContactForm() {
 
     emailjs
       .sendForm(
-        "service_j5nb1ym",
-        "template_5lecm3j",
+        "service_gzoalin",
+        "template_hhknr7b",
         form.current,
-        "N7BQYsyCGc0luSO4R"
+        "TsuUEEHJnVF1s01Uh"
       )
       .then((result) => {
         console.log("SUCCESS!", result.text);
