@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import HeroStructure from "@/components/three/HeroStructure";
@@ -85,7 +84,7 @@ export default function Home() {
               Liberty Group (FSP 2409) · Pretoria
             </p>
 
-            <h1 className="mb-6 font-serif text-4xl font-bold leading-[1.12] tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
+            <h1 className="mb-6 font-serif text-4xl font-bold leading-[1.12] tracking-tight sm:text-5xl md:text-6xl">
               <span className="block text-balance">You work hard for your money.</span>
               <span className="block text-balance">Let&apos;s structure it to endure.</span>
             </h1>
@@ -132,23 +131,6 @@ export default function Home() {
             </div>
           </div>
         </div>
-
-        <motion.div
-          className="absolute bottom-14 left-1/2 flex -translate-x-1/2 flex-col items-center gap-3 text-sm tracking-widest text-[var(--cream)]/70 md:bottom-10"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.6, duration: 1 }}
-        >
-          <motion.div
-            animate={{ y: [0, 12, 0] }}
-            transition={{ duration: 2.6, repeat: Infinity, ease: "easeInOut" }}
-            className="text-3xl"
-            aria-hidden="true"
-          >
-            ↓
-          </motion.div>
-          <span className="hidden text-[10px] uppercase tracking-[0.28em] md:block">Scroll to explore</span>
-        </motion.div>
       </section>
 
       <div className="relative bg-[#0b0d10]/92">
