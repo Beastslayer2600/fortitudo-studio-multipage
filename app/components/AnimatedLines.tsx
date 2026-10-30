@@ -1,9 +1,11 @@
 // app/components/AnimatedLines.tsx
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 
 export default function AnimatedLines() {
+  const reduce = useReducedMotion();
+  const loop = reduce ? 0 : Infinity;
   return (
     <>
       {/* Primary structural lattice */}
@@ -14,7 +16,7 @@ export default function AnimatedLines() {
         }}
         transition={{
           duration: 30,
-          repeat: Infinity,
+          repeat: loop,
           ease: "linear",
         }}
         style={{
@@ -26,14 +28,14 @@ export default function AnimatedLines() {
 
       {/* Metallic gold diagonal ribbons */}
       <motion.div
-        className="pointer-events-none absolute inset-[-12%] z-0 opacity-[0.18] mix-blend-screen"
+        className="pointer-events-none absolute inset-[-12%] z-0 opacity-[0.1] mix-blend-screen"
         animate={{
           backgroundPosition: ["135% 120%", "0% 0%"],
-          opacity: [0.14, 0.26, 0.14],
+          opacity: [0.08, 0.14, 0.08],
         }}
         transition={{
           duration: 20,
-          repeat: Infinity,
+          repeat: loop,
           ease: "linear",
         }}
         style={{
@@ -53,7 +55,7 @@ export default function AnimatedLines() {
         }}
         transition={{
           duration: 16,
-          repeat: Infinity,
+          repeat: loop,
           ease: "linear",
         }}
         style={{
@@ -73,7 +75,7 @@ export default function AnimatedLines() {
         }}
         transition={{
           duration: 15,
-          repeat: Infinity,
+          repeat: loop,
           ease: "easeInOut",
         }}
         style={{
@@ -83,24 +85,6 @@ export default function AnimatedLines() {
         }}
       />
 
-      {/* Bright metallic sweep for polish */}
-      <motion.div
-        className="pointer-events-none absolute inset-0 z-0 mix-blend-screen"
-        animate={{
-          backgroundPosition: ["140% 10%", "-20% 92%"],
-          opacity: [0.1, 0.22, 0.1],
-        }}
-        transition={{
-          duration: 10,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-        style={{
-          backgroundImage:
-            "linear-gradient(118deg, transparent 42%, rgba(255,222,138,0.9) 49%, rgba(245,199,92,0.72) 52%, transparent 58%)",
-          backgroundSize: "220% 220%",
-        }}
-      />
     </>
   );
 }

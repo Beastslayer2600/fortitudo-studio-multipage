@@ -4,7 +4,7 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "About Gert Fourie",
   description:
-    "Gert Fourie is a Liberty accredited financial adviser in Pretoria, helping professionals, business owners, and families build wealth through structure, discipline, and long-term clarity.",
+    "Gert Fourie is a financial adviser with Liberty Group in Pretoria, helping young professionals, business owners, and families build wealth through structure, discipline, and long-term clarity.",
 };
 
 const principles = [
@@ -23,6 +23,7 @@ const principles = [
 ];
 
 const audience = [
+  "Young professionals who want the foundations right early in their careers",
   "Professionals earning well who are unsure whether the current strategy is optimal",
   "Business owners who want structure, not speculation",
   "Families who want a clear picture of retirement and protection",
@@ -55,7 +56,7 @@ export default function About() {
             I am a financial advisor with Liberty Group (FSP 2409), based in Pretoria. My work is grounded in one principle: wealth is not built by reacting — it is built by structure, discipline, and long-term clarity.
           </p>
           <p>
-            I advise high-income professionals, business owners, and families who understand that earning well is only the beginning. The real advantage comes from strategy — aligning income, assets, risk, and legacy into a system that works quietly and consistently over time.
+            I advise young professionals laying their foundations, high earners, business owners, and families who understand that earning well is only the beginning. The real advantage comes from strategy — aligning income, assets, risk, and legacy into a system that works quietly and consistently over time.
           </p>
           <p>
             My role is not to predict markets or chase trends. It is to design financial architecture that creates stability, protects growth, and removes uncertainty from major decisions.
@@ -74,7 +75,7 @@ export default function About() {
             {principles.map((item) => (
               <div key={item.title} className="rounded-2xl border border-[var(--gold)]/25 bg-black/20 p-6">
                 <h3 className="mb-3 font-serif text-xl text-[var(--gold)]">{item.title}</h3>
-                <p className="text-sm leading-relaxed text-white/70">{item.body}</p>
+                <p className="text-base leading-relaxed text-white/75">{item.body}</p>
               </div>
             ))}
           </div>
@@ -98,7 +99,7 @@ export default function About() {
               <div key={step.number} className="rounded-2xl border border-[var(--gold)]/20 p-6">
                 <p className="mb-2 font-serif text-2xl text-[var(--gold)]">{step.number}</p>
                 <h3 className="mb-2 font-serif text-xl">{step.title}</h3>
-                <p className="text-sm leading-relaxed text-white/70">{step.body}</p>
+                <p className="text-base leading-relaxed text-white/75">{step.body}</p>
               </div>
             ))}
           </div>

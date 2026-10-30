@@ -81,9 +81,9 @@ export default function PlanCalculator() {
             </p>
           </div>
 
-          <p className="mt-4 max-w-[36rem] text-[.75rem] leading-relaxed text-[#7e9186]">
+          <p className="mt-4 max-w-[36rem] text-[.8rem] leading-relaxed text-[#8a9c91]">
             Illustration only — not advice, and not a projection of returns. Assumes 9% nominal
-            annual growth with contributions escalating 5% a year, before fees and tax.
+            annual growth with contributions escalating 5% a year, before fees and tax. Figures are not guaranteed.
           </p>
         </div>
 
@@ -120,7 +120,7 @@ function Slider({
         step={step}
         value={value}
         onChange={(e) => onChange(+e.target.value)}
-        className="mt-3 h-[2px] w-full cursor-pointer appearance-none rounded bg-[rgba(242,239,230,.18)] accent-[#c8a45c]"
+        className="fs-range mt-3 w-full cursor-pointer"
       />
     </div>
   );

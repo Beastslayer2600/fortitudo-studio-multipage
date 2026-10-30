@@ -217,7 +217,7 @@ export default function RootLayout({
                 &copy; {new Date().getFullYear()} Gert Fourie | Financial Advisor &ndash; Liberty Group Limited (FSP
                 2409) | Pretoria
               </p>
-              <p className="mx-auto max-w-4xl leading-relaxed text-white/65">
+              <p className="mx-auto max-w-4xl text-[0.95rem] leading-relaxed text-white/70">
                 Liberty Group Limited is an Authorised Financial Services Provider (FSP 2409) in terms of the Financial
                 Advisory and Intermediary Services Act 37 of 2002. Gert Fourie is a representative of Liberty Group
                 Limited. All content on fortitudostudios.com is general information only and does not constitute
@@ -225,7 +225,7 @@ export default function RootLayout({
                 needs analysis. Past performance is not indicative of future results. Investments carry risk, including
                 possible loss of capital.
               </p>
-              <div className="mt-6 space-x-4 text-xs text-white/75">
+              <div className="mt-6 space-x-4 text-sm text-white/75">
                 <a href="/disclaimer" className="transition-colors hover:text-[var(--gold)] hover:underline">
                   Disclaimer
                 </a>

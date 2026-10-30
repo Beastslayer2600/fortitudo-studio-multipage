@@ -87,15 +87,15 @@ export default function CostOfWaiting() {
               step={1}
               value={years}
               onChange={(e) => setYears(+e.target.value)}
-              className="mt-3 h-[2px] w-full cursor-pointer appearance-none rounded bg-[rgba(242,239,230,.18)] accent-[#c8a45c]"
+              className="fs-range mt-3 w-full cursor-pointer"
             />
           </div>
 
-          <p className="mt-4 max-w-[36rem] text-[.75rem] leading-relaxed text-[#7e9186]">
+          <p className="mt-4 max-w-[36rem] text-[.8rem] leading-relaxed text-[#8a9c91]">
             Illustration only, not advice or a forecast. Both figures are expressed in today&apos;s
             money, so they are directly comparable: cash at 5% inflation, and growth at 9% nominal
             less the same 5% inflation. Before fees and tax, and assuming constant rates — which
-            real markets do not provide.
+            real markets do not provide. Figures are not guaranteed.
           </p>
         </div>
       </div>
