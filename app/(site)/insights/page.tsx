@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { INSIGHT_PRINCIPLES } from "@/lib/principles";
 
 export const metadata: Metadata = {
   title: "Insights | Gert Fourie Financial Adviser",
@@ -64,6 +65,7 @@ export default function InsightsPage() {
           {insights.map((insight) => (
             <article key={insight.href} className="surface p-6 sm:p-8">
               <p className="text-xs uppercase tracking-[0.16em] text-[var(--gold)]">
+                {INSIGHT_PRINCIPLES[insight.href] ? `${INSIGHT_PRINCIPLES[insight.href]} \u00B7 ` : ""}
                 {"featured" in insight && insight.featured
                   ? `Latest \u00B7 ${insight.category}`
                   : insight.category}

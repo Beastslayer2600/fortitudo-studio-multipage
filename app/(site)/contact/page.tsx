@@ -4,7 +4,7 @@ import ContactForm from "./ContactForm";
 export const metadata: Metadata = {
   title: "Contact",
   description:
-    "Book a consultation with Gert Fourie, Liberty accredited financial adviser in Pretoria - reach out by phone, email, or the contact form.",
+    "Book a consultation with Gert Fourie, financial adviser with Liberty Group in Pretoria - reach out by phone, email, or the contact form.",
 };
 
 export default function Contact() {
@@ -15,7 +15,7 @@ export default function Contact() {
           Contact
         </h1>
         <p className="mt-3 text-white/70 max-w-2xl">
-          Reach out to book a consultation or ask a question. I will get back to you as soon as possible.
+          The first step is the hardest one. This is it. Book a consultation or ask a question, and I will get back to you as soon as possible.
         </p>
         <div className="mt-10 grid gap-10 lg:grid-cols-2">
           <div className="space-y-6">
@@ -25,7 +25,7 @@ export default function Contact() {
               </p>
               <div className="mt-4 space-y-2 text-white/70">
                 <p className="text-base font-medium text-[var(--cream)]">Mr. Gert Fourie</p>
-                <p>Liberty accredited financial adviser</p>
+                <p>Financial adviser · Liberty Group (FSP 2409)</p>
               </div>
             </div>
             <div className="space-y-2 text-white/70">

@@ -35,7 +35,7 @@ export default function CostOfWaiting() {
   }, [cash, grown]);
 
   return (
-    <section className="py-14 md:py-24">
+    <section id="cost-of-waiting" className="scroll-mt-24 py-14 md:py-24">
       <div className="mx-auto grid w-full max-w-[1240px] items-center gap-10 px-5 md:px-8 lg:grid-cols-2 lg:gap-14">
         <Scene3D
           variant="compare"
@@ -45,7 +45,7 @@ export default function CostOfWaiting() {
 
         <div>
           <p className="mb-4 text-[.68rem] uppercase tracking-[.18em] text-[#c8a45c]">
-            The cost of waiting
+            Courage · The cost of waiting
           </p>
           <h2 className="max-w-[22ch] font-serif text-3xl font-light leading-[1.08] tracking-[-.015em] md:text-[2.6rem]">
             Doing nothing <em className="not-italic text-[#e6cf9c]"><i>is also a decision.</i></em>
@@ -87,15 +87,15 @@ export default function CostOfWaiting() {
               step={1}
               value={years}
               onChange={(e) => setYears(+e.target.value)}
-              className="mt-3 h-[2px] w-full cursor-pointer appearance-none rounded bg-[rgba(242,239,230,.18)] accent-[#c8a45c]"
+              className="fs-range mt-3 w-full cursor-pointer"
             />
           </div>
 
-          <p className="mt-4 max-w-[36rem] text-[.75rem] leading-relaxed text-[#7e9186]">
+          <p className="mt-4 max-w-[36rem] text-[.8rem] leading-relaxed text-[#8a9c91]">
             Illustration only, not advice or a forecast. Both figures are expressed in today&apos;s
             money, so they are directly comparable: cash at 5% inflation, and growth at 9% nominal
             less the same 5% inflation. Before fees and tax, and assuming constant rates — which
-            real markets do not provide.
+            real markets do not provide. Figures are not guaranteed.
           </p>
         </div>
       </div>

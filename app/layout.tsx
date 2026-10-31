@@ -5,12 +5,13 @@ import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import QuickMenu from "./components/QuickMenu";
 import AnimatedLines from "./components/AnimatedLines";
+import PrincipleFooter from "./components/PrincipleFooter";
 import "./globals.css";
 
 const siteUrl = "https://fortitudostudios.com";
 const siteTitle = "Gert Fourie | Financial Advisor | Liberty Group FSP 2409 | Pretoria";
 const siteDescription =
-  "Structured financial planning for professionals who want clarity, not complexity — Pretoria & Gauteng";
+  "Financial planning for professionals in Pretoria and Gauteng: a plan you’ll actually keep.";
 
 const structuredData = {
   "@context": "https://schema.org",
@@ -201,6 +202,7 @@ export default function RootLayout({
           </header>
 
           <main className="flex-1">{children}</main>
+          <PrincipleFooter />
 
           <footer className="mt-auto border-t border-[var(--gold)]/25 bg-[#060a08]/90 py-10 text-center text-sm text-[var(--cream)] backdrop-blur-[2px]">
             <div className="container mx-auto max-w-5xl px-6">
@@ -213,11 +215,14 @@ export default function RootLayout({
                   className="h-auto w-28 md:w-32"
                 />
               </div>
+              <p className="mb-6 font-serif text-lg italic text-[var(--gold)]">
+                Fortitudo: strength to build it, patience to keep it.
+              </p>
               <p className="mb-3 font-medium text-white/90">
                 &copy; {new Date().getFullYear()} Gert Fourie | Financial Advisor &ndash; Liberty Group Limited (FSP
                 2409) | Pretoria
               </p>
-              <p className="mx-auto max-w-4xl leading-relaxed text-white/65">
+              <p className="mx-auto max-w-4xl text-[0.95rem] leading-relaxed text-white/70">
                 Liberty Group Limited is an Authorised Financial Services Provider (FSP 2409) in terms of the Financial
                 Advisory and Intermediary Services Act 37 of 2002. Gert Fourie is a representative of Liberty Group
                 Limited. All content on fortitudostudios.com is general information only and does not constitute
@@ -225,7 +230,7 @@ export default function RootLayout({
                 needs analysis. Past performance is not indicative of future results. Investments carry risk, including
                 possible loss of capital.
               </p>
-              <div className="mt-6 space-x-4 text-xs text-white/75">
+              <div className="mt-6 space-x-4 text-sm text-white/75">
                 <a href="/disclaimer" className="transition-colors hover:text-[var(--gold)] hover:underline">
                   Disclaimer
                 </a>

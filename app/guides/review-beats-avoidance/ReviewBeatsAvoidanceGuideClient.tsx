@@ -50,7 +50,7 @@ export default function ReviewBeatsAvoidanceGuideClient() {
       bottomLineTitle="The Bottom Line"
       bottomLineParagraphs={[
         "Looking at your numbers regularly is one of the least discussed, highest-leverage financial habits there is.",
-        "It costs five minutes and replaces months of quiet anxiety with an honest, workable picture.",
+        "It costs five minutes and replaces months of guessing with an honest, workable picture.",
       ]}
       hubHref="/guides/rules-of-a-wealthy-mindset"
       hubLabel="Rules & Foundations of a Wealthy Mindset"

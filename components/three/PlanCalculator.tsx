@@ -39,11 +39,11 @@ export default function PlanCalculator() {
   }, [r]);
 
   return (
-    <section className="border-y border-[rgba(242,239,230,.12)] bg-[#0a231a] py-14 md:py-24">
+    <section id="plan-calculator" className="scroll-mt-24 border-y border-[rgba(242,239,230,.12)] bg-[#0a231a] py-14 md:py-24">
       <div className="mx-auto grid w-full max-w-[1240px] items-center gap-10 px-5 md:px-8 lg:grid-cols-2 lg:gap-14">
         <div>
           <p className="mb-4 text-[.68rem] uppercase tracking-[.18em] text-[#c8a45c]">
-            Structure, made visible
+            Patience
           </p>
           <h2 className="max-w-[22ch] font-serif text-3xl font-light leading-[1.08] tracking-[-.015em] md:text-[2.6rem]">
             Forty years is not an abstraction.{' '}
@@ -81,9 +81,9 @@ export default function PlanCalculator() {
             </p>
           </div>
 
-          <p className="mt-4 max-w-[36rem] text-[.75rem] leading-relaxed text-[#7e9186]">
+          <p className="mt-4 max-w-[36rem] text-[.8rem] leading-relaxed text-[#8a9c91]">
             Illustration only — not advice, and not a projection of returns. Assumes 9% nominal
-            annual growth with contributions escalating 5% a year, before fees and tax.
+            annual growth with contributions escalating 5% a year, before fees and tax. Figures are not guaranteed.
           </p>
         </div>
 
@@ -120,7 +120,7 @@ function Slider({
         step={step}
         value={value}
         onChange={(e) => onChange(+e.target.value)}
-        className="mt-3 h-[2px] w-full cursor-pointer appearance-none rounded bg-[rgba(242,239,230,.18)] accent-[#c8a45c]"
+        className="fs-range mt-3 w-full cursor-pointer"
       />
     </div>
   );

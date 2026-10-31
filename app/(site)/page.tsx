@@ -1,16 +1,25 @@
 "use client";
 
-import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import HeroStructure from "@/components/three/HeroStructure";
 import CostOfWaiting from "@/components/three/CostOfWaiting";
 import PlanCalculator from "@/components/three/PlanCalculator";
+import Monogram from "@/components/Monogram";
+
+// Portrait for the "Meet Gert" section. Drop a professional head-and-shoulders
+// photo (portrait orientation, ~1000x1250, plain dark background) into /public
+// and set this to its path, e.g. "/portrait.jpg". While null, a monogram shows.
+const PORTRAIT: string | null = null;
 
 const audience = [
   {
-    title: "High-income professionals",
-    body: "Earning well but unsure whether the strategy is optimal.",
+    title: "Young professionals",
+    body: "Early in your career and want the foundations right before income and complexity grow.",
+  },
+  {
+    title: "Established professionals",
+    body: "Earning well but unsure the plan is right for you.",
   },
   {
     title: "Business owners",
@@ -19,10 +28,6 @@ const audience = [
   {
     title: "Families",
     body: "Seeking clarity around retirement, protection, and legacy.",
-  },
-  {
-    title: "Disciplined thinkers",
-    body: "Tired of reacting emotionally to markets and headlines.",
   },
 ];
 
@@ -40,7 +45,7 @@ const processSteps = [
   {
     number: "03",
     title: "Structured plan",
-    body: "A written framework designed for resilience — not short-term performance theatre.",
+    body: "A written plan built to endure, not to chase this year’s returns.",
   },
   {
     number: "04",
@@ -80,29 +85,17 @@ export default function Home() {
               Liberty Group (FSP 2409) · Pretoria
             </p>
 
-            <div className="mb-8 flex justify-center">
-              <Image
-                src="/liberty-standard-bank-group.png"
-                alt="Liberty Standard Bank Group logo"
-                width={176}
-                height={176}
-                priority
-                className="h-auto w-28 md:w-36"
-              />
-            </div>
-
-            <h1 className="mb-6 font-serif text-4xl font-bold leading-[1.12] tracking-tight sm:text-5xl md:text-7xl">
-              You work hard for your money.
-              <br />
-              Let&apos;s structure it to endure.
+            <h1 className="mb-6 font-serif text-4xl font-bold leading-[1.12] tracking-tight sm:text-5xl md:text-6xl">
+              <span className="block text-balance">You work hard for your money.</span>
+              <span className="block text-balance">Let&apos;s structure it to endure.</span>
             </h1>
 
-            <p className="mx-auto mb-4 max-w-3xl text-lg opacity-90 md:text-2xl">
-              Structured financial strategy for high-income professionals who want clarity, not complexity.
+            <p className="mx-auto mb-4 max-w-3xl text-balance text-lg opacity-90 md:text-2xl">
+              Structured financial strategy for professionals building wealth, who want clarity, not complexity.
             </p>
 
             <p className="mx-auto mb-10 max-w-2xl text-sm text-white/55 md:text-base">
-              Gert Fourie · Financial Advisor · Helping clients build structured, disciplined wealth strategies.
+              Gert Fourie · Financial Adviser · Helping you build a plan you&apos;ll actually keep.
             </p>
 
             <div className="flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-6">
@@ -119,27 +112,29 @@ export default function Home() {
                 How I Work
               </Link>
             </div>
+
+            <div className="mt-10 flex items-center justify-center gap-3 text-left">
+              <span className="flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-lg bg-white">
+                <Image
+                  src="/liberty-standard-bank-group.png"
+                  alt="Liberty Standard Bank Group logo"
+                  width={44}
+                  height={44}
+                  priority
+                  className="h-11 w-11 object-contain"
+                />
+              </span>
+              <span className="text-sm leading-snug text-white/70">
+                Representative of Liberty Group Limited
+                <br />
+                Authorised FSP 2409
+              </span>
+            </div>
           </div>
         </div>
-
-        <motion.div
-          className="absolute bottom-14 left-1/2 flex -translate-x-1/2 flex-col items-center gap-3 text-sm tracking-widest text-[var(--cream)]/70 md:bottom-10"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.6, duration: 1 }}
-        >
-          <motion.div
-            animate={{ y: [0, 12, 0] }}
-            transition={{ duration: 2.6, repeat: Infinity, ease: "easeInOut" }}
-            className="text-3xl"
-            aria-hidden="true"
-          >
-            ↓
-          </motion.div>
-          <span className="hidden text-[10px] uppercase tracking-[0.28em] md:block">Scroll to explore</span>
-        </motion.div>
       </section>
 
+      <div className="relative bg-[#0b0d10]/92">
       {/* Problem */}
       <section className="border-t border-[var(--gold)]/15 px-6 py-24 md:py-32">
         <div className="container mx-auto max-w-3xl text-center">
@@ -148,19 +143,64 @@ export default function Home() {
             Success without structure creates quiet anxiety.
           </h2>
           <p className="text-lg leading-relaxed text-white/80 md:text-xl">
-            Many high-income professionals earn well but lack a structured financial framework. They invest. They
+            Many professionals earn well but lack a structured financial framework. They invest. They
             save. They insure. But they are unsure whether it all works together. Financial strategy should eliminate
             doubt, not create it.
           </p>
         </div>
       </section>
 
+
+
+
+
+      {/* Meet Gert */}
+      <section className="px-6 py-24 md:py-32">
+        <div className="container mx-auto grid max-w-5xl items-center gap-12 md:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]">
+          <div className="mx-auto w-full max-w-xs md:max-w-none">
+            {PORTRAIT ? (
+              <Image
+                src={PORTRAIT}
+                alt="Gert Fourie, financial adviser"
+                width={800}
+                height={1000}
+                className="aspect-[4/5] w-full rounded-2xl border border-[var(--gold)]/25 object-cover"
+              />
+            ) : (
+              <Monogram className="aspect-[4/5] w-full" />
+            )}
+          </div>
+          <div>
+            <p className="mb-4 text-xs uppercase tracking-[0.22em] text-[var(--gold)]">Who you will work with</p>
+            <h2 className="mb-6 font-serif text-3xl text-[var(--cream)] md:text-4xl">Gert Fourie</h2>
+            <div className="space-y-5 text-lg leading-relaxed text-white/85">
+              <p>
+                I am a financial adviser with Liberty Group, based in Pretoria. My work rests on one principle: wealth
+                is not built by reacting. It is built by structure, discipline, and long-term clarity.
+              </p>
+              <p>
+                My role is not to predict markets or chase trends. It is to help you build a plan you understand,
+                and to help you keep it when it&apos;s tested.
+              </p>
+            </div>
+            <Link
+              href="/about"
+              className="mt-8 inline-block text-sm tracking-[0.12em] text-[var(--gold)] hover:text-white"
+            >
+              More about how I work →
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      <PlanCalculator />
+
       {/* Who */}
       <section className="px-6 py-24 md:py-32">
         <div className="container mx-auto max-w-5xl">
           <h2 className="mb-4 text-center font-serif text-3xl text-[var(--gold)] md:text-5xl">Who this is designed for</h2>
           <p className="mx-auto mb-14 max-w-2xl text-center text-white/65">
-            Not for everyone. Best suited to people who value stewardship over noise.
+            For people who want a plan, not just products.
           </p>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
             {audience.map((item) => (
@@ -169,7 +209,7 @@ export default function Home() {
                 className="rounded-2xl border border-[var(--gold)]/20 bg-black/20 p-7 transition-all duration-300 hover:border-[var(--gold)]/50 hover:shadow-[0_0_24px_rgba(188,164,114,0.12)]"
               >
                 <h3 className="mb-3 font-serif text-xl text-[var(--gold)]">{item.title}</h3>
-                <p className="text-sm leading-relaxed text-white/75">{item.body}</p>
+                <p className="text-base leading-relaxed text-white/80">{item.body}</p>
               </div>
             ))}
           </div>
@@ -177,23 +217,6 @@ export default function Home() {
       </section>
 
       <CostOfWaiting />
-
-      {/* Philosophy */}
-      <section className="border-y border-[var(--gold)]/10 px-6 py-24 md:py-32">
-        <div className="container mx-auto max-w-3xl text-center">
-          <h2 className="mb-8 font-serif text-3xl text-[var(--gold)] md:text-5xl">
-            Discipline over emotion. Structure over speculation.
-          </h2>
-          <p className="mb-10 text-lg leading-relaxed text-white/80 md:text-xl">
-            Markets fluctuate. Noise increases. Trends tempt. Wealth is built through structured planning, disciplined
-            execution, and long-term thinking — not reactionary decisions. Performance matters, but only inside a
-            framework that protects your future.
-          </p>
-          <p className="font-serif text-2xl italic text-[var(--gold)]">Strategy first. Emotion second.</p>
-        </div>
-      </section>
-
-      <PlanCalculator />
 
       {/* Process */}
       <section className="px-6 py-24 md:py-32">
@@ -207,7 +230,7 @@ export default function Home() {
               <div key={step.number} className="rounded-2xl border border-[var(--gold)]/20 p-6">
                 <p className="mb-3 font-serif text-3xl text-[var(--gold)]">{step.number}</p>
                 <h3 className="mb-2 font-serif text-xl">{step.title}</h3>
-                <p className="text-sm leading-relaxed text-white/70">{step.body}</p>
+                <p className="text-base leading-relaxed text-white/75">{step.body}</p>
               </div>
             ))}
           </div>
@@ -223,28 +246,29 @@ export default function Home() {
       <section className="border-t border-[var(--gold)]/10 bg-black/25 px-6 py-24 md:py-32">
         <div className="container mx-auto max-w-5xl">
           <h2 className="mb-4 text-center font-serif text-3xl text-[var(--gold)] md:text-5xl">
-            What most advisors won&apos;t emphasise
+            What keeping a plan really takes
           </h2>
           <p className="mx-auto mb-14 max-w-2xl text-center text-white/65">
-            Not fantasy. Reality builds trust.
+            The honest part of planning. Knowing it in advance is half of holding on.
           </p>
           <div className="grid gap-6 md:grid-cols-2">
             {truths.map((item) => (
               <div key={item.title} className="rounded-2xl border border-[var(--gold)]/15 p-7">
                 <h3 className="mb-3 font-serif text-xl text-[var(--gold)]">{item.title}</h3>
-                <p className="text-sm leading-relaxed text-white/75">{item.body}</p>
+                <p className="text-base leading-relaxed text-white/80">{item.body}</p>
               </div>
             ))}
           </div>
+          <p className="mt-14 text-center font-serif text-2xl italic text-[var(--gold)]">Strategy first. Emotion second.</p>
         </div>
       </section>
 
       {/* CTA */}
       <section className="px-6 py-24 text-center md:py-32">
         <div className="container mx-auto max-w-3xl">
-          <h2 className="mb-6 font-serif text-3xl text-[var(--gold)] md:text-5xl">Ready to structure your future?</h2>
+          <h2 className="mb-6 font-serif text-3xl text-[var(--gold)] md:text-5xl">Ready to build something that lasts?</h2>
           <p className="mb-10 text-lg text-white/75">
-            If you value clarity over complexity and stewardship over speculation, let&apos;s speak.
+            If you want a plan that holds when life gets loud, let&apos;s talk.
           </p>
           <Link
             href="/contact"
@@ -254,6 +278,7 @@ export default function Home() {
           </Link>
         </div>
       </section>
+      </div>
     </main>
   );
 }

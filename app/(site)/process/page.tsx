@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "My Process",
   description:
-    "A structured, four-step approach - strategic clarity, financial analysis, plan design, and ongoing review - built to turn financial anxiety into confidence.",
+    "A structured, four-step approach - strategic clarity, financial analysis, plan design, and ongoing review - built to give you a plan you’ll actually keep.",
 };
 
 export default function Process() {
@@ -28,9 +28,9 @@ export default function Process() {
     },
     {
       number: "04",
-      title: "Ongoing Review & Optimization",
+      title: "Ongoing Review: Keeping the Plan",
       description:
-        "Regular check-ins (quarterly or as needed) to monitor progress, adjust for life changes or market conditions, and ensure the plan remains effective. Discipline is maintained through structure, not emotion.",
+        "Reviews at least once a year, and whenever life changes, to adjust for new circumstances or market conditions. This is the step that keeps the plan alive.",
     },
   ];
 
@@ -42,8 +42,8 @@ export default function Process() {
             A Structured Approach
           </h1>
           <p className="text-xl max-w-3xl mx-auto opacity-90">
-            When clients see clear process, uncertainty fades. This is how we turn financial
-            anxiety into confidence.
+            When you can see the process, uncertainty fades. This is how we build a plan you&apos;ll
+            actually keep.
           </p>
         </div>
 
