@@ -1,85 +1,89 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { GUIDES, PRINCIPLES, START_HERE } from "@/lib/principles";
 
 export const metadata: Metadata = {
-  title: "Guides & Videos",
+  title: "Guides",
+  description:
+    "Free, South Africa-focused guides for every stage of a financial plan: starting it, holding it, and letting it work.",
 };
 
-const guides = [
-  {
-    title: "The 7-Question Financial Health Check",
-    description:
-      "A two-minute, scored self-assessment covering the seven areas that decide whether your financial position holds up under pressure.",
-    coverage:
-      "Covers your reserve, income continuation, dependants, retirement rate, debt structure, education funding, and estate readiness.",
-    href: "/guides/financial-health-check",
-  },
-  {
-    title: "Building Wealth on a Starter Salary",
-    description:
-      "A practical framework for young professionals who want to start building wealth early through better cash-flow structure, protection, and disciplined investing.",
-    coverage:
-      "Covers emergency reserves, TFSA use, retirement contributions, cover, and habit design.",
-    href: "/guides/building-wealth-on-a-starter-salary",
-  },
-  {
-    title: "Why Saving Feels Painful",
-    description:
-      "A guide to the psychology and neuroscience behind spending impulses, delayed reward, and why saving feels harder than it should.",
-    coverage:
-      "Covers dopamine, delay discounting, scarcity mindset, money scripts, and practical behavior design.",
-    href: "/guides/why-saving-feels-painful",
-  },
-  {
-    title: "Rules & Foundations of a Wealthy Mindset",
-    description:
-      "A 10-part series — from classic wealth literature to modern behavioural finance — with each principle broken into its own deep-dive guide.",
-    coverage:
-      "Covers definite purpose, assets vs. liabilities, automation, loss aversion, compounding, delayed gratification, and financial habit design.",
-    href: "/guides/rules-of-a-wealthy-mindset",
-  },
-] as const;
-
 export default function Guides() {
+  const startHere = START_HERE.map((href) => GUIDES.find((g) => g.href === href)!).filter(Boolean);
+
   return (
-    <main className="relative z-10 min-h-screen text-[var(--cream)] pt-24 pb-16 sm:pt-28 sm:pb-24">
-      <div className="container max-w-4xl">
-        <h1 className="font-serif text-3xl text-[var(--cream)]">
-          Guides & Videos
-        </h1>
-        <p className="mt-4 text-white/70">
-          Practical, South Africa-focused guides on wealth building, protection, retirement
-          planning, and disciplined investing.
+    <main className="relative z-10 min-h-screen bg-[#0b0d10]/92 pb-16 pt-24 text-[var(--cream)] sm:pb-24 sm:pt-28">
+      <div className="container max-w-5xl">
+        <h1 className="font-serif text-4xl text-[var(--cream)] md:text-5xl">Guides</h1>
+        <p className="mt-4 max-w-2xl text-lg text-white/75">
+          Guides for every stage of a plan: starting it, holding it, and letting it work.
         </p>
 
-        <div className="mt-8 space-y-6">
-          {guides.map((guide) => (
-            <article key={guide.href} className="surface p-6 sm:p-8">
-              <p className="text-xs uppercase tracking-[0.16em] text-[var(--gold)]">Guide</p>
-              <h2 className="mt-3 font-serif text-2xl text-white sm:text-3xl">{guide.title}</h2>
-              <p className="mt-4 text-white/70">{guide.description}</p>
-              <div className="mt-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-                <p className="text-sm text-white/55">{guide.coverage}</p>
+        {/* Start here */}
+        <section className="mt-12 rounded-2xl border border-[var(--gold)]/30 p-6 sm:p-8">
+          <p className="text-xs uppercase tracking-[0.18em] text-[var(--gold)]">Start here</p>
+          <h2 className="mt-2 font-serif text-2xl text-white sm:text-3xl">Early in your career?</h2>
+          <p className="mt-2 text-white/70">Five guides, in the order I&apos;d read them.</p>
+          <ol className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
+            {startHere.map((g, i) => (
+              <li key={g.href}>
                 <Link
-                  href={guide.href}
-                  className="inline-flex items-center justify-center rounded-xl border border-[var(--gold)] px-5 py-3 text-sm tracking-[0.12em] uppercase text-[var(--gold)] transition-colors hover:bg-[var(--gold)] hover:text-[#0B0D10]"
+                  href={g.href}
+                  className="flex h-full flex-col rounded-xl border border-white/10 p-4 transition-colors hover:border-[var(--gold)]/60"
                 >
-                  Read guide
+                  <span className="font-serif text-2xl text-[var(--gold)]">{i + 1}</span>
+                  <span className="mt-2 text-sm leading-snug text-white/85">{g.title}</span>
                 </Link>
-              </div>
-            </article>
-          ))}
-        </div>
+              </li>
+            ))}
+          </ol>
+        </section>
 
-        <div className="mt-8 surface p-6">
-          <p className="text-sm text-white/70">
-            Want to be notified when new content drops? Send a message via the{" "}
-            <Link href="/contact" className="text-[var(--gold)] underline underline-offset-2">
-              contact page
-            </Link>
-            .
+        {/* Rows by principle */}
+        {PRINCIPLES.map((p) => {
+          const items = GUIDES.filter((g) => g.principle === p.name);
+          return (
+            <section key={p.id} id={p.id} className="mt-16 scroll-mt-28">
+              <p className="text-xs uppercase tracking-[0.18em] text-[var(--gold)]">{p.name}</p>
+              <h2 className="mt-2 font-serif text-2xl text-white sm:text-3xl">{p.line}</h2>
+              <div className="mt-6 grid gap-4 md:grid-cols-2">
+                {items.map((g) => (
+                  <Link
+                    key={g.href}
+                    href={g.href}
+                    className="group rounded-2xl border border-[var(--gold)]/20 bg-black/20 p-6 transition-colors hover:border-[var(--gold)]/55"
+                  >
+                    <h3 className="font-serif text-xl text-[var(--cream)] group-hover:text-[var(--gold)]">{g.title}</h3>
+                    <p className="mt-2 text-base leading-relaxed text-white/75">{g.blurb}</p>
+                  </Link>
+                ))}
+              </div>
+            </section>
+          );
+        })}
+
+        {/* Series */}
+        <section className="mt-16 rounded-2xl border border-white/10 p-6 sm:p-8">
+          <p className="text-xs uppercase tracking-[0.18em] text-[var(--gold)]">The full series</p>
+          <h2 className="mt-2 font-serif text-2xl text-white">Rules &amp; Foundations of a Wealthy Mindset</h2>
+          <p className="mt-2 max-w-2xl text-white/70">
+            Ten principles, from classic wealth literature to modern behavioural finance, for readers who want them in order.
           </p>
-        </div>
+          <Link
+            href="/guides/rules-of-a-wealthy-mindset"
+            className="mt-5 inline-flex items-center justify-center rounded-xl border border-[var(--gold)] px-5 py-3 text-sm uppercase tracking-[0.12em] text-[var(--gold)] transition-colors hover:bg-[var(--gold)] hover:text-[#0B0D10]"
+          >
+            Read the series
+          </Link>
+        </section>
+
+        <p className="mt-10 text-sm text-white/70">
+          Want to know when new guides go up? Send a message via the{" "}
+          <Link href="/contact" className="text-[var(--gold)] underline underline-offset-2">
+            contact page
+          </Link>
+          .
+        </p>
       </div>
     </main>
   );

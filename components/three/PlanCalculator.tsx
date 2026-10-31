@@ -39,11 +39,11 @@ export default function PlanCalculator() {
   }, [r]);
 
   return (
-    <section className="border-y border-[rgba(242,239,230,.12)] bg-[#0a231a] py-14 md:py-24">
+    <section id="plan-calculator" className="scroll-mt-24 border-y border-[rgba(242,239,230,.12)] bg-[#0a231a] py-14 md:py-24">
       <div className="mx-auto grid w-full max-w-[1240px] items-center gap-10 px-5 md:px-8 lg:grid-cols-2 lg:gap-14">
         <div>
           <p className="mb-4 text-[.68rem] uppercase tracking-[.18em] text-[#c8a45c]">
-            Structure, made visible
+            Patience
           </p>
           <h2 className="max-w-[22ch] font-serif text-3xl font-light leading-[1.08] tracking-[-.015em] md:text-[2.6rem]">
             Forty years is not an abstraction.{' '}

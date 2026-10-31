@@ -17,8 +17,8 @@ const audience = [
     body: "Early in your career and want the foundations right before income and complexity grow.",
   },
   {
-    title: "High-income professionals",
-    body: "Earning well but unsure whether the strategy is optimal.",
+    title: "Established professionals",
+    body: "Earning well but unsure the plan is right for you.",
   },
   {
     title: "Business owners",
@@ -44,7 +44,7 @@ const processSteps = [
   {
     number: "03",
     title: "Structured plan",
-    body: "A written framework designed for resilience — not short-term performance theatre.",
+    body: "A written plan built to endure, not to chase this year’s returns.",
   },
   {
     number: "04",
@@ -94,7 +94,7 @@ export default function Home() {
             </p>
 
             <p className="mx-auto mb-10 max-w-2xl text-sm text-white/55 md:text-base">
-              Gert Fourie · Financial Advisor · Helping clients build structured, disciplined wealth strategies.
+              Gert Fourie · Financial Adviser · Helping you build a plan you&apos;ll actually keep.
             </p>
 
             <div className="flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-6">
@@ -184,7 +184,7 @@ export default function Home() {
               </p>
               <p>
                 My role is not to predict markets or chase trends. It is to help you build a plan you understand,
-                written down and reviewed, so major decisions stop feeling uncertain.
+                and to help you keep it when it&apos;s tested.
               </p>
             </div>
             <Link
@@ -204,7 +204,7 @@ export default function Home() {
         <div className="container mx-auto max-w-5xl">
           <h2 className="mb-4 text-center font-serif text-3xl text-[var(--gold)] md:text-5xl">Who this is designed for</h2>
           <p className="mx-auto mb-14 max-w-2xl text-center text-white/65">
-            Not for everyone. Best suited to people who value stewardship over noise.
+            For people who want a plan, not just products.
           </p>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
             {audience.map((item) => (
@@ -250,10 +250,10 @@ export default function Home() {
       <section className="border-t border-[var(--gold)]/10 bg-black/25 px-6 py-24 md:py-32">
         <div className="container mx-auto max-w-5xl">
           <h2 className="mb-4 text-center font-serif text-3xl text-[var(--gold)] md:text-5xl">
-            What most advisors won&apos;t emphasise
+            What keeping a plan really takes
           </h2>
           <p className="mx-auto mb-14 max-w-2xl text-center text-white/65">
-            Discipline over emotion. Structure over speculation. Not fantasy: reality builds trust.
+            The honest part of planning. Knowing it in advance is half of holding on.
           </p>
           <div className="grid gap-6 md:grid-cols-2">
             {truths.map((item) => (
@@ -270,9 +270,9 @@ export default function Home() {
       {/* CTA */}
       <section className="px-6 py-24 text-center md:py-32">
         <div className="container mx-auto max-w-3xl">
-          <h2 className="mb-6 font-serif text-3xl text-[var(--gold)] md:text-5xl">Ready to structure your future?</h2>
+          <h2 className="mb-6 font-serif text-3xl text-[var(--gold)] md:text-5xl">Ready to build something that lasts?</h2>
           <p className="mb-10 text-lg text-white/75">
-            If you value clarity over complexity and stewardship over speculation, let&apos;s speak.
+            If you want a plan that holds when life gets loud, let&apos;s talk.
           </p>
           <Link
             href="/contact"
