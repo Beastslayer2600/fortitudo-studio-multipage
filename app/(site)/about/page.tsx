@@ -18,7 +18,7 @@ const principles = [
     tag: "Firmness",
     title: "Firmness to hold",
     body: "Markets will fall, and staying the course will feel wrong at exactly the moment it matters. One written plan, and someone to call, stops a bad month from undoing a good plan.",
-    link: { href: "/guides/plan-on-paper", label: "A plan on paper beats a good intention" },
+    link: { href: "/guides/plan-on-paper", label: "Why a written plan holds" },
   },
   {
     tag: "Patience",
