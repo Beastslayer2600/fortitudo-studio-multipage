@@ -58,3 +58,8 @@ h1,h2,h3,h4{font-family: Georgia, "Times New Roman", Times, serif}
 .fs-range::-webkit-slider-thumb{ -webkit-appearance:none; appearance:none; width:20px; height:20px; margin-top:-9px; border-radius:50%; background:#c8a45c; border:2px solid #0b0d10; box-shadow:0 0 0 1px #c8a45c; }
 .fs-range::-moz-range-thumb{ width:18px; height:18px; border-radius:50%; background:#c8a45c; border:2px solid #0b0d10; }
 .fs-range:focus-visible{ outline:2px solid var(--gold); outline-offset:4px; border-radius:4px; }
+
+/* Monogram seal: the ring of text turns very slowly */
+.gfm-spin{ transform-box:view-box; transform-origin:200px 230px; animation:gfm-spin 120s linear infinite; }
+@keyframes gfm-spin{ to{ transform:rotate(360deg); } }
+@media (prefers-reduced-motion: reduce){ .gfm-spin{ animation:none; } }

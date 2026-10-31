@@ -5,6 +5,7 @@ import Link from "next/link";
 import HeroStructure from "@/components/three/HeroStructure";
 import CostOfWaiting from "@/components/three/CostOfWaiting";
 import PlanCalculator from "@/components/three/PlanCalculator";
+import Monogram from "@/components/Monogram";
 
 // Portrait for the "Meet Gert" section. Drop a professional head-and-shoulders
 // photo (portrait orientation, ~1000x1250, plain dark background) into /public
@@ -166,12 +167,7 @@ export default function Home() {
                 className="aspect-[4/5] w-full rounded-2xl border border-[var(--gold)]/25 object-cover"
               />
             ) : (
-              <div
-                aria-hidden="true"
-                className="flex aspect-[4/5] w-full items-center justify-center rounded-2xl border border-[var(--gold)]/25 bg-[#0d2a1f]"
-              >
-                <span className="font-serif text-7xl tracking-[0.08em] text-[var(--gold)]/80">GF</span>
-              </div>
+              <Monogram className="aspect-[4/5] w-full" />
             )}
           </div>
           <div>
