@@ -6,6 +6,7 @@ import HeroStructure from "@/components/three/HeroStructure";
 import CostOfWaiting from "@/components/three/CostOfWaiting";
 import PlanCalculator from "@/components/three/PlanCalculator";
 import Monogram from "@/components/Monogram";
+import JanuaryBand from "@/components/home/JanuaryBand";
 
 // Portrait for the "Meet Gert" section. Drop a professional head-and-shoulders
 // photo (portrait orientation, ~1000x1250, plain dark background) into /public
@@ -217,6 +218,8 @@ export default function Home() {
       </section>
 
       <CostOfWaiting />
+
+      <JanuaryBand />
 
       {/* Process */}
       <section className="px-6 py-24 md:py-32">

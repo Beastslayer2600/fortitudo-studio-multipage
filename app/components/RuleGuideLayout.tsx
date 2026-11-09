@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion'
 import Link from 'next/link'
+import GuideEndBlock from './GuideEndBlock'
 
 const fadeUp = {
   hidden: { opacity: 0, y: 28 },
@@ -194,49 +195,13 @@ export default function RuleGuideLayout({
       </section>
 
       {/* CTA */}
-      <section className="border-t border-zinc-800">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
-          className="max-w-3xl mx-auto px-6 py-24 text-center"
-        >
-          <p className="text-xs uppercase tracking-[0.25em] text-[#c9a84c] mb-6">Put it into practice</p>
-          <h3 className="text-3xl sm:text-4xl font-light text-white mb-4">
-            A mindset is the start.
-            <br />
-            A plan makes it real.
-          </h3>
-          <p className="text-zinc-500 mb-10 max-w-md mx-auto">
-            Free consultation. No pressure. Just a clear, honest conversation about where you are and
-            where you want to be.
-          </p>
-          <Link
-            href="/contact"
-            className="inline-block px-8 py-4 bg-[#c9a84c] text-[#0a0a0a] text-sm uppercase tracking-widest font-medium hover:bg-[#e0bc6a] transition-colors duration-300"
-          >
-            Book a Free Consultation
-          </Link>
-          <div className="mt-12 pt-12 border-t border-zinc-800 flex flex-col gap-3">
-            <p className="text-xs text-zinc-600 mb-1 uppercase tracking-widest">Continue the series</p>
-            <Link
-              href={hubHref}
-              className="text-zinc-400 hover:text-white transition-colors duration-200 text-sm"
-            >
-              {hubLabel} →
-            </Link>
-            {nextHref && (
-              <Link
-                href={nextHref}
-                className="text-zinc-400 hover:text-white transition-colors duration-200 text-sm"
-              >
-                {nextLabel} →
-              </Link>
-            )}
-          </div>
-        </motion.div>
-      </section>
+      <GuideEndBlock
+        linksLabel="Continue the series"
+        links={[
+          { href: hubHref, label: hubLabel },
+          ...(nextHref ? [{ href: nextHref, label: nextLabel ?? '' }] : []),
+        ]}
+      />
     </main>
   )
 }
