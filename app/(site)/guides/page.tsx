@@ -19,8 +19,27 @@ export default function Guides() {
           Guides for every stage of a plan: starting it, holding it, and letting it work.
         </p>
 
+        {/* Feature: the January test (not part of the Start here path) */}
+        <section className="mt-12 rounded-2xl border border-[rgba(242,239,230,.12)] bg-[#0a231a] p-6 sm:p-8 md:flex md:items-end md:justify-between md:gap-10">
+          <div>
+            <p className="text-[.68rem] uppercase tracking-[.18em] text-[#c8a45c]">Interactive · 90 seconds</p>
+            <h2 className="mt-3 max-w-[24ch] font-serif text-3xl font-light leading-[1.1] text-[var(--cream)] sm:text-4xl">
+              How much of January have you <i className="text-[#e6cf9c]">already spent?</i>
+            </h2>
+            <p className="mt-3 max-w-xl text-[#a9bcb0]">
+              Add up your pay-later and instalment purchases. See what is left of your next six paydays.
+            </p>
+          </div>
+          <Link
+            href="/guides/january-already-spent"
+            className="mt-6 inline-flex min-h-[48px] shrink-0 items-center justify-center rounded-xl bg-[var(--gold)] px-7 py-3 text-base font-medium text-[#0a231a] transition-colors hover:bg-white md:mt-0"
+          >
+            Run the test
+          </Link>
+        </section>
+
         {/* Start here */}
-        <section className="mt-12 rounded-2xl border border-[var(--gold)]/30 p-6 sm:p-8">
+        <section className="mt-8 rounded-2xl border border-[var(--gold)]/30 p-6 sm:p-8">
           <p className="text-xs uppercase tracking-[0.18em] text-[var(--gold)]">Start here</p>
           <h2 className="mt-2 font-serif text-2xl text-white sm:text-3xl">Early in your career?</h2>
           <p className="mt-2 text-white/70">Five guides, in the order I&apos;d read them.</p>

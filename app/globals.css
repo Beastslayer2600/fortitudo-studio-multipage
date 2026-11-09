@@ -63,3 +63,10 @@ h1,h2,h3,h4{font-family: Georgia, "Times New Roman", Times, serif}
 .gfm-spin{ transform-box:view-box; transform-origin:200px 230px; animation:gfm-spin 120s linear infinite; }
 @keyframes gfm-spin{ to{ transform:rotate(360deg); } }
 @media (prefers-reduced-motion: reduce){ .gfm-spin{ animation:none; } }
+
+/* January test: gold focus rings and the hatched "deal" ghost layer */
+.jan-tool :focus-visible{ outline:2px solid var(--gold); outline-offset:2px; }
+.jan-ghost{
+  background:repeating-linear-gradient(135deg, rgba(200,164,92,.55) 0 2px, transparent 2px 7px);
+  box-shadow:inset 0 0 0 1px rgba(200,164,92,.9);
+}

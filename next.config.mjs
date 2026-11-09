@@ -2,6 +2,12 @@ const nextConfig = {
   reactStrictMode: true,
   async redirects() {
     return [
+      // Short URL printed on the January slip
+      {
+        source: "/january",
+        destination: "/guides/january-already-spent",
+        permanent: false,
+      },
       {
         source: "/:path*",
         has: [{ type: "host", value: "fortitudostudios.site" }],

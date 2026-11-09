@@ -17,6 +17,7 @@ const guideSlugs = [
   "plan-on-paper",
   "review-beats-avoidance",
   "your-environment-shapes-you",
+  "january-already-spent",
 ];
 
 const insightSlugs = [
