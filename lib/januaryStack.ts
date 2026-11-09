@@ -36,7 +36,13 @@ export type Cycle = {
 
 export type StackResult = {
   paydays: Date[]; // 7 entries: six cycles plus the boundary payday
-  cycles: Cycle[]; // 6 entries
+  /**
+   * The current cycle: from tomorrow until the day before payday[0], funded by
+   * the pay the visitor already has. Null when today is itself a payday
+   * (there is no gap). Never the focus month.
+   */
+  current: Cycle | null;
+  cycles: Cycle[]; // 6 entries, one per upcoming payday
   focusIndex: number;
   focusLabel: string;
   /** Total due on or after the seventh payday ("plus R{x} after that"). */
@@ -171,6 +177,14 @@ export function schedule(row: Pick<Row, "price" | "instalments" | "interval" | "
   return out;
 }
 
+/**
+ * The first instalment dated today is treated as paid at checkout, so it is
+ * never counted against any payday.
+ */
+export function paidAtCheckout(inst: Instalment, today: Date): boolean {
+  return inst.k === 1 && inst.due.getTime() === today.getTime();
+}
+
 export function activeRows(rows: Row[]): Row[] {
   return rows.filter((r) => r.included && r.price > 0);
 }
@@ -179,16 +193,30 @@ export function activeRows(rows: Row[]): Row[] {
 // The stack
 // ---------------------------------------------------------------------------
 
-/** Spread instalments across the six pay cycles. Pure sum; no shares. */
-export function committedByCycle(rows: Row[], paydays: Date[], today: Date): { committed: number[]; after: number } {
+/**
+ * Spread instalments across the current cycle and the six pay cycles.
+ * Pure sums; no shares. Past instalments and the one paid at checkout are
+ * left out.
+ */
+export function committedByCycle(
+  rows: Row[],
+  paydays: Date[],
+  today: Date,
+): { current: number; committed: number[]; after: number } {
   const committed = new Array(CYCLE_COUNT).fill(0);
+  let current = 0;
   let after = 0;
+  const now = today.getTime();
   const first = paydays[0].getTime();
   const boundary = paydays[CYCLE_COUNT].getTime();
   for (const row of rows) {
     for (const inst of schedule(row, today)) {
       const t = inst.due.getTime();
-      if (t < first) continue; // already paid from the current pay
+      if (t < now || paidAtCheckout(inst, today)) continue;
+      if (t < first) {
+        current += inst.amount; // paid from the pay the visitor already has
+        continue;
+      }
       if (t >= boundary) {
         after += inst.amount;
         continue;
@@ -201,7 +229,7 @@ export function committedByCycle(rows: Row[], paydays: Date[], today: Date): { c
       }
     }
   }
-  return { committed, after };
+  return { current, committed, after };
 }
 
 export function computeStack(input: {
@@ -211,8 +239,19 @@ export function computeStack(input: {
   today: Date;
 }): StackResult {
   const paydays = buildPaydays(input.today, input.payday);
-  const { committed, after } = committedByCycle(activeRows(input.rows), paydays, input.today);
+  const { current: currentSum, committed, after } = committedByCycle(activeRows(input.rows), paydays, input.today);
   const takeHome = input.takeHome > 0 ? input.takeHome : 0;
+  const p0 = paydays[0];
+  const current: Cycle | null =
+    p0.getTime() === input.today.getTime()
+      ? null
+      : {
+          label: `Before ${p0.getUTCDate()} ${SHORT_MONTHS[p0.getUTCMonth()]}`,
+          fullLabel: `Before ${p0.getUTCDate()} ${LONG_MONTHS[p0.getUTCMonth()]}`,
+          payday: input.today,
+          committed: currentSum,
+          share: takeHome > 0 ? currentSum / takeHome : 0,
+        };
   const cycles: Cycle[] = paydays.slice(0, CYCLE_COUNT).map((p, i) => ({
     label: SHORT_MONTHS[p.getUTCMonth()],
     fullLabel: LONG_MONTHS[p.getUTCMonth()],
@@ -229,19 +268,20 @@ export function computeStack(input: {
     });
   }
 
-  return { paydays, cycles, focusIndex, focusLabel: cycles[focusIndex].fullLabel, after };
+  return { paydays, current, cycles, focusIndex, focusLabel: cycles[focusIndex].fullLabel, after };
 }
 
-/** Extra share per cycle from a not-yet-bought deal (the ghost layer). */
+/** Extra share per cycle from a not-yet-bought deal (the ghost layer), including the current cycle. */
 export function dealShares(
   deal: { price: number; instalments: number; interval: Interval; firstPayment: string },
   paydays: Date[],
   today: Date,
   takeHome: number,
-): number[] {
+): { current: number; cycles: number[] } {
   const row: Row = { id: "deal", item: "", included: true, ...deal };
-  const { committed } = committedByCycle([row], paydays, today);
-  return committed.map((c) => (takeHome > 0 ? c / takeHome : 0));
+  const { current, committed } = committedByCycle([row], paydays, today);
+  const share = (c: number) => (takeHome > 0 ? c / takeHome : 0);
+  return { current: share(current), cycles: committed.map(share) };
 }
 
 // ---------------------------------------------------------------------------
@@ -264,12 +304,21 @@ export function crossesTier(before: number, after: number): boolean {
   return tierFor(before) !== tierFor(after);
 }
 
-/** Latest future due date across the given rows, or null. */
+/**
+ * Heaviest bar across the current cycle and the six paydays. Returns the
+ * cycle itself so the label can be shown as-is.
+ */
+export function heaviestCycle(stack: StackResult): Cycle {
+  const all = stack.current ? [stack.current, ...stack.cycles] : stack.cycles;
+  return all.reduce((m, c) => (c.share > m.share ? c : m), all[0]);
+}
+
+/** Latest future due date across the given rows, or null. Ignores the instalment paid at checkout. */
 export function lastDueDate(rows: Row[], today: Date): Date | null {
   let last: Date | null = null;
   for (const row of activeRows(rows)) {
     for (const inst of schedule(row, today)) {
-      if (inst.due.getTime() < today.getTime()) continue;
+      if (inst.due.getTime() < today.getTime() || paidAtCheckout(inst, today)) continue;
       if (!last || inst.due.getTime() > last.getTime()) last = inst.due;
     }
   }
@@ -368,7 +417,7 @@ export function buildIcs(rows: Row[], today: Date, now: Date = new Date()): { ic
   for (const row of activeRows(rows)) {
     const name = row.item.trim() || "Purchase";
     for (const inst of schedule(row, today)) {
-      if (inst.due.getTime() < today.getTime()) continue;
+      if (inst.due.getTime() < today.getTime() || paidAtCheckout(inst, today)) continue;
       events += 1;
       lines.push(
         "BEGIN:VEVENT",

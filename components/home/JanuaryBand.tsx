@@ -36,13 +36,11 @@ export default function JanuaryBand() {
   const days = today ? daysBetween(today, JANUARY_PAYDAY) : null;
 
   return (
-    <section
-      aria-label="The January test"
-      className="border-y border-[rgba(242,239,230,.12)] bg-[#0a231a] px-6 py-10 md:py-12"
-    >
-      <div className="mx-auto flex w-full max-w-[1240px] flex-col gap-6 md:flex-row md:items-center md:justify-between md:gap-10 md:px-2">
+    // Same container and gutters as the Courage block above it (max-w-[1240px], px-5 md:px-8).
+    <section aria-label="The January test" className="border-y border-[rgba(242,239,230,.12)] bg-[#0a231a] py-10 md:py-14">
+      <div className="mx-auto flex w-full max-w-[1240px] flex-col gap-8 px-5 md:flex-row md:items-center md:justify-between md:gap-14 md:px-8">
         <div>
-          <p className="max-w-[40ch] font-serif text-2xl font-light leading-[1.15] tracking-[-.01em] md:text-[2rem]">
+          <p className="max-w-[40ch] font-serif text-2xl font-light leading-[1.15] tracking-[-.01em] md:text-[2.1rem]">
             Black November is here. <i className="text-[#e6cf9c]">How much of January have you already spent?</i>
           </p>
           <Link
@@ -52,9 +50,20 @@ export default function JanuaryBand() {
             Run the ninety-second test →
           </Link>
         </div>
-        <p className="min-h-[1.25rem] shrink-0 text-[.72rem] uppercase tracking-[.18em] text-[#c8a45c] tabular-nums" aria-live="off">
-          {days === null ? '' : days > 0 ? `${days} ${days === 1 ? 'DAY' : 'DAYS'} TO JANUARY PAYDAY` : 'JANUARY PAYDAY IS HERE'}
-        </p>
+        {/* Reserves its height before mount so nothing shifts when the number arrives. */}
+        <div className="min-h-[4.25rem] shrink-0 md:text-right" aria-live="off">
+          {days !== null &&
+            (days > 0 ? (
+              <>
+                <p className="font-serif text-4xl font-light leading-none tabular-nums text-[#e6cf9c] md:text-[2.8rem]">{days}</p>
+                <p className="mt-2 text-[.66rem] uppercase tracking-[.16em] text-[#8aa094]">
+                  {days === 1 ? 'DAY' : 'DAYS'} TO JANUARY PAYDAY
+                </p>
+              </>
+            ) : (
+              <p className="font-serif text-3xl font-light leading-tight text-[#e6cf9c] md:text-[2.2rem]">January payday is here.</p>
+            ))}
+        </div>
       </div>
     </section>
   );

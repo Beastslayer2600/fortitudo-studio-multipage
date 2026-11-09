@@ -36,7 +36,7 @@ export default function GuideEndBlock({ linksLabel, links = [], hideJanuaryLink 
         </h3>
 
         {!hideJanuaryLink && (
-          <div className="mb-12">
+          <div className="mb-14">
             <p className="text-zinc-400 mb-8 max-w-md mx-auto">
               Most people finish a guide and do nothing, because there is no obvious next step.
             </p>
@@ -49,20 +49,23 @@ export default function GuideEndBlock({ linksLabel, links = [], hideJanuaryLink 
           </div>
         )}
 
-        <p className="text-zinc-500 mb-10 max-w-md mx-auto">
-          Free consultation. No pressure. Just a clear, honest conversation about where you are and
-          where you want to be.
-        </p>
-        <Link
-          href="/contact"
-          className={
-            hideJanuaryLink
-              ? 'inline-block px-8 py-4 bg-[#c9a84c] text-[#0a0a0a] text-sm uppercase tracking-widest font-medium hover:bg-[#e0bc6a] transition-colors duration-300'
-              : 'inline-block px-8 py-4 border border-[#c9a84c] text-[#c9a84c] text-sm uppercase tracking-widest font-medium hover:bg-[#c9a84c]/10 transition-colors duration-300'
-          }
-        >
-          Book a Free Consultation
-        </Link>
+        {/* The consultation line sits directly on its own button, so it can't be read as describing the test. */}
+        <div className={hideJanuaryLink ? '' : 'pt-12 border-t border-zinc-800/70 max-w-md mx-auto'}>
+          <p className={`text-zinc-500 max-w-md mx-auto ${hideJanuaryLink ? 'mb-10' : 'mb-5'}`}>
+            Free consultation. No pressure. Just a clear, honest conversation about where you are and
+            where you want to be.
+          </p>
+          <Link
+            href="/contact"
+            className={
+              hideJanuaryLink
+                ? 'inline-block px-8 py-4 bg-[#c9a84c] text-[#0a0a0a] text-sm uppercase tracking-widest font-medium hover:bg-[#e0bc6a] transition-colors duration-300'
+                : 'inline-block px-8 py-4 border border-[#c9a84c] text-[#c9a84c] text-sm uppercase tracking-widest font-medium hover:bg-[#c9a84c]/10 transition-colors duration-300'
+            }
+          >
+            Book a Free Consultation
+          </Link>
+        </div>
 
         {links.length > 0 && (
           <div className="mt-12 pt-12 border-t border-zinc-800 flex flex-col gap-3">

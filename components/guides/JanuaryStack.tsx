@@ -15,6 +15,7 @@ import {
   formatLongDate,
   formatMonthYear,
   groupDigits,
+  heaviestCycle,
   hoursOfWork,
   lastDueDate,
   parseRands,
@@ -25,6 +26,7 @@ import {
   tierFor,
   toISODate,
   todayDate,
+  type Cycle,
   type Interval,
   type PaydayChoice,
   type Row,
@@ -117,7 +119,12 @@ export const RESULT_COPY = {
       body: () => 'Instalments come off the top. Everything else has to fit around what is left.',
     },
   } as Record<Tier, { title: (focus: string) => string; body: (focus: string) => string }>,
-  tierNames: { manageable: 'manageable', crowded: 'crowded', spoken: 'spoken for' } as Record<Tier, string>,
+  // Used in the deal line: "That moves you from Manageable to Crowded."
+  tierNames: {
+    manageable: () => 'Manageable',
+    crowded: () => 'Crowded',
+    spoken: (f: string) => `${f} is already spoken for`,
+  } as Record<Tier, (focus: string) => string>,
   whatIf: {
     one: (name: string, focus: string, from: number, to: number) =>
       `Without ${name}: ${focus} drops from ${from}% to ${to}%.`,
@@ -234,9 +241,9 @@ export default function JanuaryStack() {
     const ghost =
       deal.price > 0
         ? dealShares({ ...deal, firstPayment: '' }, stack.paydays, today, takeHome)
-        : new Array(stack.cycles.length).fill(0);
+        : { current: 0, cycles: new Array(stack.cycles.length).fill(0) };
+    const withDeal = share + ghost.cycles[stack.focusIndex];
     const last = lastDueDate(rows, today);
-    const heaviest = stack.cycles.reduce((m, c, i) => (c.share > stack.cycles[m].share ? i : m), 0);
     return {
       stack,
       focus,
@@ -245,11 +252,12 @@ export default function JanuaryStack() {
       tier,
       oldPct: pct(allOn.cycles[stack.focusIndex].share),
       ghost,
-      withDealPct: pct(share + ghost[stack.focusIndex]),
-      dealCrosses: deal.price > 0 && crossesTier(share, share + ghost[stack.focusIndex]),
+      withDeal,
+      withDealPct: pct(withDeal),
+      dealCrosses: deal.price > 0 && crossesTier(share, withDeal),
       last,
       paydaysToClear: paydaysUntilClear(today, payday, last),
-      heaviest,
+      heaviest: heaviestCycle(stack),
       running: activeRows(rows).length,
     };
   }, [today, takeHome, payday, rows, deal]);
@@ -387,9 +395,15 @@ export default function JanuaryStack() {
       aria-label="The January test"
       className="jan-tool scroll-mt-24 border-y border-[rgba(242,239,230,.12)] bg-[#0a231a] py-12 text-[var(--cream)] md:py-20"
     >
-      <div className="mx-auto grid w-full max-w-[1240px] items-start gap-10 px-4 sm:px-5 md:px-8 lg:grid-cols-2 lg:gap-14">
+      {/*
+        Three grid children. Desktop: inputs and the deal card stack in the
+        left column, the stack and result span both rows on the right.
+        Below lg they fall in source order, so the deal card comes after the
+        result and nobody scrolls past it to reach their number.
+      */}
+      <div className="mx-auto grid w-full max-w-[1240px] items-start gap-10 px-4 sm:px-5 md:px-8 lg:grid-cols-2 lg:gap-x-14 lg:gap-y-8">
         {/* ------------------------------------------------ inputs */}
-        <div className="min-w-0">
+        <div className="min-w-0 lg:col-start-1 lg:row-start-1">
           <MoneyInput
             id="jan-takehome"
             label={C.inputs.takeHomeLabel}
@@ -462,27 +476,18 @@ export default function JanuaryStack() {
             </div>
           </fieldset>
 
-          <DealCard
-            deal={deal}
-            takeHome={takeHome}
-            canAdd={rows.length < MAX_ROWS || rows.some(isBlank)}
-            onChange={(patch) => {
-              started();
-              setDeal((d) => ({ ...d, ...patch }));
-            }}
-            onAdd={addDealToList}
-            onClear={() => setDeal(EMPTY_DEAL)}
-          />
         </div>
 
         {/* ------------------------------------------------ stack + result */}
-        <div className="min-w-0 lg:sticky lg:top-24">
+        <div className="min-w-0 lg:sticky lg:top-24 lg:col-start-2 lg:row-span-2 lg:row-start-1">
           <p className="mb-4 text-[.68rem] uppercase tracking-[.18em] text-[#c8a45c]">{C.stack.label}</p>
 
           {calc && hasResult ? (
             <Stack calc={calc} reduce={!!reduce} />
           ) : (
-            <EmptyStack labels={calc?.stack.cycles.map((c) => c.label)} />
+            <EmptyStack
+              labels={calc ? [...(calc.stack.current ? [calc.stack.current.label] : []), ...calc.stack.cycles.map((c) => c.label)] : undefined}
+            />
           )}
 
           {calc && hasResult && deal.price > 0 && (
@@ -493,56 +498,38 @@ export default function JanuaryStack() {
           )}
 
           {calc && hasResult && (
-            <>
-              {/* 2.4 Free-on date */}
-              <div className="mt-7 border-t border-[rgba(242,239,230,.12)] pt-5">
-                {calc.last ? (
-                  <>
-                    <p className="font-serif text-2xl font-light leading-snug">
-                      {C.stack.clearsOn} <i className="text-[#e6cf9c]">{formatLongDate(calc.last)}.</i>
-                    </p>
-                    <p className="mt-1 text-[.86rem] text-[#8aa094]">
-                      {calc.paydaysToClear > 0
-                        ? C.stack.paydaysUntilClear(calc.paydaysToClear)
-                        : C.stack.clearBeforePayday}
-                    </p>
-                  </>
-                ) : (
-                  <p className="font-serif text-2xl font-light leading-snug">{C.stack.nothingToClear}</p>
-                )}
-              </div>
-
-              <div className="mt-4 flex flex-col items-start gap-1">
-                {calc.last && (
-                  <button
-                    type="button"
-                    onClick={downloadCalendar}
-                    className="min-h-[44px] text-sm text-[#e6cf9c] underline decoration-[#c8a45c]/50 underline-offset-4 hover:text-white"
-                  >
-                    {C.stack.calendar}
-                  </button>
-                )}
-                <p className="text-[.78rem] leading-relaxed text-[#8a9c91]">{C.stack.hoursNote}</p>
-                <p className="text-[.78rem] leading-relaxed text-[#8a9c91]">{C.stack.privacy}</p>
-              </div>
-
-              <Result
-                calc={calc}
-                focusLabel={focusLabel}
-                offRows={offRows}
-                dealActive={deal.price > 0}
-                whatsappHref={whatsappHref}
-                includePct={includePct}
-                setIncludePct={setIncludePct}
-                copied={copied}
-                onWhatsApp={() => send('jan_whatsapp_click', { tier: calc.tier, rows: rowBucket(calc.running) })}
-                onShare={shareResult}
-                onSlip={saveSlip}
-              />
-            </>
+            <Result
+              calc={calc}
+              focusLabel={focusLabel}
+              offRows={offRows}
+              dealActive={deal.price > 0}
+              whatsappHref={whatsappHref}
+              includePct={includePct}
+              setIncludePct={setIncludePct}
+              copied={copied}
+              onWhatsApp={() => send('jan_whatsapp_click', { tier: calc.tier, rows: rowBucket(calc.running) })}
+              onShare={shareResult}
+              onSlip={saveSlip}
+              onCalendar={downloadCalendar}
+            />
           )}
 
           {!(calc && hasResult) && <p className="mt-4 text-[.78rem] leading-relaxed text-[#8a9c91]">{C.stack.privacy}</p>}
+        </div>
+
+        {/* ------------------------------------------------ deal card */}
+        <div className="min-w-0 lg:col-start-1 lg:row-start-2">
+          <DealCard
+          deal={deal}
+          takeHome={takeHome}
+          canAdd={rows.length < MAX_ROWS || rows.some(isBlank)}
+          onChange={(patch) => {
+            started();
+            setDeal((d) => ({ ...d, ...patch }));
+          }}
+          onAdd={addDealToList}
+          onClear={() => setDeal(EMPTY_DEAL)}
+          />
         </div>
       </div>
     </section>
@@ -560,30 +547,55 @@ type Calc = {
   sharePct: number;
   tier: Tier;
   oldPct: number;
-  ghost: number[];
+  ghost: { current: number; cycles: number[] };
+  withDeal: number;
   withDealPct: number;
   dealCrosses: boolean;
   last: Date | null;
   paydaysToClear: number;
-  heaviest: number;
+  heaviest: Cycle;
   running: number;
 };
 
+// Label column: two short lines for the "Before 25 Nov" bar, month names otherwise.
+const LABEL_COLS = 'grid grid-cols-[3.25rem_1fr_3.75rem] items-center gap-3';
+
+function StackLabel({ text, className }: { text: string; className: string }) {
+  const [first, ...rest] = text.split(' ');
+  return rest.length ? (
+    <span className={`text-[.72rem] leading-tight ${className}`}>
+      {first}
+      <br />
+      {rest.join(' ')}
+    </span>
+  ) : (
+    <span className={`text-sm ${className}`}>{text}</span>
+  );
+}
+
 function Stack({ calc, reduce }: { calc: Calc; reduce: boolean }) {
-  const { cycles, focusIndex } = calc.stack;
+  const { current, cycles, focusIndex } = calc.stack;
+  type Bar = { c: Cycle; ghost: number; isFocus: boolean; isCurrent: boolean };
+  const bars: Bar[] = [
+    ...(current ? [{ c: current, ghost: calc.ghost.current, isFocus: false, isCurrent: true }] : []),
+    ...cycles.map((c, i) => ({ c, ghost: calc.ghost.cycles[i], isFocus: i === focusIndex, isCurrent: false })),
+  ];
   const aria =
-    RESULT_COPY.stack.ariaPrefix + cycles.map((c) => `${c.fullLabel} ${pct(c.share)} percent`).join(', ') + '.';
+    RESULT_COPY.stack.ariaPrefix + bars.map(({ c }) => `${c.fullLabel} ${pct(c.share)} percent`).join(', ') + '.';
 
   return (
     <div role="img" aria-label={aria} className="grid gap-2.5">
-      {cycles.map((c, i) => {
-        const isFocus = i === focusIndex;
+      {bars.map(({ c, ghost: ghostShare, isFocus, isCurrent }, i) => {
         const fill = Math.min(1, c.share);
-        const ghost = Math.max(0, Math.min(calc.ghost[i], 1 - fill));
+        const ghost = Math.max(0, Math.min(ghostShare, 1 - fill));
         const over = c.share > 1;
         return (
-          <div key={c.payday.getTime()} className="grid grid-cols-[2.75rem_1fr_3.75rem] items-center gap-3" aria-hidden="true">
-            <span className={`text-sm ${isFocus ? 'font-medium text-[#e6cf9c]' : 'text-[#a9bcb0]'}`}>{c.label}</span>
+          <div
+            key={isCurrent ? 'current' : c.payday.getTime()}
+            className={`${LABEL_COLS} ${isCurrent ? 'mb-1.5 border-b border-dashed border-[#8aa094]/25 pb-3' : ''}`}
+            aria-hidden="true"
+          >
+            <StackLabel text={c.label} className={isFocus ? 'font-medium text-[#e6cf9c]' : 'text-[#a9bcb0]'} />
             <div
               className={`relative overflow-hidden rounded-[3px] border ${
                 isFocus ? 'h-11 border-[#c8a45c]' : 'h-7 border-[#8aa094]/35'
@@ -629,8 +641,8 @@ function EmptyStack({ labels }: { labels?: string[] }) {
     <div>
       <div className="grid gap-2.5" aria-hidden="true">
         {list.map((l, i) => (
-          <div key={i} className="grid grid-cols-[2.75rem_1fr_3.75rem] items-center gap-3">
-            <span className="text-sm text-[#a9bcb0]/70">{l}</span>
+          <div key={i} className={LABEL_COLS}>
+            <StackLabel text={l} className="text-[#a9bcb0]/70" />
             <div className="h-7 rounded-[3px] border border-[#8aa094]/25" />
             <span className="text-right font-serif text-base text-[#8aa094]/50">—</span>
           </div>
@@ -653,6 +665,7 @@ function Result({
   onWhatsApp,
   onShare,
   onSlip,
+  onCalendar,
 }: {
   calc: Calc;
   focusLabel: string;
@@ -665,66 +678,81 @@ function Result({
   onWhatsApp: () => void;
   onShare: () => void;
   onSlip: () => void;
+  onCalendar: () => void;
 }) {
   const C = RESULT_COPY;
   const committed = calc.focus.committed;
   const tier = C.tiers[calc.tier];
-  const heaviest = calc.stack.cycles[calc.heaviest];
   const checkboxId = useId();
 
+  // Order: headline, tier, deal, without, clears-on, stats, WhatsApp,
+  // slip/share, calendar, small print, email.
   return (
     <div className="mt-8 border-t border-[rgba(242,239,230,.12)] pt-7">
-      {/* 3.1 Headline */}
       <div aria-live="polite">
-      <h2 className="font-serif text-3xl font-light leading-[1.1] tracking-[-.015em] md:text-[2.4rem]">
-        {Math.round(committed) > 0 ? (
-          <>
-            {C.headline.gone(rands(committed), focusLabel)} <i className="text-[#e6cf9c]">{C.headline.goneGold}</i>
-          </>
-        ) : (
-          <>
-            {C.headline.nothing(focusLabel)} <i className="text-[#e6cf9c]">{C.headline.nothingGold}</i>
-          </>
-        )}
-      </h2>
-
-      {/* 2.5 what-if */}
-      {offRows.length > 0 && (
-        <p className="mt-3 text-[.92rem] text-[#e6cf9c]">
-          {calc.oldPct === calc.sharePct
-            ? C.whatIf.same(focusLabel, calc.sharePct)
-            : offRows.length === 1
-            ? C.whatIf.one(offRows[0].item.trim() || C.whatIf.fallbackName, focusLabel, calc.oldPct, calc.sharePct)
-            : C.whatIf.many(offRows.length, focusLabel, calc.oldPct, calc.sharePct)}
-        </p>
-      )}
-
-      {/* 2.6 deal */}
-      {dealActive && (
-        <p className="mt-3 text-[.92rem] text-[#e6cf9c]">
-          {C.deal.withDeal(focusLabel, calc.sharePct, calc.withDealPct)}
-          {calc.dealCrosses && (
+        {/* 3.1 Headline */}
+        <h2 className="font-serif text-3xl font-light leading-[1.1] tracking-[-.015em] md:text-[2.4rem]">
+          {Math.round(committed) > 0 ? (
             <>
-              {' '}
-              {C.deal.crossing(
-                C.tierNames[calc.tier],
-                C.tierNames[tierFor(calc.share + calc.ghost[calc.stack.focusIndex])],
-              )}
+              {C.headline.gone(rands(committed), focusLabel)} <i className="text-[#e6cf9c]">{C.headline.goneGold}</i>
+            </>
+          ) : (
+            <>
+              {C.headline.nothing(focusLabel)} <i className="text-[#e6cf9c]">{C.headline.nothingGold}</i>
             </>
           )}
-        </p>
-      )}
+        </h2>
 
-      {/* 3.2 Tier */}
-      <p className="mt-4 text-[1rem] leading-relaxed text-[#a9bcb0]">
-        <strong className="font-medium text-[var(--cream)]">{tier.title(focusLabel)}</strong> {tier.body(focusLabel)}
-      </p>
+        {/* 3.2 Tier */}
+        <p className="mt-4 text-[1rem] leading-relaxed text-[#a9bcb0]">
+          <strong className="font-medium text-[var(--cream)]">{tier.title(focusLabel)}</strong> {tier.body(focusLabel)}
+        </p>
+
+        {/* 2.6 Deal */}
+        {dealActive && (
+          <p className="mt-3 text-[.92rem] text-[#e6cf9c]">
+            {C.deal.withDeal(focusLabel, calc.sharePct, calc.withDealPct)}
+            {calc.dealCrosses && (
+              <>
+                {' '}
+                {C.deal.crossing(C.tierNames[calc.tier](focusLabel), C.tierNames[tierFor(calc.withDeal)](focusLabel))}
+              </>
+            )}
+          </p>
+        )}
+
+        {/* 2.5 Without */}
+        {offRows.length > 0 && (
+          <p className="mt-3 text-[.92rem] text-[#e6cf9c]">
+            {calc.oldPct === calc.sharePct
+              ? C.whatIf.same(focusLabel, calc.sharePct)
+              : offRows.length === 1
+              ? C.whatIf.one(offRows[0].item.trim() || C.whatIf.fallbackName, focusLabel, calc.oldPct, calc.sharePct)
+              : C.whatIf.many(offRows.length, focusLabel, calc.oldPct, calc.sharePct)}
+          </p>
+        )}
+      </div>
+
+      {/* 2.4 Clears on */}
+      <div className="mt-6">
+        {calc.last ? (
+          <>
+            <p className="font-serif text-xl font-light leading-snug md:text-2xl">
+              {C.stack.clearsOn} <i className="text-[#e6cf9c]">{formatLongDate(calc.last)}.</i>
+            </p>
+            <p className="mt-1 text-[.86rem] text-[#8aa094]">
+              {calc.paydaysToClear > 0 ? C.stack.paydaysUntilClear(calc.paydaysToClear) : C.stack.clearBeforePayday}
+            </p>
+          </>
+        ) : (
+          <p className="font-serif text-xl font-light leading-snug md:text-2xl">{C.stack.nothingToClear}</p>
+        )}
       </div>
 
       {/* 3.3 Stats */}
       <dl className="mt-6 grid grid-cols-2 gap-x-4 gap-y-5 sm:grid-cols-3">
         <Stat label={C.stats.running} value={String(calc.running)} />
-        <Stat label={C.stats.heaviest} value={`${heaviest.label} ${pct(heaviest.share)}%`} />
+        <Stat label={C.stats.heaviest} value={`${calc.heaviest.label} ${pct(calc.heaviest.share)}%`} />
         {Math.round(calc.stack.after) > 0 && <Stat label={C.stats.owedAfter} value={rands(calc.stack.after)} />}
       </dl>
 
@@ -742,7 +770,7 @@ function Result({
         <p className="mt-2 text-[.8rem] text-[#8aa094]">{C.whatsapp.note}</p>
       </div>
 
-      {/* 3.6 + 3.7 */}
+      {/* 3.7 Slip + 3.6 Share */}
       <div className="mt-7 border-t border-[rgba(242,239,230,.12)] pt-6">
         <label htmlFor={checkboxId} className="inline-flex min-h-[44px] cursor-pointer items-center gap-3 text-sm text-[#a9bcb0]">
           <input
@@ -775,8 +803,25 @@ function Result({
         </div>
       </div>
 
+      {/* 2.8 Calendar */}
+      {calc.last && (
+        <button
+          type="button"
+          onClick={onCalendar}
+          className="mt-4 min-h-[44px] text-sm text-[#e6cf9c] underline decoration-[#c8a45c]/50 underline-offset-4 hover:text-white"
+        >
+          {C.stack.calendar}
+        </button>
+      )}
+
+      {/* Small print */}
+      <div className="mt-4 space-y-1">
+        <p className="text-[.78rem] leading-relaxed text-[#8a9c91]">{C.stack.hoursNote}</p>
+        <p className="text-[.78rem] leading-relaxed text-[#8a9c91]">{C.stack.privacy}</p>
+      </div>
+
       {/* 3.8 Tertiary */}
-      <p className="mt-6 text-[.85rem] text-[#8aa094]">
+      <p className="mt-5 text-[.85rem] text-[#8aa094]">
         {C.email.lead}{' '}
         <Link href="/contact" className="text-[#e6cf9c] underline underline-offset-4 hover:text-white">
           {C.email.link}
@@ -926,7 +971,7 @@ function DealCard({
   const C = RESULT_COPY.deal;
   const hours = hoursOfWork(deal.price, takeHome);
   return (
-    <div className="mt-8 rounded-md border border-dashed border-[#c8a45c]/70 p-4 sm:p-5">
+    <div className="rounded-md border border-dashed border-[#c8a45c]/70 p-4 sm:p-5">
       <p className="text-[.68rem] uppercase tracking-[.18em] text-[#c8a45c]">{C.label}</p>
       <p className="mt-1 text-[.88rem] text-[#a9bcb0]">{C.helper}</p>
       <div className="mt-4">
