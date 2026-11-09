@@ -36,9 +36,10 @@ export default function JanuaryBand() {
   const days = today ? daysBetween(today, JANUARY_PAYDAY) : null;
 
   return (
-    // Same container and gutters as the Courage block above it (max-w-[1240px], px-5 md:px-8).
+    // Full-bleed green; content in the same `.container` as the site header,
+    // so the text lines up with the logo and the countdown with "Book session".
     <section aria-label="The January test" className="border-y border-[rgba(242,239,230,.12)] bg-[#0a231a] py-10 md:py-14">
-      <div className="mx-auto flex w-full max-w-[1240px] flex-col gap-8 px-5 md:flex-row md:items-center md:justify-between md:gap-14 md:px-8">
+      <div className="container flex flex-col gap-8 md:flex-row md:items-center md:justify-between md:gap-14">
         <div>
           <p className="max-w-[40ch] font-serif text-2xl font-light leading-[1.15] tracking-[-.01em] md:text-[2.1rem]">
             Black November is here. <i className="text-[#e6cf9c]">How much of January have you already spent?</i>
