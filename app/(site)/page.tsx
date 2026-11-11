@@ -11,7 +11,7 @@ import JanuaryBand from "@/components/home/JanuaryBand";
 // Portrait for the "Meet Gert" section. Drop a professional head-and-shoulders
 // photo (portrait orientation, ~1000x1250, plain dark background) into /public
 // and set this to its path, e.g. "/portrait.jpg". While null, a monogram shows.
-const PORTRAIT: string | null = null;
+const PORTRAIT: string | null = "/gert-portrait.jpg";
 
 const audience: { title: string; body: string; link?: { href: string; label: string } }[] = [
   {
@@ -164,9 +164,9 @@ export default function Home() {
               <Image
                 src={PORTRAIT}
                 alt="Gert Fourie, financial adviser"
-                width={800}
-                height={1000}
-                className="aspect-[4/5] w-full rounded-2xl border border-[var(--gold)]/25 object-cover"
+                width={1008}
+                height={1024}
+                className="aspect-[4/5] w-full rounded-2xl border border-[var(--gold)]/25 object-cover object-top"
               />
             ) : (
               <Monogram className="aspect-[4/5] w-full" />

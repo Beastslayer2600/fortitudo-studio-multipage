@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 
 export const metadata: Metadata = {
@@ -76,7 +77,15 @@ export default function About() {
 
         {/* Gert */}
         <section className="px-6 py-20 md:py-28">
-          <div className="container mx-auto max-w-3xl">
+          <div className="container mx-auto grid max-w-5xl items-center gap-12 md:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]">
+            <Image
+              src="/gert-full.jpg"
+              alt="Gert Fourie, financial adviser"
+              width={968}
+              height={1625}
+              className="mx-auto w-full max-w-xs rounded-2xl border border-[var(--gold)]/25 md:max-w-none"
+            />
+            <div>
             <h2 className="font-serif text-4xl text-[var(--cream)] md:text-5xl">Gert Fourie</h2>
             <p className="mt-3 text-sm uppercase tracking-[0.14em] text-[var(--gold)]">
               Representative of Liberty Group Limited · FSP 2409 · Pretoria
@@ -91,6 +100,7 @@ export default function About() {
                 I&apos;m not here to predict markets or sell the product of the month. I&apos;m here to help you write a
                 plan down, understand it, and keep it when it&apos;s tested.
               </p>
+            </div>
             </div>
           </div>
         </section>
