@@ -13,12 +13,18 @@ type Props = {
   links?: GuideEndLink[]
   /** Hide the January test step (used on the January page itself). */
   hideJanuaryLink?: boolean
+  /**
+   * Optional primary step shown above the consultation (e.g. the January
+   * page's WhatsApp button). When set, the consultation becomes secondary.
+   */
+  primaryAction?: React.ReactNode
 }
 
 // The shared "Put it into practice" block at the end of every guide.
 // A low-commitment first step (the January test) sits above the
 // consultation, which stays as the secondary action.
-export default function GuideEndBlock({ linksLabel, links = [], hideJanuaryLink = false }: Props) {
+export default function GuideEndBlock({ linksLabel, links = [], hideJanuaryLink = false, primaryAction }: Props) {
+  const consultPrimary = hideJanuaryLink && !primaryAction
   return (
     <section className="border-t border-zinc-800">
       <motion.div
@@ -49,16 +55,18 @@ export default function GuideEndBlock({ linksLabel, links = [], hideJanuaryLink 
           </div>
         )}
 
+        {primaryAction && <div className="mb-14">{primaryAction}</div>}
+
         {/* The consultation line sits directly on its own button, so it can't be read as describing the test. */}
-        <div className={hideJanuaryLink ? '' : 'pt-12 border-t border-zinc-800/70 max-w-md mx-auto'}>
-          <p className={`text-zinc-500 max-w-md mx-auto ${hideJanuaryLink ? 'mb-10' : 'mb-5'}`}>
+        <div className={consultPrimary ? '' : 'pt-12 border-t border-zinc-800/70 max-w-md mx-auto'}>
+          <p className={`text-zinc-500 max-w-md mx-auto ${consultPrimary ? 'mb-10' : 'mb-5'}`}>
             Free consultation. No pressure. Just a clear, honest conversation about where you are and
             where you want to be.
           </p>
           <Link
             href="/contact"
             className={
-              hideJanuaryLink
+              consultPrimary
                 ? 'inline-block px-8 py-4 bg-[#c9a84c] text-[#0a0a0a] text-sm uppercase tracking-widest font-medium hover:bg-[#e0bc6a] transition-colors duration-300'
                 : 'inline-block px-8 py-4 border border-[#c9a84c] text-[#c9a84c] text-sm uppercase tracking-widest font-medium hover:bg-[#c9a84c]/10 transition-colors duration-300'
             }

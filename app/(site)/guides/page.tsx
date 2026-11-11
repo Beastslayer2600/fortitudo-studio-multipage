@@ -8,6 +8,25 @@ export const metadata: Metadata = {
     "Free, South Africa-focused guides for every stage of a financial plan: starting it, holding it, and letting it work.",
 };
 
+const INTERACTIVE = [
+  {
+    href: "/guides/what-are-you-worth",
+    meta: "Interactive · 60 seconds",
+    title: "What are you",
+    gold: "worth?",
+    blurb: "Add up what your working years will earn. See the asset every other plan depends on.",
+    cta: "See your number",
+  },
+  {
+    href: "/guides/january-already-spent",
+    meta: "Interactive · 90 seconds",
+    title: "How much of January have you",
+    gold: "already spent?",
+    blurb: "Add up your pay-later and instalment purchases. See what is left of your next six paydays.",
+    cta: "Run the test",
+  },
+];
+
 export default function Guides() {
   const startHere = START_HERE.map((href) => GUIDES.find((g) => g.href === href)!).filter(Boolean);
 
@@ -19,23 +38,29 @@ export default function Guides() {
           Guides for every stage of a plan: starting it, holding it, and letting it work.
         </p>
 
-        {/* Feature: the January test (not part of the Start here path) */}
-        <section className="mt-12 rounded-2xl border border-[rgba(242,239,230,.12)] bg-[#0a231a] p-6 sm:p-8 md:flex md:items-end md:justify-between md:gap-10">
-          <div>
-            <p className="text-[.68rem] uppercase tracking-[.18em] text-[#c8a45c]">Interactive · 90 seconds</p>
-            <h2 className="mt-3 max-w-[24ch] font-serif text-3xl font-light leading-[1.1] text-[var(--cream)] sm:text-4xl">
-              How much of January have you <i className="text-[#e6cf9c]">already spent?</i>
-            </h2>
-            <p className="mt-3 max-w-xl text-[#a9bcb0]">
-              Add up your pay-later and instalment purchases. See what is left of your next six paydays.
-            </p>
+        {/* Interactive tools (not part of the Start here path) */}
+        <section className="mt-12" aria-labelledby="interactive-heading">
+          <p id="interactive-heading" className="text-xs uppercase tracking-[0.18em] text-[var(--gold)]">
+            Interactive
+          </p>
+          <div className="mt-4 grid gap-4 md:grid-cols-2">
+            {INTERACTIVE.map((t) => (
+              <Link
+                key={t.href}
+                href={t.href}
+                className="group flex flex-col rounded-2xl border border-[rgba(242,239,230,.12)] bg-[#0a231a] p-6 transition-colors hover:border-[var(--gold)]/55 sm:p-8"
+              >
+                <p className="text-[.68rem] uppercase tracking-[.18em] text-[#c8a45c]">{t.meta}</p>
+                <h2 className="mt-3 font-serif text-2xl font-light leading-[1.1] text-[var(--cream)] sm:text-3xl">
+                  {t.title} <i className="text-[#e6cf9c]">{t.gold}</i>
+                </h2>
+                <p className="mt-3 text-[#a9bcb0]">{t.blurb}</p>
+                <span className="mt-6 inline-flex min-h-[48px] w-fit items-center justify-center rounded-xl bg-[var(--gold)] px-7 py-3 text-base font-medium text-[#0a231a] transition-colors group-hover:bg-white">
+                  {t.cta}
+                </span>
+              </Link>
+            ))}
           </div>
-          <Link
-            href="/guides/january-already-spent"
-            className="mt-6 inline-flex min-h-[48px] shrink-0 items-center justify-center rounded-xl bg-[var(--gold)] px-7 py-3 text-base font-medium text-[#0a231a] transition-colors hover:bg-white md:mt-0"
-          >
-            Run the test
-          </Link>
         </section>
 
         {/* Start here */}

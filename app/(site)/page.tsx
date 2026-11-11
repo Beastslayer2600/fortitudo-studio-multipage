@@ -13,10 +13,11 @@ import JanuaryBand from "@/components/home/JanuaryBand";
 // and set this to its path, e.g. "/portrait.jpg". While null, a monogram shows.
 const PORTRAIT: string | null = null;
 
-const audience = [
+const audience: { title: string; body: string; link?: { href: string; label: string } }[] = [
   {
     title: "Young professionals",
     body: "Early in your career and want the foundations right before income and complexity grow.",
+    link: { href: "/guides/what-are-you-worth", label: "Start with one number →" },
   },
   {
     title: "Established professionals",
@@ -211,6 +212,14 @@ export default function Home() {
               >
                 <h3 className="mb-3 font-serif text-xl text-[var(--gold)]">{item.title}</h3>
                 <p className="text-base leading-relaxed text-white/80">{item.body}</p>
+                {item.link && (
+                  <Link
+                    href={item.link.href}
+                    className="mt-4 inline-block text-sm text-[var(--gold)] underline-offset-4 hover:underline"
+                  >
+                    {item.link.label}
+                  </Link>
+                )}
               </div>
             ))}
           </div>
