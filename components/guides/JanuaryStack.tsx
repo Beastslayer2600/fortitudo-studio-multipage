@@ -197,7 +197,9 @@ const EMPTY_DEAL: Deal = { price: 0, instalments: 4, interval: 'month' };
 
 // ===========================================================================
 
-export default function JanuaryStack() {
+export type JanuaryResult = { sharePct: number; focusLabel: string } | null;
+
+export default function JanuaryStack({ onResult }: { onResult?: (r: JanuaryResult) => void } = {}) {
   const reduce = useReducedMotion();
   const [today, setToday] = useState<Date | null>(null);
   const [takeHome, setTakeHome] = useState(0);
@@ -265,6 +267,12 @@ export default function JanuaryStack() {
   const offRows = rows.filter((r) => !r.included && r.price > 0);
   const focusLabel = calc?.stack.focusLabel ?? 'January';
   const tierHeadline = calc ? RESULT_COPY.tiers[calc.tier].title(focusLabel) : '';
+
+  // Lets the page reuse the result (the WhatsApp button above the consultation).
+  const resultPct = calc && hasResult ? calc.sharePct : null;
+  useEffect(() => {
+    onResult?.(resultPct === null ? null : { sharePct: resultPct, focusLabel });
+  }, [onResult, resultPct, focusLabel]);
 
   // ---------------------------------------------------------------- tracking
   // Result shown: wait until typing settles, so the tier reported is the

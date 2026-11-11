@@ -1,7 +1,9 @@
 'use client'
 
+import { useState } from 'react'
 import { motion } from 'framer-motion'
-import JanuaryStack from '@/components/guides/JanuaryStack'
+import { track } from '@vercel/analytics'
+import JanuaryStack, { type JanuaryResult } from '@/components/guides/JanuaryStack'
 import GuideEndBlock from '../../components/GuideEndBlock'
 
 // ===========================================================================
@@ -56,6 +58,16 @@ export const COPY = {
     'Pay later is not free money. It is next month’s money, committed today.',
     'Knowing how much of a payday is already spoken for does not require a spreadsheet. It requires adding up what you have already agreed to, once, before the next deal arrives.',
   ],
+  // Gold WhatsApp button above "Book a Free Consultation". Percentage only, never rand amounts.
+  endWhatsapp: {
+    label: 'Send Gert my January on WhatsApp',
+    number: '27773866299',
+    note: 'Opens WhatsApp with the message already written. No form, no call list.',
+    message: (sharePct: number, focus: string) =>
+      `Hi Gert. I ran the January test. ${sharePct}% of my ${focus} payday is already committed. What would you look at first?`,
+    // Used if the visitor reaches the button without running the test.
+    fallbackMessage: 'Hi Gert. I read your January guide. What would you look at first?',
+  },
   seriesLabel: 'Guides',
   seriesLinks: [
     { href: '/guides', label: 'All guides' },
@@ -80,6 +92,11 @@ const fadeUp = {
 }
 
 export default function JanuaryGuideClient() {
+  const [result, setResult] = useState<JanuaryResult>(null)
+  const W = COPY.endWhatsapp
+  const whatsappText = result ? W.message(result.sharePct, result.focusLabel) : W.fallbackMessage
+  const whatsappHref = `https://wa.me/${W.number}?text=${encodeURIComponent(whatsappText)}`
+
   return (
     <main className="min-h-screen bg-[#0b0d10] text-zinc-300">
       {/* Hero */}
@@ -130,7 +147,7 @@ export default function JanuaryGuideClient() {
       </section>
 
       {/* The tool */}
-      <JanuaryStack />
+      <JanuaryStack onResult={setResult} />
 
       {/* Sections */}
       <section className="max-w-3xl mx-auto px-6 pt-24 pb-24 space-y-24">
@@ -173,7 +190,31 @@ export default function JanuaryGuideClient() {
         </div>
       </section>
 
-      <GuideEndBlock hideJanuaryLink linksLabel={COPY.seriesLabel} links={COPY.seriesLinks} />
+      <GuideEndBlock
+        hideJanuaryLink
+        linksLabel={COPY.seriesLabel}
+        links={COPY.seriesLinks}
+        primaryAction={
+          <>
+            <a
+              href={whatsappHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => {
+                try {
+                  track('jan_end_whatsapp_click', { hasResult: !!result })
+                } catch {
+                  /* analytics must never break the page */
+                }
+              }}
+              className="inline-block px-8 py-4 bg-[#c9a84c] text-[#0a0a0a] text-sm uppercase tracking-widest font-medium hover:bg-[#e0bc6a] transition-colors duration-300"
+            >
+              {W.label}
+            </a>
+            <p className="mt-3 text-[.8rem] text-zinc-500">{W.note}</p>
+          </>
+        }
+      />
 
       {/* Compliance */}
       <section className="border-t border-zinc-800">

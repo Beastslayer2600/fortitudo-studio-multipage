@@ -8,6 +8,12 @@ const nextConfig = {
         destination: "/guides/january-already-spent",
         permanent: false,
       },
+      // Short URL for Instagram
+      {
+        source: "/worth",
+        destination: "/guides/what-are-you-worth",
+        permanent: false,
+      },
       {
         source: "/:path*",
         has: [{ type: "host", value: "fortitudostudios.site" }],
