@@ -1,69 +1,91 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
+import {
+  buildNotification,
+  clientIp,
+  createRateLimiter,
+  parseEnquiry,
+  type ContactResponse,
+} from "@/lib/contact";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-function isEmail(value: string) {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+// Five submissions per IP per minute; the sixth gets 429.
+const allow = createRateLimiter(5, 60_000);
+
+function reply(body: ContactResponse, status: number) {
+  return NextResponse.json(body, { status });
 }
 
 export async function POST(request: Request) {
-  const body = await request.json().catch(() => null);
-  if (!body) {
-    return NextResponse.json({ error: "Invalid request body." }, { status: 400 });
-  }
-
-  const name = String(body.name || "").trim();
-  const email = String(body.email || "").trim();
-  const phone = String(body.phone || "").trim();
-  const message = String(body.message || "").trim();
-
-  if (!name || !email || !message) {
-    return NextResponse.json(
-      { error: "Name, email, and message are required." },
-      { status: 400 }
+  if (!allow(clientIp(request.headers))) {
+    return reply(
+      {
+        ok: false,
+        error: "rate_limited",
+        message: "Too many messages in a short time. Please wait a minute and try again.",
+      },
+      429,
     );
   }
 
-  if (!isEmail(email)) {
-    return NextResponse.json(
-      { error: "Please provide a valid email address." },
-      { status: 400 }
+  const body = await request.json().catch(() => null);
+  const parsed = parseEnquiry(body);
+
+  if (parsed.kind === "spam") {
+    // Pretend it worked so bots get no signal.
+    return reply({ ok: true }, 200);
+  }
+
+  if (parsed.kind === "invalid") {
+    return reply(
+      {
+        ok: false,
+        error: "invalid",
+        message: "Please check the highlighted fields.",
+        fields: parsed.errors,
+      },
+      400,
     );
   }
 
   const apiKey = process.env.RESEND_API_KEY;
-  if (!apiKey) {
-    return NextResponse.json(
-      { error: "Email service is not configured." },
-      { status: 500 }
+  const to = process.env.CONTACT_TO;
+  const from = process.env.CONTACT_FROM;
+  if (!apiKey || !to || !from) {
+    console.error("Contact form is not configured: set RESEND_API_KEY, CONTACT_TO and CONTACT_FROM.");
+    return reply(
+      {
+        ok: false,
+        error: "not_configured",
+        message: "The form is unavailable right now. Please use WhatsApp or email instead.",
+      },
+      503,
     );
   }
 
-  const resend = new Resend(apiKey);
+  const { subject, text } = buildNotification(parsed.enquiry);
 
   try {
-    await resend.emails.send({
-      from: "Fortitudo Studio <no-reply@fortitudostudios.com>",
-      to: "fortitudostudios@protonmail.com",
-      replyTo: email,
-      subject: `New enquiry from ${name}`,
-      html: `
-        <p><strong>Name:</strong> ${name}</p>
-        <p><strong>Email:</strong> ${email}</p>
-        <p><strong>Phone:</strong> ${phone || "(not provided)"}</p>
-        <p><strong>Message:</strong></p>
-        <p>${message.replace(/\n/g, "<br />")}</p>
-      `,
+    const { error } = await new Resend(apiKey).emails.send({
+      from,
+      to,
+      replyTo: parsed.enquiry.email,
+      subject,
+      text,
     });
-
-    return NextResponse.json({ ok: true });
+    if (error) throw error;
+    return reply({ ok: true }, 200);
   } catch (err) {
-    console.error("Resend error:", err);
-    return NextResponse.json(
-      { error: "Failed to send message. Please try again." },
-      { status: 500 }
+    console.error("Contact send failed:", err);
+    return reply(
+      {
+        ok: false,
+        error: "send_failed",
+        message: "Your message could not be sent. Please try again, or use WhatsApp.",
+      },
+      502,
     );
   }
 }

@@ -1,112 +1,77 @@
 "use client";
 
-import { useRef, useState } from "react";
-import emailjs from "@emailjs/browser";
+import { Field, FormMessage, Honeypot, errorProps, inputClass } from "@/components/contact/fields";
+import { useEnquiry } from "@/components/contact/useEnquiry";
 
 export default function ContactForm() {
-  const form = useRef<HTMLFormElement>(null);
-  const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
-  const [errorMsg, setErrorMsg] = useState("");
-
-  const sendEmail = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    if (!form.current) {
-      return;
-    }
-
-    setStatus("sending");
-    setErrorMsg("");
-
-    emailjs
-      .sendForm(
-        "service_gzoalin",
-        "template_6h8g4ai",
-        form.current,
-        "TsuUEEHJnVF1s01Uh"
-      )
-      .then((result) => {
-        console.log("SUCCESS!", result.text);
-        setStatus("success");
-        form.current?.reset();
-      })
-      .catch((error) => {
-        console.error("EmailJS Error:", error);
-        setStatus("error");
-        setErrorMsg(error.text || "Failed to send message. Please try again.");
-      });
-  };
+  const { status, message, fieldErrors, messageRef, onSubmit } = useEnquiry("Contact page");
 
   return (
     <div className="max-w-2xl mx-auto p-6">
       <h2 className="mb-8 font-serif text-3xl text-[var(--gold)]">Send a Message</h2>
 
-      <form ref={form} onSubmit={sendEmail} className="space-y-6">
-        <div>
-          <label htmlFor="name" className="mb-2 block text-sm">
-            Full Name
-          </label>
+      <form onSubmit={onSubmit} className="relative space-y-6">
+        <Field id="name" label="Full name" error={fieldErrors.name}>
           <input
             id="name"
             type="text"
             name="name"
             required
-            className="w-full rounded-xl border border-[var(--gold)]/30 bg-[#0B0D10] px-4 py-3 focus:border-[var(--gold)] focus:outline-none"
+            autoComplete="name"
+            maxLength={100}
+            className={inputClass}
+            {...errorProps("name", fieldErrors.name)}
           />
-        </div>
+        </Field>
 
-        <div>
-          <label htmlFor="email" className="mb-2 block text-sm">
-            Email Address
-          </label>
+        <Field id="email" label="Email address" error={fieldErrors.email}>
           <input
             id="email"
             type="email"
             name="email"
             required
-            className="w-full rounded-xl border border-[var(--gold)]/30 bg-[#0B0D10] px-4 py-3 focus:border-[var(--gold)] focus:outline-none"
+            autoComplete="email"
+            maxLength={254}
+            className={inputClass}
+            {...errorProps("email", fieldErrors.email)}
           />
-        </div>
+        </Field>
 
-        <div>
-          <label htmlFor="phone" className="mb-2 block text-sm">
-            Phone Number
-          </label>
+        <Field id="phone" label="Phone number" optional error={fieldErrors.phone}>
           <input
             id="phone"
             type="tel"
             name="phone"
-            className="w-full rounded-xl border border-[var(--gold)]/30 bg-[#0B0D10] px-4 py-3 focus:border-[var(--gold)] focus:outline-none"
+            autoComplete="tel"
+            maxLength={30}
+            className={inputClass}
+            {...errorProps("phone", fieldErrors.phone)}
           />
-        </div>
+        </Field>
 
-        <div>
-          <label htmlFor="message" className="mb-2 block text-sm">
-            Message
-          </label>
+        <Field id="message" label="Message" error={fieldErrors.message}>
           <textarea
             id="message"
             name="message"
             required
             rows={6}
-            className="w-full resize-y rounded-xl border border-[var(--gold)]/30 bg-[#0B0D10] px-4 py-3 focus:border-[var(--gold)] focus:outline-none"
+            maxLength={5000}
+            className={`${inputClass} resize-y`}
+            {...errorProps("message", fieldErrors.message)}
           />
-        </div>
+        </Field>
+
+        <Honeypot />
 
         <button
           type="submit"
           disabled={status === "sending"}
-          className="w-full rounded-xl bg-[var(--gold)] py-4 font-medium text-black transition-all hover:bg-white disabled:opacity-50"
+          className="w-full rounded-xl bg-[var(--gold)] py-4 font-medium text-black transition-all hover:bg-white disabled:opacity-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--gold)]"
         >
           {status === "sending" ? "Sending..." : "Send Message"}
         </button>
 
-        {status === "success" && (
-          <p className="text-center text-green-400">Message sent successfully!</p>
-        )}
-
-        {status === "error" && (
-          <p className="text-center text-red-400">{errorMsg}</p>
-        )}
+        <FormMessage message={message} messageRef={messageRef} />
       </form>
     </div>
   );

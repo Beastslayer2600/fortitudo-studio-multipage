@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import ContactForm from "./ContactForm";
+import { RESPONSE_TIME } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -15,7 +16,7 @@ export default function Contact() {
           Contact
         </h1>
         <p className="mt-3 text-white/70 max-w-2xl">
-          The first step is the hardest one. This is it. Book a consultation or ask a question, and I will get back to you as soon as possible.
+          The first step is the hardest one. This is it. Book a consultation or ask a question, and I will reply within {RESPONSE_TIME}.
         </p>
         <div className="mt-10 grid gap-10 lg:grid-cols-2">
           <div className="space-y-6">
