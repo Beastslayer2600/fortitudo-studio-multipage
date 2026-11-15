@@ -1,12 +1,13 @@
-import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import Image from "next/image";
 import Link from "next/link";
 
-export const metadata: Metadata = {
-  title: "About Gert Fourie · A plan you'll actually keep",
+export const metadata = pageMetadata({
+  path: "/about",
+  title: "About",
   description:
     "Gert Fourie is a financial adviser with Liberty Group in Pretoria, helping young professionals, business owners and families build a plan they'll actually keep.",
-};
+});
 
 const principles = [
   {

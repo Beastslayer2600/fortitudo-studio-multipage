@@ -1,4 +1,5 @@
-import type { Metadata } from "next";
+import ArticleMeta from "@/components/ArticleMeta";
+import { articleMetadata } from "@/lib/seo";
 import Link from "next/link";
 
 const hiddenCorrelations = [
@@ -47,13 +48,9 @@ const dimensions = [
   },
 ] as const;
 
-export const metadata: Metadata = {
-  title: "Why Diversification Isn't Just About Asset Classes | Gert Fourie",
-  description:
-    "Real diversification goes deeper than splitting money between shares, bonds, and cash. A look at the hidden correlations that undermine portfolios that look diversified on paper.",
-};
+export const metadata = articleMetadata("/insights/why-diversification-isnt-just-about-asset-classes");
 
-export default function DiversificationPage() {
+function DiversificationPageContent() {
   return (
     <main className="relative z-10 min-h-screen pt-24 pb-16 text-[var(--cream)] sm:pt-28 sm:pb-24">
       <article className="container max-w-4xl">
@@ -156,5 +153,14 @@ export default function DiversificationPage() {
         </div>
       </article>
     </main>
+  );
+}
+
+export default function DiversificationPage() {
+  return (
+    <>
+      <DiversificationPageContent />
+      <ArticleMeta path="/insights/why-diversification-isnt-just-about-asset-classes" />
+    </>
   );
 }

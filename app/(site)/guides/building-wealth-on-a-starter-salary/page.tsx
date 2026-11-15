@@ -1,4 +1,5 @@
-import type { Metadata } from "next";
+import ArticleMeta from "@/components/ArticleMeta";
+import { articleMetadata } from "@/lib/seo";
 import Link from "next/link";
 
 const buckets = [
@@ -70,13 +71,9 @@ const mindsetPoints = [
   "Wealth usually feels boring while it is being built. That is normal.",
 ] as const;
 
-export const metadata: Metadata = {
-  title: "Building Wealth on a Starter Salary | Gert Fourie",
-  description:
-    "A practical guide for young professionals who want to start building wealth early through structure, protection, and disciplined investing.",
-};
+export const metadata = articleMetadata("/guides/building-wealth-on-a-starter-salary");
 
-export default function BuildingWealthOnAStarterSalaryPage() {
+function BuildingWealthOnAStarterSalaryPageContent() {
   return (
     <main className="relative z-10 min-h-screen pt-24 pb-16 text-[var(--cream)] sm:pt-28 sm:pb-24">
       <article className="container max-w-4xl">
@@ -250,5 +247,14 @@ export default function BuildingWealthOnAStarterSalaryPage() {
         </div>
       </article>
     </main>
+  );
+}
+
+export default function BuildingWealthOnAStarterSalaryPage() {
+  return (
+    <>
+      <BuildingWealthOnAStarterSalaryPageContent />
+      <ArticleMeta path="/guides/building-wealth-on-a-starter-salary" />
+    </>
   );
 }

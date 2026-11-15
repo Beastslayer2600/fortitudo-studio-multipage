@@ -1,10 +1,11 @@
-import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
+  path: "/process",
   title: "My Process",
   description:
     "A structured, four-step approach - strategic clarity, financial analysis, plan design, and ongoing review - built to give you a plan you’ll actually keep.",
-};
+});
 
 export default function Process() {
   const steps = [

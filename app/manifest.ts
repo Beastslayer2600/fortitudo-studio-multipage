@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "Gert Fourie | Financial Advisor",
+    name: "Gert Fourie, Financial Adviser",
     short_name: "Gert Fourie",
     description:
       "Calm, structured financial planning that replaces worry with clarity — Pretoria & Gauteng. Liberty Group FSP 2409.",

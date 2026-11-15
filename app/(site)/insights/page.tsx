@@ -1,44 +1,22 @@
-import type { Metadata } from "next";
+import { ARTICLES, articlePath } from "@/content/articles";
+import { pageMetadata } from "@/lib/seo";
 import Link from "next/link";
 import { INSIGHT_PRINCIPLES } from "@/lib/principles";
 
-export const metadata: Metadata = {
-  title: "Insights | Gert Fourie Financial Adviser",
+export const metadata = pageMetadata({
+  path: "/insights",
+  title: "Insights",
   description:
     "Structured perspectives on economic cycles, portfolio construction, tax developments, risk management, and behavioural finance in South Africa.",
-};
+});
 
-const insights = [
-  {
-    category: "Portfolio Construction",
-    title: "You're Betting Twice on AI",
-    description:
-      "Your career and your retirement fund were supposed to balance each other out. In 2026, they're quietly riding on the same trade.",
-    href: "/insights/betting-twice-on-ai",
-    featured: true,
-  },
-  {
-    category: "Risk Management",
-    title: "Sequence-of-Returns Risk: The Retirement Danger Few People Plan For",
-    description:
-      "Why the order investment returns arrive in - not just the average - can determine whether a retirement income plan survives.",
-    href: "/insights/sequence-of-returns-risk",
-  },
-  {
-    category: "Legislative & Tax Developments",
-    title: "South Africa's Two-Pot Retirement System: What It Actually Changes",
-    description:
-      "What the two-pot retirement reform changes for your contributions, access to funds, and long-term retirement planning - explained plainly.",
-    href: "/insights/two-pot-retirement-system",
-  },
-  {
-    category: "Portfolio Construction",
-    title: "Why Diversification Isn't Just About Asset Classes",
-    description:
-      "Real diversification goes deeper than splitting money between shares, bonds, and cash. The hidden correlations that undermine portfolios that look diversified on paper.",
-    href: "/insights/why-diversification-isnt-just-about-asset-classes",
-  },
-] as const;
+const insights = ARTICLES.filter((a) => a.type === "insight").map((a) => ({
+  category: a.card?.category ?? "",
+  title: a.card?.title ?? a.title,
+  description: a.card?.blurb ?? a.description,
+  href: articlePath(a),
+  featured: a.card?.featured ?? false,
+}));
 
 export default function InsightsPage() {
   return (

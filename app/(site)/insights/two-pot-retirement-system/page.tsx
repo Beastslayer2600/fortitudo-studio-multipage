@@ -1,4 +1,5 @@
-import type { Metadata } from "next";
+import ArticleMeta from "@/components/ArticleMeta";
+import { articleMetadata } from "@/lib/seo";
 import Link from "next/link";
 
 const mechanics = [
@@ -26,13 +27,9 @@ const considerations = [
   "The retirement component's stricter preservation rules mean job changes no longer offer the same access to two-thirds of your fund that many people previously relied on.",
 ] as const;
 
-export const metadata: Metadata = {
-  title: "South Africa's Two-Pot Retirement System | Gert Fourie",
-  description:
-    "What the two-pot retirement reform actually changes for your contributions, access to funds, and long-term retirement planning - explained plainly.",
-};
+export const metadata = articleMetadata("/insights/two-pot-retirement-system");
 
-export default function TwoPotSystemPage() {
+function TwoPotSystemPageContent() {
   return (
     <main className="relative z-10 min-h-screen pt-24 pb-16 text-[var(--cream)] sm:pt-28 sm:pb-24">
       <article className="container max-w-4xl">
@@ -143,5 +140,14 @@ export default function TwoPotSystemPage() {
         </div>
       </article>
     </main>
+  );
+}
+
+export default function TwoPotSystemPage() {
+  return (
+    <>
+      <TwoPotSystemPageContent />
+      <ArticleMeta path="/insights/two-pot-retirement-system" />
+    </>
   );
 }
