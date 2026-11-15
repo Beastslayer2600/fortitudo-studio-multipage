@@ -163,7 +163,7 @@ const focusRing =
 export default function WorthGuideClient() {
   const C = WORTH_COPY
   return (
-    <main className="min-h-screen bg-[#0b0d10] text-zinc-300">
+    <div className="min-h-screen bg-[#0b0d10] text-zinc-300">
       {/* Hero */}
       <section className="relative min-h-[44vh] flex items-end overflow-hidden">
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-[var(--gold)]/5 rounded-full blur-[120px] pointer-events-none" />
@@ -233,7 +233,7 @@ export default function WorthGuideClient() {
 
       {/* Compliance */}
       <section className="border-t border-zinc-800">
-        <div className="max-w-3xl mx-auto px-6 py-10 text-[.82rem] leading-relaxed text-zinc-500 space-y-2">
+        <div className="max-w-3xl mx-auto px-6 py-10 text-[.82rem] leading-relaxed text-zinc-400 space-y-2">
           <p>{C.compliance.adviser}</p>
           <p className="whitespace-pre-wrap">
             {C.compliance.websiteLead}{' '}
@@ -249,7 +249,7 @@ export default function WorthGuideClient() {
           <p>{C.compliance.disclaimer}</p>
         </div>
       </section>
-    </main>
+    </div>
   )
 }
 
@@ -281,7 +281,6 @@ function WorthTool() {
 
   useEffect(() => {
     if (total !== null) once('worth_result_shown')
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [total])
 
   const chosen = C.answers.find((a) => a.key === answer) ?? null

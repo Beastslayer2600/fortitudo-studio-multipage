@@ -11,7 +11,7 @@ export const metadata = pageMetadata({
 
 export default function Services() {
   return (
-    <main className="relative z-10 min-h-screen pb-16 pt-24 text-[var(--cream)] sm:pb-24 sm:pt-28">
+    <div className="relative z-10 min-h-screen pb-16 pt-24 text-[var(--cream)] sm:pb-24 sm:pt-28">
       <div className="container max-w-5xl">
         <h1 className="font-serif text-4xl text-[var(--cream)] md:text-5xl">How I help</h1>
         <p className="mt-4 max-w-2xl text-white/70">
@@ -58,6 +58,6 @@ export default function Services() {
           </Link>
         </div>
       </div>
-    </main>
+    </div>
   );
 }

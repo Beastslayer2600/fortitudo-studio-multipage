@@ -39,7 +39,7 @@ export default function EarningPowerCalculator() {
   const savingsBar = (savings / largest) * 100;
 
   const inputClass =
-    "w-full rounded-xl border border-[var(--gold)]/30 bg-[#0B0D10] px-4 py-3 tabular-nums focus:border-[var(--gold)] focus:outline-none";
+    "w-full rounded-xl border border-[var(--gold)]/30 bg-[#0B0D10] px-4 py-3 tabular-nums focus:border-[var(--gold)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--gold)]";
   const labelClass = "mb-2 block text-sm text-white/75";
 
   return (

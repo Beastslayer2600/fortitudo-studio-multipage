@@ -7,3 +7,11 @@ out/
 .env
 .env.local
 .env.*.local
+
+# Editors, tooling and local agent output
+.idea/
+.ai/
+.codex-*
+*.tsbuildinfo
+/test-results/
+/playwright-report/

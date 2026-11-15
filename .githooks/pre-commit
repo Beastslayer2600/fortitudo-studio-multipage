@@ -1,0 +1,6 @@
+#!/bin/sh
+# Installed by `npm install` (see "prepare" in package.json). Skip once with --no-verify.
+set -e
+npm run --silent lint
+npm run --silent typecheck
+npm test --silent

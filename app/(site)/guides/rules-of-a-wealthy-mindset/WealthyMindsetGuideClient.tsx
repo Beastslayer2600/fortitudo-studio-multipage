@@ -88,7 +88,7 @@ const rules = [
 
 export default function WealthyMindsetGuideClient() {
   return (
-    <main className="min-h-screen bg-[#0a0a0a] text-zinc-300">
+    <div className="min-h-screen bg-[#0a0a0a] text-zinc-300">
       {/* Hero */}
       <section className="relative min-h-[50vh] flex items-end overflow-hidden">
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#c9a84c]/5 rounded-full blur-[120px] pointer-events-none" />
@@ -190,6 +190,6 @@ export default function WealthyMindsetGuideClient() {
           { href: "/guides/building-wealth-on-a-starter-salary", label: "Building Wealth on a Starter Salary" },
         ]}
       />
-    </main>
+    </div>
   )
 }
