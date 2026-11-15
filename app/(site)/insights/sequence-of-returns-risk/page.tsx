@@ -1,4 +1,5 @@
-import type { Metadata } from "next";
+import ArticleMeta from "@/components/ArticleMeta";
+import { articleMetadata } from "@/lib/seo";
 import Link from "next/link";
 
 const drivers = [
@@ -42,13 +43,9 @@ const safeguards = [
   },
 ] as const;
 
-export const metadata: Metadata = {
-  title: "Sequence-of-Returns Risk Explained | Gert Fourie",
-  description:
-    "Why the order of investment returns - not just the average - can determine whether a retirement income plan survives. A structured look at sequence-of-returns risk and how to plan around it.",
-};
+export const metadata = articleMetadata("/insights/sequence-of-returns-risk");
 
-export default function SequenceOfReturnsRiskPage() {
+function SequenceOfReturnsRiskPageContent() {
   return (
     <main className="relative z-10 min-h-screen pt-24 pb-16 text-[var(--cream)] sm:pt-28 sm:pb-24">
       <article className="container max-w-4xl">
@@ -165,5 +162,14 @@ export default function SequenceOfReturnsRiskPage() {
         </div>
       </article>
     </main>
+  );
+}
+
+export default function SequenceOfReturnsRiskPage() {
+  return (
+    <>
+      <SequenceOfReturnsRiskPageContent />
+      <ArticleMeta path="/insights/sequence-of-returns-risk" />
+    </>
   );
 }

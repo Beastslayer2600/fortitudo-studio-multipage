@@ -1,12 +1,13 @@
-import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import ContactForm from "./ContactForm";
 import { RESPONSE_TIME } from "@/lib/site";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
+  path: "/contact",
   title: "Contact",
   description:
     "Book a consultation with Gert Fourie, financial adviser with Liberty Group in Pretoria - reach out by phone, email, or the contact form.",
-};
+});
 
 export default function Contact() {
   return (

@@ -1,12 +1,18 @@
-import type { Metadata } from "next";
+import ArticleMeta from "@/components/ArticleMeta";
+import { articleMetadata } from "@/lib/seo";
 import HealthCheckClient from "./HealthCheckClient";
 
-export const metadata: Metadata = {
-  title: "The 7-Question Financial Health Check | Gert Fourie",
-  description:
-    "A two-minute, scored self-assessment covering the seven areas that decide whether your financial position holds up under pressure.",
-};
+export const metadata = articleMetadata("/guides/financial-health-check");
+
+function FinancialHealthCheckPageContent() {
+  return <HealthCheckClient />;
+}
 
 export default function FinancialHealthCheckPage() {
-  return <HealthCheckClient />;
+  return (
+    <>
+      <FinancialHealthCheckPageContent />
+      <ArticleMeta path="/guides/financial-health-check" />
+    </>
+  );
 }

@@ -1,11 +1,8 @@
-import type { Metadata } from "next";
+import ArticleMeta from "@/components/ArticleMeta";
+import { articleMetadata } from "@/lib/seo";
+import { SITE_URL } from "@/lib/site";
 import Link from "next/link";
 import EarningPowerCalculator from "./EarningPowerCalculator";
-
-const title = "You're Betting Twice on AI";
-const description =
-  "Your career and your retirement fund were supposed to balance each other out. In 2026, they're quietly riding on the same trade.";
-const canonical = "https://fortitudostudios.com/insights/betting-twice-on-ai";
 
 const actions = [
   {
@@ -46,37 +43,9 @@ const sources = [
   },
 ] as const;
 
-export const metadata: Metadata = {
-  title,
-  description,
-  alternates: { canonical },
-  openGraph: {
-    type: "article",
-    url: canonical,
-    siteName: "Gert Fourie | Financial Advisor",
-    title: `${title} | Gert Fourie | Pretoria`,
-    description,
-    publishedTime: "2026-10-27",
-    authors: ["Gert Fourie"],
-    locale: "en_ZA",
-    images: [
-      {
-        url: "/og-image.png",
-        width: 1200,
-        height: 630,
-        alt: "Gert Fourie | Financial Advisor | Liberty Group FSP 2409 | Pretoria",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: `${title} | Gert Fourie | Pretoria`,
-    description,
-    images: ["/og-image.png"],
-  },
-};
+export const metadata = articleMetadata("/insights/betting-twice-on-ai");
 
-export default function BettingTwiceOnAiPage() {
+function BettingTwiceOnAiPageContent() {
   return (
     <main className="relative z-10 min-h-screen pt-24 pb-16 text-[var(--cream)] sm:pt-28 sm:pb-24">
       <article className="container max-w-4xl">
@@ -263,7 +232,7 @@ export default function BettingTwiceOnAiPage() {
             </Link>
             <p className="mt-6 text-sm text-white/60">
               <a
-                href="https://www.fortitudostudios.com"
+                href={SITE_URL}
                 className="underline decoration-white/25 underline-offset-4 transition-colors hover:text-[var(--gold)]"
               >
                 www.fortitudostudios.com
@@ -283,5 +252,14 @@ export default function BettingTwiceOnAiPage() {
         </div>
       </article>
     </main>
+  );
+}
+
+export default function BettingTwiceOnAiPage() {
+  return (
+    <>
+      <BettingTwiceOnAiPageContent />
+      <ArticleMeta path="/insights/betting-twice-on-ai" />
+    </>
   );
 }

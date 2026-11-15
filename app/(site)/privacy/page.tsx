@@ -1,8 +1,11 @@
-import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
+  path: "/privacy",
   title: "Privacy Policy",
-};
+  description:
+    "How this website handles the personal information you share with it, under South Africa's Protection of Personal Information Act (POPIA).",
+});
 
 export default function PrivacyPolicy() {
   return (

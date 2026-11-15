@@ -1,8 +1,11 @@
-import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
+  path: "/disclaimer",
   title: "Disclaimer",
-};
+  description:
+    "Everything on this website is general information, not financial advice. Gert Fourie is a representative of Liberty Group Limited (FSP 2409).",
+});
 
 export default function Disclaimer() {
   return (

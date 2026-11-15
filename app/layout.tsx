@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { Analytics } from "@vercel/analytics/next";
@@ -6,27 +6,60 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import QuickMenu from "./components/QuickMenu";
 import AnimatedLines from "./components/AnimatedLines";
 import PrincipleFooter from "./components/PrincipleFooter";
+import { SERVICES } from "@/content/services";
+import {
+  AUTHOR_BIO,
+  DEFAULT_DESCRIPTION,
+  DEFAULT_OG_IMAGE,
+  DEFAULT_TITLE,
+  EMAIL,
+  PHONE_CELL,
+  PHONE_OFFICE,
+  SAME_AS,
+  SITE_NAME,
+  SITE_URL,
+  TITLE_SUFFIX,
+} from "@/lib/site";
 import "./globals.css";
 
-const siteUrl = "https://fortitudostudios.com";
-const siteTitle = "Gert Fourie | Financial Advisor | Liberty Group FSP 2409 | Pretoria";
-const siteDescription =
-  "Financial planning for professionals in Pretoria and Gauteng: a plan you’ll actually keep.";
+const person = `${SITE_URL}/#gert-fourie`;
+const liberty = {
+  "@type": "Organization",
+  name: "Liberty Group Limited",
+  identifier: "FSP 2409",
+  url: "https://www.liberty.co.za",
+};
 
+// Only facts that appear on the site. Gert is a representative of Liberty,
+// not a subsidiary of it, so Liberty is his employer/affiliation, never a
+// parentOrganization.
 const structuredData = {
   "@context": "https://schema.org",
   "@graph": [
     {
+      "@type": "Person",
+      "@id": person,
+      name: "Gert Fourie",
+      jobTitle: "Financial Adviser",
+      description: AUTHOR_BIO,
+      url: `${SITE_URL}/about`,
+      image: `${SITE_URL}/gert-portrait.jpg`,
+      email: EMAIL,
+      telephone: PHONE_CELL,
+      worksFor: liberty,
+      affiliation: liberty,
+      knowsLanguage: ["en", "af"],
+      sameAs: SAME_AS,
+    },
+    {
       "@type": "FinancialService",
-      "@id": `${siteUrl}/#organization`,
-      name: "Gert Fourie | Financial Advisor",
-      alternateName: "Fortitudo Studios",
-      url: siteUrl,
-      description: siteDescription,
-      image: `${siteUrl}/og-image.png`,
-      logo: `${siteUrl}/icon-512.png`,
-      telephone: ["+27773866299", "+27124337241"],
-      email: "gert.fourie@liblink.co.za",
+      "@id": `${SITE_URL}/#practice`,
+      name: SITE_NAME,
+      url: SITE_URL,
+      description: DEFAULT_DESCRIPTION,
+      image: `${SITE_URL}${DEFAULT_OG_IMAGE.url}`,
+      telephone: [PHONE_CELL, PHONE_OFFICE],
+      email: EMAIL,
       address: {
         "@type": "PostalAddress",
         addressLocality: "Pretoria",
@@ -36,73 +69,41 @@ const structuredData = {
       areaServed: [
         { "@type": "City", name: "Pretoria" },
         { "@type": "AdministrativeArea", name: "Gauteng" },
-        { "@type": "Country", name: "South Africa" },
       ],
-      parentOrganization: {
-        "@type": "Organization",
-        name: "Liberty Group Limited",
-        identifier: "FSP 2409",
-        url: "https://www.liberty.co.za",
-      },
-      sameAs: [
-        "https://www.instagram.com/gert_wealth",
-        "https://www.linkedin.com/in/gert-fourie-wealth",
-      ],
-      knowsLanguage: ["en", "af"],
+      member: { "@id": person },
       hasOfferCatalog: {
         "@type": "OfferCatalog",
-        name: "Financial Planning Services",
-        itemListElement: [
-          "Retirement Clarity",
-          "Investment Discipline",
-          "Protection That Lasts",
-          "Legacy & Estate Planning",
-          "Tax-Efficient Structure",
-          "Risk Management",
-        ].map((service) => ({
+        name: "Services",
+        url: `${SITE_URL}/services`,
+        itemListElement: SERVICES.map((service) => ({
           "@type": "Offer",
-          itemOffered: { "@type": "Service", name: service },
+          itemOffered: {
+            "@type": "Service",
+            name: service.title,
+            description: service.description,
+            url: `${SITE_URL}/services#${service.id}`,
+          },
         })),
       },
     },
     {
-      "@type": "Person",
-      "@id": `${siteUrl}/#gert-fourie`,
-      name: "Gert Fourie",
-      jobTitle: "Financial Adviser",
-      url: `${siteUrl}/about`,
-      email: "gert.fourie@liblink.co.za",
-      telephone: "+27773866299",
-      worksFor: { "@id": `${siteUrl}/#organization` },
-      affiliation: {
-        "@type": "Organization",
-        name: "Liberty Group Limited",
-        identifier: "FSP 2409",
-      },
-      sameAs: [
-        "https://www.instagram.com/gert_wealth",
-        "https://www.linkedin.com/in/gert-fourie-wealth",
-      ],
-    },
-    {
       "@type": "WebSite",
-      "@id": `${siteUrl}/#website`,
-      url: siteUrl,
-      name: siteTitle,
-      description: siteDescription,
+      "@id": `${SITE_URL}/#website`,
+      url: SITE_URL,
+      name: SITE_NAME,
       inLanguage: "en-ZA",
-      publisher: { "@id": `${siteUrl}/#organization` },
+      publisher: { "@id": person },
     },
   ],
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL(siteUrl),
+  metadataBase: new URL(SITE_URL),
   title: {
-    default: siteTitle,
-    template: "%s | Gert Fourie | Pretoria",
+    default: DEFAULT_TITLE,
+    template: `%s${TITLE_SUFFIX}`,
   },
-  description: siteDescription,
+  description: DEFAULT_DESCRIPTION,
   manifest: "/manifest.webmanifest",
   icons: {
     icon: [
@@ -113,26 +114,23 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: "website",
-    url: siteUrl,
-    siteName: "Gert Fourie | Financial Advisor",
-    title: siteTitle,
-    description: siteDescription,
-    images: [
-      {
-        url: "/og-image.png",
-        width: 1200,
-        height: 630,
-        alt: "Gert Fourie | Financial Advisor | Liberty Group FSP 2409 | Pretoria",
-      },
-    ],
+    url: "/",
+    siteName: SITE_NAME,
+    title: DEFAULT_TITLE,
+    description: DEFAULT_DESCRIPTION,
+    images: [DEFAULT_OG_IMAGE],
     locale: "en_ZA",
   },
   twitter: {
     card: "summary_large_image",
-    title: siteTitle,
-    description: siteDescription,
-    images: ["/og-image.png"],
+    title: DEFAULT_TITLE,
+    description: DEFAULT_DESCRIPTION,
+    images: [DEFAULT_OG_IMAGE.url],
   },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#0a231a",
 };
 
 const desktopNav = [
@@ -150,10 +148,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en-ZA">
       <head>
-        <meta charSet="utf-8" />
-        <meta name="theme-color" content="#0a231a" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
@@ -219,7 +215,7 @@ export default function RootLayout({
                 Fortitudo: strength to build it, patience to keep it.
               </p>
               <p className="mb-3 font-medium text-white/90">
-                &copy; {new Date().getFullYear()} Gert Fourie | Financial Advisor &ndash; Liberty Group Limited (FSP
+                &copy; {new Date().getFullYear()} Gert Fourie | Financial Adviser &ndash; Liberty Group Limited (FSP
                 2409) | Pretoria
               </p>
               <p className="mx-auto max-w-4xl text-[0.95rem] leading-relaxed text-white/70">

@@ -1,9 +1,15 @@
+import { pageMetadata } from "@/lib/seo";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { RESPONSE_TIME, WHATSAPP_DISPLAY, WHATSAPP_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Message received",
+  ...pageMetadata({
+    path: "/thank-you",
+    title: "Message received",
+    description:
+      "Your message has reached Gert Fourie. Here is when to expect a reply, and how to reach him sooner on WhatsApp if it can't wait.",
+  }),
   robots: { index: false, follow: false },
 };
 
