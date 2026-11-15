@@ -13,7 +13,7 @@ import JanuaryBand from "@/components/home/JanuaryBand";
 // and set this to its path, e.g. "/portrait.jpg". While null, a monogram shows.
 const PORTRAIT: string | null = "/gert-portrait.jpg";
 
-const audience: { title: string; body: string; link?: { href: string; label: string } }[] = [
+const audience: { title: string; body: string; link: { href: string; label: string } }[] = [
   {
     title: "Young professionals",
     body: "Early in your career and want the foundations right before income and complexity grow.",
@@ -22,14 +22,17 @@ const audience: { title: string; body: string; link?: { href: string; label: str
   {
     title: "Established professionals",
     body: "Earning well but unsure the plan is right for you.",
+    link: { href: "/guides/financial-health-check", label: "Take the health check →" },
   },
   {
     title: "Business owners",
     body: "Building sustainable wealth with structure, not speculation.",
+    link: { href: "/services#business", label: "See business structuring →" },
   },
   {
     title: "Families",
     body: "Seeking clarity around retirement, protection, and legacy.",
+    link: { href: "/contact", label: "Start a conversation →" },
   },
 ];
 
@@ -212,14 +215,12 @@ export default function Home() {
               >
                 <h3 className="mb-3 font-serif text-xl text-[var(--gold)]">{item.title}</h3>
                 <p className="text-base leading-relaxed text-white/80">{item.body}</p>
-                {item.link && (
-                  <Link
-                    href={item.link.href}
-                    className="mt-4 inline-block text-sm text-[var(--gold)] underline-offset-4 hover:underline"
-                  >
-                    {item.link.label}
-                  </Link>
-                )}
+                <Link
+                  href={item.link.href}
+                  className="mt-4 inline-flex min-h-[44px] items-center text-sm text-[var(--gold)] underline-offset-4 hover:underline"
+                >
+                  {item.link.label}
+                </Link>
               </div>
             ))}
           </div>
