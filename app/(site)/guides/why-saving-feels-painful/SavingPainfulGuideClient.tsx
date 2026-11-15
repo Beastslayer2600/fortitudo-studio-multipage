@@ -180,7 +180,7 @@ export default function SavingPainfulGuideClient() {
   ]
 
   return (
-    <main className="min-h-screen bg-[#0a0a0a] text-zinc-300">
+    <div className="min-h-screen bg-[#0a0a0a] text-zinc-300">
 
       {/* Hero */}
       <section ref={heroRef} className="relative min-h-[60vh] flex items-end overflow-hidden">
@@ -318,6 +318,6 @@ export default function SavingPainfulGuideClient() {
           </div>
         </motion.div>
       </section>
-    </main>
+    </div>
   )
 }

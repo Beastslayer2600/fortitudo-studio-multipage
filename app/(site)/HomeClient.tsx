@@ -80,7 +80,7 @@ const truths = [
 
 export default function Home() {
   return (
-    <main className="relative text-[var(--cream)]">
+    <div className="relative text-[var(--cream)]">
       {/* Hero */}
       <section className="relative isolate min-h-[100svh] overflow-hidden pt-20 md:pt-24">
         <HeroStructure />
@@ -292,6 +292,6 @@ export default function Home() {
         </div>
       </section>
       </div>
-    </main>
+    </div>
   );
 }

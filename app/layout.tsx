@@ -156,6 +156,9 @@ export default function RootLayout({
         />
       </head>
       <body className="relative min-h-screen overflow-x-hidden">
+        <a href="#main" className="skip-link">
+          Skip to content
+        </a>
         <div aria-hidden="true" className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
           <AnimatedLines />
           <div className="absolute inset-0 bg-black/0" />
@@ -176,7 +179,7 @@ export default function RootLayout({
                   <Link
                     key={item.href}
                     href={item.href}
-                    className="text-xs uppercase tracking-[0.14em] text-white/70 transition-colors hover:text-[var(--gold)]"
+                    className="inline-flex min-h-[44px] items-center text-xs uppercase tracking-[0.14em] text-white/75 transition-colors hover:text-[var(--gold)]"
                   >
                     {item.label}
                   </Link>
@@ -186,7 +189,7 @@ export default function RootLayout({
               <div className="flex items-center gap-3">
                 <Link
                   href="/contact"
-                  className="hidden rounded-xl border border-[var(--gold)]/50 px-4 py-2 text-xs uppercase tracking-[0.12em] text-[var(--gold)] transition-colors hover:bg-[var(--gold)]/10 md:inline-flex"
+                  className="hidden min-h-[44px] items-center rounded-xl border border-[var(--gold)]/50 px-4 py-2 text-xs uppercase tracking-[0.12em] text-[var(--gold)] transition-colors hover:bg-[var(--gold)]/10 md:inline-flex"
                 >
                   Book session
                 </Link>
@@ -197,7 +200,9 @@ export default function RootLayout({
             </div>
           </header>
 
-          <main className="flex-1">{children}</main>
+          <main id="main" tabIndex={-1} className="flex-1 focus:outline-none">
+            {children}
+          </main>
           <PrincipleFooter />
 
           <footer className="mt-auto border-t border-[var(--gold)]/25 bg-[#060a08]/90 py-10 text-center text-sm text-[var(--cream)] backdrop-blur-[2px]">
@@ -227,17 +232,17 @@ export default function RootLayout({
                 possible loss of capital.
               </p>
               <div className="mt-6 space-x-4 text-sm text-white/75">
-                <a href="/disclaimer" className="transition-colors hover:text-[var(--gold)] hover:underline">
+                <Link href="/disclaimer" className="inline-flex min-h-[44px] items-center transition-colors hover:text-[var(--gold)] hover:underline">
                   Disclaimer
-                </a>
+                </Link>
                 <span aria-hidden="true">&bull;</span>
-                <a href="/privacy" className="transition-colors hover:text-[var(--gold)] hover:underline">
+                <Link href="/privacy" className="inline-flex min-h-[44px] items-center transition-colors hover:text-[var(--gold)] hover:underline">
                   Privacy Policy (POPIA)
-                </a>
+                </Link>
                 <span aria-hidden="true">&bull;</span>
-                <a href="/contact" className="transition-colors hover:text-[var(--gold)] hover:underline">
+                <Link href="/contact" className="inline-flex min-h-[44px] items-center transition-colors hover:text-[var(--gold)] hover:underline">
                   Contact
-                </a>
+                </Link>
               </div>
             </div>
           </footer>
