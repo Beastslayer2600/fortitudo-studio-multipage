@@ -46,8 +46,10 @@ export default function PlanCalculator() {
             Patience
           </p>
           <h2 className="max-w-[22ch] font-serif text-3xl font-light leading-[1.08] tracking-[-.015em] md:text-[2.6rem]">
-            Forty years is not an abstraction.{' '}
-            <i className="text-[#e6cf9c]">It is forty decisions, stacked.</i>
+            {r.years} {r.years === 1 ? 'year is' : 'years are'} not an abstraction.{' '}
+            <i className="text-[#e6cf9c]">
+              {r.years === 1 ? 'It is one decision.' : `They are ${r.years} decisions, stacked.`}
+            </i>
           </h2>
           <p className="mt-4 max-w-[54ch] text-[#a9bcb0]">
             Move the two numbers that actually move outcomes. Every layer is one year of

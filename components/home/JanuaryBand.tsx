@@ -7,6 +7,9 @@ import Link from 'next/link';
 // Both are calendar dates in Africa/Johannesburg.
 export const JANUARY_PAYDAY = '2027-01-25';
 export const BAND_LAST_DAY = '2027-01-31';
+// The "Black November" lead-in only makes sense in November.
+export const BLACK_NOVEMBER_FIRST_DAY = '2026-11-01';
+export const BLACK_NOVEMBER_LAST_DAY = '2026-11-30';
 
 const TZ = 'Africa/Johannesburg';
 
@@ -34,6 +37,8 @@ export default function JanuaryBand() {
   if (today && today > BAND_LAST_DAY) return null;
 
   const days = today ? daysBetween(today, JANUARY_PAYDAY) : null;
+  const isBlackNovember =
+    today !== null && today >= BLACK_NOVEMBER_FIRST_DAY && today <= BLACK_NOVEMBER_LAST_DAY;
 
   return (
     // Full-bleed green; content in the same `.container` as the site header,
@@ -42,7 +47,8 @@ export default function JanuaryBand() {
       <div className="container flex flex-col gap-8 md:flex-row md:items-center md:justify-between md:gap-14">
         <div>
           <p className="max-w-[40ch] font-serif text-2xl font-light leading-[1.15] tracking-[-.01em] md:text-[2.1rem]">
-            Black November is here. <i className="text-[#e6cf9c]">How much of January have you already spent?</i>
+            {isBlackNovember && 'Black November is here. '}
+            <i className="text-[#e6cf9c]">How much of January have you already spent?</i>
           </p>
           <Link
             href="/guides/january-already-spent"

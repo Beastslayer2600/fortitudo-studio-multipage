@@ -70,3 +70,25 @@ h1,h2,h3,h4{font-family: Georgia, "Times New Roman", Times, serif}
   background:repeating-linear-gradient(135deg, rgba(200,164,92,.55) 0 2px, transparent 2px 7px);
   box-shadow:inset 0 0 0 1px rgba(200,164,92,.9);
 }
+
+/* WCAG 2.4.7: a visible keyboard focus ring everywhere. */
+:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+
+/* WCAG 2.4.1: skip link, hidden until focused. */
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -100px;
+  z-index: 100;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  background: var(--gold);
+  color: #0a231a;
+  font-weight: 600;
+}
+.skip-link:focus {
+  top: 1rem;
+}
