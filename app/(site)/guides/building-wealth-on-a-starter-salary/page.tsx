@@ -75,7 +75,7 @@ export const metadata = articleMetadata("/guides/building-wealth-on-a-starter-sa
 
 function BuildingWealthOnAStarterSalaryPageContent() {
   return (
-    <main className="relative z-10 min-h-screen pt-24 pb-16 text-[var(--cream)] sm:pt-28 sm:pb-24">
+    <div className="relative z-10 min-h-screen pt-24 pb-16 text-[var(--cream)] sm:pt-28 sm:pb-24">
       <article className="container max-w-4xl">
         <div className="mx-auto max-w-3xl">
           <Link
@@ -246,7 +246,7 @@ function BuildingWealthOnAStarterSalaryPageContent() {
           </section>
         </div>
       </article>
-    </main>
+    </div>
   );
 }
 

@@ -32,7 +32,7 @@ export default function Guides() {
   const startHere = START_HERE.map((href) => GUIDES.find((g) => g.href === href)!).filter(Boolean);
 
   return (
-    <main className="relative z-10 min-h-screen bg-[#0b0d10]/92 pb-16 pt-24 text-[var(--cream)] sm:pb-24 sm:pt-28">
+    <div className="relative z-10 min-h-screen bg-[#0b0d10]/92 pb-16 pt-24 text-[var(--cream)] sm:pb-24 sm:pt-28">
       <div className="container max-w-5xl">
         <h1 className="font-serif text-4xl text-[var(--cream)] md:text-5xl">Guides</h1>
         <p className="mt-4 max-w-2xl text-lg text-white/75">
@@ -130,6 +130,6 @@ export default function Guides() {
           .
         </p>
       </div>
-    </main>
+    </div>
   );
 }

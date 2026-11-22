@@ -85,7 +85,7 @@ export default function HealthCheckClient() {
     "I just completed the 7-Question Financial Health Check. I'd like to talk through my results.";
 
   return (
-    <main className="relative z-10 min-h-screen pt-24 pb-16 text-[var(--cream)] sm:pt-28 sm:pb-24">
+    <div className="relative z-10 min-h-screen pt-24 pb-16 text-[var(--cream)] sm:pt-28 sm:pb-24">
       <article className="container max-w-4xl">
         {/* ---------- Hero ---------- */}
         <div className="mx-auto max-w-3xl">
@@ -283,7 +283,7 @@ export default function HealthCheckClient() {
         </div>
 
         {/* ---------- Compliance note ---------- */}
-        <p className="mx-auto mt-10 max-w-3xl text-xs leading-6 text-white/45">
+        <p className="mx-auto mt-10 max-w-3xl text-xs leading-6 text-white/60">
           This guide is general information only. It does not constitute financial advice, a
           recommendation, or a solicitation, and does not take your personal circumstances,
           objectives, or needs into account. Personalised advice is provided only after a full
@@ -292,6 +292,6 @@ export default function HealthCheckClient() {
           capital.
         </p>
       </article>
-    </main>
+    </div>
   );
 }

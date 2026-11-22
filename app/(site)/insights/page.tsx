@@ -20,7 +20,7 @@ const insights = ARTICLES.filter((a) => a.type === "insight").map((a) => ({
 
 export default function InsightsPage() {
   return (
-    <main className="relative z-10 min-h-screen text-[var(--cream)] pt-24 pb-16 md:pt-28 md:pb-24">
+    <div className="relative z-10 min-h-screen text-[var(--cream)] pt-24 pb-16 md:pt-28 md:pb-24">
       <div className="mx-auto max-w-4xl px-6 lg:px-8">
         <div className="mx-auto max-w-3xl text-center">
           <h1 className="text-4xl font-bold tracking-tight sm:text-5xl font-serif">Insights</h1>
@@ -76,6 +76,6 @@ export default function InsightsPage() {
           </a>
         </div>
       </div>
-    </main>
+    </div>
   );
 }

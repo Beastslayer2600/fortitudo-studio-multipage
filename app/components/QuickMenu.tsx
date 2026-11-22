@@ -53,8 +53,8 @@ export default function QuickMenu() {
     <div ref={menuRef} className="relative">
       <button
         type="button"
-        className="inline-flex items-center gap-2 rounded-xl border border-[var(--gold)]/35 bg-black/25 px-3 py-2 text-sm text-[var(--cream)] transition-colors hover:border-[var(--gold)] hover:bg-black/45 focus:outline-none focus:ring-2 focus:ring-[var(--gold)]/45"
-        aria-label="Open navigation menu"
+        className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center gap-2 rounded-xl border border-[var(--gold)]/35 bg-black/25 px-3 py-2 text-sm text-[var(--cream)] transition-colors hover:border-[var(--gold)] hover:bg-black/45 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--gold)]"
+        aria-label={open ? "Close navigation menu" : "Open navigation menu"}
         aria-expanded={open}
         aria-controls="quick-menu-panel"
         onClick={() => setOpen((value) => !value)}
@@ -68,10 +68,10 @@ export default function QuickMenu() {
         className={`absolute right-0 top-[calc(100%+0.65rem)] z-50 w-[min(18rem,calc(100vw-2rem))] origin-top-right rounded-2xl border border-[var(--gold)]/30 bg-[#0b0f0d]/95 p-2 shadow-2xl shadow-black/40 backdrop-blur-md transition-all ${
           open ? "pointer-events-auto translate-y-0 opacity-100" : "pointer-events-none -translate-y-2 opacity-0"
         }`}
-        role="menu"
-        aria-hidden={!open}
+        // Closed: invisible, so also unreachable by keyboard and screen readers.
+        inert={!open}
       >
-        <nav className="grid gap-1">
+        <nav aria-label="Mobile" className="grid gap-1">
           {links.map((link) => {
             const active = pathname === link.href;
 
@@ -79,9 +79,9 @@ export default function QuickMenu() {
               <Link
                 key={link.href}
                 href={link.href}
-                role="menuitem"
+                aria-current={active ? "page" : undefined}
                 onClick={() => setOpen(false)}
-                className={`rounded-xl px-3 py-2 text-sm tracking-[0.08em] transition-colors ${
+                className={`flex min-h-[44px] items-center rounded-xl px-3 py-2 text-sm tracking-[0.08em] transition-colors ${
                   active
                     ? "bg-[var(--gold)]/15 text-[var(--gold)]"
                     : "text-[var(--cream)]/85 hover:bg-white/5 hover:text-[var(--gold)]"
