@@ -25,6 +25,14 @@ const INTERACTIVE = [
     blurb: "Add up your pay-later and instalment purchases. See what is left of your next six paydays.",
     cta: "Run the test",
   },
+  {
+    href: "/guides/life-in-layers",
+    meta: "Interactive · 60 seconds",
+    title: "Life in",
+    gold: "layers.",
+    blurb: "One layer for every year you've lived. See how many paydays are left.",
+    cta: "Stack your layers",
+  },
 ];
 
 export default function Guides() {
@@ -43,7 +51,7 @@ export default function Guides() {
           <p id="interactive-heading" className="text-xs uppercase tracking-[0.18em] text-[var(--gold)]">
             Interactive
           </p>
-          <div className="mt-4 grid gap-4 md:grid-cols-2">
+          <div className="mt-4 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             {INTERACTIVE.map((t) => (
               <Link
                 key={t.href}

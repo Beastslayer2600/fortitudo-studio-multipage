@@ -1,6 +1,7 @@
 'use client';
 
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import Link from 'next/link';
 import Scene3D from './Scene3D';
 import type { SceneHandle } from '@/lib/three/scenes';
 
@@ -92,6 +93,14 @@ export default function PlanCalculator() {
           onHandle={onHandle}
           className="relative aspect-[4/5] max-h-[560px] w-full overflow-hidden rounded-md lg:aspect-square"
         />
+        <p className="lg:col-span-2 lg:text-right">
+          <Link
+            href="/guides/life-in-layers"
+            className="text-[.9rem] text-[#a9bcb0] underline-offset-4 transition-colors hover:text-[#e6cf9c] hover:underline"
+          >
+            See your own forty decisions, stacked &rarr;
+          </Link>
+        </p>
       </div>
     </section>
   );
