@@ -1,10 +1,10 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
-import emailjs from "@emailjs/browser";
-
-const WHATSAPP_NUMBER = "27773866299";
+import { Field, FormMessage, Honeypot, errorProps, inputClass } from "@/components/contact/fields";
+import { useEnquiry } from "@/components/contact/useEnquiry";
+import { WHATSAPP_NUMBER } from "@/lib/site";
 
 function waLink(extra?: string) {
   const base = "Hi Gert, I just did the 7-question financial health check on your site";
@@ -76,34 +76,13 @@ const scoreBands = [
 ] as const;
 
 export default function HealthCheckClient() {
-  const form = useRef<HTMLFormElement>(null);
-  const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
-  const [errorMsg, setErrorMsg] = useState("");
+  const { status, message, fieldErrors, messageRef, onSubmit } = useEnquiry(
+    "7-Question Financial Health Check",
+  );
   const [selected, setSelected] = useState("");
 
   const defaultMessage =
     "I just completed the 7-Question Financial Health Check. I'd like to talk through my results.";
-
-  const sendEmail = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    if (!form.current) return;
-
-    setStatus("sending");
-    setErrorMsg("");
-
-    emailjs
-      .sendForm("service_gzoalin", "template_6h8g4ai", form.current, "TsuUEEHJnVF1s01Uh")
-      .then(() => {
-        setStatus("success");
-        form.current?.reset();
-        setSelected("");
-      })
-      .catch((error) => {
-        console.error("EmailJS Error:", error);
-        setStatus("error");
-        setErrorMsg(error?.text || "Failed to send message. Please try again.");
-      });
-  };
 
   return (
     <main className="relative z-10 min-h-screen pt-24 pb-16 text-[var(--cream)] sm:pt-28 sm:pb-24">
@@ -208,81 +187,76 @@ export default function HealthCheckClient() {
             product discussion until the analysis is done.
           </p>
 
-          <form ref={form} onSubmit={sendEmail} className="mt-6 space-y-5">
-            <div>
-              <label htmlFor="name" className="mb-2 block text-sm">
-                Full Name
-              </label>
+          <form onSubmit={onSubmit} className="relative mt-6 space-y-5">
+            <Field id="name" label="Full name" error={fieldErrors.name}>
               <input
                 id="name"
                 type="text"
                 name="name"
                 required
-                className="w-full rounded-xl border border-[var(--gold)]/30 bg-[#0B0D10] px-4 py-3 focus:border-[var(--gold)] focus:outline-none"
+                autoComplete="name"
+                maxLength={100}
+                className={inputClass}
+                {...errorProps("name", fieldErrors.name)}
               />
-            </div>
+            </Field>
 
-            <div>
-              <label htmlFor="email" className="mb-2 block text-sm">
-                Email Address
-              </label>
+            <Field id="email" label="Email address" error={fieldErrors.email}>
               <input
                 id="email"
                 type="email"
                 name="email"
                 required
-                className="w-full rounded-xl border border-[var(--gold)]/30 bg-[#0B0D10] px-4 py-3 focus:border-[var(--gold)] focus:outline-none"
+                autoComplete="email"
+                maxLength={254}
+                className={inputClass}
+                {...errorProps("email", fieldErrors.email)}
               />
-            </div>
+            </Field>
 
-            <div>
-              <label htmlFor="phone" className="mb-2 block text-sm">
-                Phone Number
-              </label>
+            <Field id="phone" label="Phone number" optional error={fieldErrors.phone}>
               <input
                 id="phone"
                 type="tel"
                 name="phone"
-                className="w-full rounded-xl border border-[var(--gold)]/30 bg-[#0B0D10] px-4 py-3 focus:border-[var(--gold)] focus:outline-none"
+                autoComplete="tel"
+                maxLength={30}
+                className={inputClass}
+                {...errorProps("phone", fieldErrors.phone)}
               />
-            </div>
+            </Field>
 
-            <div>
-              <label htmlFor="stood-out" className="mb-2 block text-sm">
-                Which question stood out? (optional)
-              </label>
+            <Field id="stood-out" label="Which question stood out?" optional>
               <select
                 id="stood-out"
+                name="stoodOutOn"
                 value={selected}
                 onChange={(e) => setSelected(e.target.value)}
-                className="w-full rounded-xl border border-[var(--gold)]/30 bg-[#0B0D10] px-4 py-3 focus:border-[var(--gold)] focus:outline-none"
+                className={inputClass}
               >
                 <option value="">Prefer not to say</option>
                 {questions.map((q) => (
-                  <option key={q.number} value={q.title}>
+                  <option key={q.number} value={`${q.number} ${q.title}`}>
                     {q.number} — {q.title}
                   </option>
                 ))}
               </select>
-            </div>
+            </Field>
 
-            <div>
-              <label htmlFor="message" className="mb-2 block text-sm">
-                Message
-              </label>
+            <Field id="message" label="Message" error={fieldErrors.message}>
               <textarea
                 id="message"
                 name="message"
                 required
                 rows={4}
+                maxLength={5000}
                 defaultValue={defaultMessage}
-                className="w-full resize-y rounded-xl border border-[var(--gold)]/30 bg-[#0B0D10] px-4 py-3 focus:border-[var(--gold)] focus:outline-none"
+                className={`${inputClass} resize-y`}
+                {...errorProps("message", fieldErrors.message)}
               />
-            </div>
+            </Field>
 
-            {/* Hidden field so the notification email carries context even if the visible message is left as-is */}
-            <input type="hidden" name="source" value="7-Question Financial Health Check" />
-            {selected && <input type="hidden" name="stood_out_on" value={selected} />}
+            <Honeypot />
 
             <button
               type="submit"
@@ -292,12 +266,7 @@ export default function HealthCheckClient() {
               {status === "sending" ? "Sending..." : "Book a strategy session"}
             </button>
 
-            {status === "success" && (
-              <p className="text-center text-green-400">
-                Message sent — I&apos;ll be in touch shortly.
-              </p>
-            )}
-            {status === "error" && <p className="text-center text-red-400">{errorMsg}</p>}
+            <FormMessage message={message} messageRef={messageRef} />
           </form>
 
           <div className="mt-6 border-t border-[var(--gold)]/20 pt-6 text-center">
